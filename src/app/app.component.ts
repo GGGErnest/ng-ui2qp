@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { QueryParamGroup, QueryParamBuilder } from '@ngqp/core';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'angular8-container';
+  title = 'ng-projects';
+
+  public paramGroup: QueryParamGroup;
+
+    constructor(private qpb: QueryParamBuilder) {
+        this.paramGroup = qpb.group({
+            searchText: qpb.stringParam('q'),
+            numberOfItems: qpb.numberParam('count'),
+        });
+    }
 }
