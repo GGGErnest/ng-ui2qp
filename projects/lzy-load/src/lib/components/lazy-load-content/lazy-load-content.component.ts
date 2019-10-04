@@ -23,7 +23,7 @@ export class LzyLoadContComponent implements OnInit, AfterContentInit, OnDestroy
 
   // Component fields
   isReady = false;
-  preloadAmount = 0;
+  amountLoadedCont = 0;
   preInBothDir = 0;
   scrollEvent = new Subject<void>();
   onResizeEvent = new Subject<void>();
@@ -119,9 +119,9 @@ export class LzyLoadContComponent implements OnInit, AfterContentInit, OnDestroy
   // Calculate preload amounts
   private calSettings(visibleItemsCount: number) {
     // Recalculating the amount of preload elements depending the amount of visible items in the view
-    this.preloadAmount = Math.ceil(this.factor * visibleItemsCount);
+    this.amountLoadedCont = Math.ceil(this.factor * visibleItemsCount);
     // Calculating the amount of items to be load in both directions
-    this.preInBothDir = Math.ceil(this.preloadAmount / 2);
+    this.preInBothDir = Math.ceil(this.amountLoadedCont / 2);
   }
 
   // Initialize the IO and the targets to observe
@@ -141,9 +141,9 @@ export class LzyLoadContComponent implements OnInit, AfterContentInit, OnDestroy
           }
         });
         // Calculating the amount of preload elements depending the amount of visible items in the view
-        this.preloadAmount = Math.ceil(this.factor * visibleElements);
+        this.amountLoadedCont = Math.ceil(this.factor * visibleElements);
         // Calculating the amount of items to be load in both directions
-        this.preInBothDir = Math.ceil(this.preloadAmount / 2);
+        this.preInBothDir = Math.ceil(this.amountLoadedCont / 2);
 
         // Preloading the items
         this.updateVisibleAndPreloadItems();
@@ -189,7 +189,7 @@ export class LzyLoadContComponent implements OnInit, AfterContentInit, OnDestroy
     // If the new start pos is at the beginning of the array, means that we should preload forward only
     if (newRange[0] === 0) {
       // prefetching the elements ahead of the last visible item
-      const newLastElementPos = lastVisibleItem.pos + this.preloadAmount;
+      const newLastElementPos = lastVisibleItem.pos + this.amountLoadedCont;
       newRange[1] = (newLastElementPos >= lastItemPosInArray) ? lastItemPosInArray : newLastElementPos;
     } else {
       // pre-fetching the elements ahead and backward of the range of visible items
