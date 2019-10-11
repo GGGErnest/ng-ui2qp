@@ -13,7 +13,7 @@ export class LzyLoadItemDirective {
   // Field to know if the content should be loaded
   loadContent = false;
   // item position in the results
-  _pos: number;
+  private _pos: number;
 
   @Input() set pos(value: number) {
     if (value !== null && value !== undefined) {
