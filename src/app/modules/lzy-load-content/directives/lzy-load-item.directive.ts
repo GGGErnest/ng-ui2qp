@@ -1,15 +1,10 @@
-import {
-  Directive,
-  ElementRef,
-  Input,
-  Renderer2
-} from '@angular/core';
+import { Directive, ElementRef, Input, Renderer2 } from '@angular/core';
 
-export const LL_PRO_NAME = "lzyLoadItemPos";
+export const LL_PRO_NAME = 'lzyLoadItemPos';
 
 @Directive({
   selector: '[lzyLoadItem]',
-  exportAs: 'lazyLoadItem'
+  exportAs: 'lzyLoadItem'
 })
 export class LzyLoadItemDirective {
 
@@ -18,7 +13,7 @@ export class LzyLoadItemDirective {
   // Field to know if the content should be loaded
   loadContent = false;
   // item position in the results
-  _pos: number;
+  private _pos: number;
 
   @Input() set pos(value: number) {
     if (value !== null && value !== undefined) {

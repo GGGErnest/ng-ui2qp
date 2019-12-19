@@ -1,0 +1,46 @@
+:host {
+  display: flex;
+  flex-grow: 1;
+}
+
+mat-sidenav-container {
+  flex-grow: 1;
+}
+
+mat-sidenav-content {
+  padding: 30px 25px 25px 25px;
+}
+
+mat-toolbar {
+  padding: 15px;
+}
+
+ul {
+  list-style: none;
+  padding: 10px;
+}
+
+nav li {
+  padding: 10px;
+}
+
+nav li.active {
+  
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+button.menu-icon {
+  position: fixed;
+  top: 5px;
+  left: 25px;
+  opacity: 0.5;
+  animation: ease-in-out 500ms;
+}
+
+button.menu-icon:hover {
+  opacity: 1;
+}

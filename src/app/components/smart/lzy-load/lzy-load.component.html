@@ -1,0 +1,50 @@
+<h2>
+  Lazy load content
+</h2>
+<h4>
+   Loading the content when it gets visible in the page
+</h4>
+<lzy-load-cont class="lazy" [settings]="onvisibleAndKeepLoad">
+  <ng-container *ngFor="let item1 of items; let i=index">
+    <div class="item" lzyLoadItem #lzyLoadItem1="lzyLoadItem" [pos]="i">
+      <p>{{item1.id}}</p>
+        <img [src]="item1.imgSrc" *ngIf="lzyLoadItem1.loadContent" alt="">
+    </div>
+  </ng-container>
+</lzy-load-cont>
+
+<h4>
+  Preloading 10 elements in ahead of the visible elements
+</h4>
+<lzy-load-cont class="lazy" [settings]="aheadOfVisibleAndLeavLoadedRange">
+  <ng-container *ngFor="let item2 of items; let u=index">
+    <div class="item" lzyLoadItem #lzyLoadItem2="lzyLoadItem" [pos]="u">
+      <p>{{item2.id}}</p>
+      <img [src]="item2.imgSrc" *ngIf="lzyLoadItem2.loadContent" alt="">
+    </div>
+  </ng-container>
+</lzy-load-cont>
+
+<h4>
+  Preloading a percent of elements in ahead of the total elements
+</h4>
+<lzy-load-cont class="lazy" [settings]="pctOfTotElemAndKeepLoaded">
+  <ng-container *ngFor="let item3 of items; let t=index">
+    <div class="item" lzyLoadItem #lzyLoadItem3="lzyLoadItem" [pos]="t">
+      <p>{{item3.id}}</p>
+        <img [src]="item3.imgSrc" *ngIf="lzyLoadItem3.isVisible" alt="">
+    </div>
+  </ng-container>
+</lzy-load-cont>
+
+<h4>
+  Preloading a percent of elements in ahead of the visible elements
+</h4>
+<lzy-load-cont class="lazy" [settings]="pctOfVisibleElemAndKeepLoaded">
+  <ng-container *ngFor="let item3 of items; let t=index">
+    <div class="item" lzyLoadItem #lzyLoadItem3="lzyLoadItem" [pos]="t">
+      <p>{{item3.id}}</p>
+        <img [src]="item3.imgSrc" *ngIf="lzyLoadItem3.isVisible" alt="">
+    </div>
+  </ng-container>
+</lzy-load-cont>

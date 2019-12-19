@@ -1,7 +1,7 @@
 /*
   * Important note: Is required that the items marked as lazy-load-items using the "LazyLoadItemDirective"
   * are present in the template at the moment of the initialization of the component because the
-  * ContentChildren query is evaluated just before the AfterContentInit life cicle,
+  * ContentChildren query is evaluated just before the AfterContentInit life circle,
   * if the items are being added dynamically later to the template then is possible that the parent of this component needs to run manualy
   * change detection to notify this component that the template has changed. Example of this case is in the cases-table in
   * gallery-management
@@ -9,14 +9,14 @@
  import { AfterContentInit, Component, ContentChildren,
   ElementRef, HostListener, Input, OnDestroy, OnInit, QueryList, Renderer2 } from '@angular/core';
  import { Subject, Subscription } from 'rxjs';
- import { debounceTime, finalize } from 'rxjs/internal/operators';
- import { LzyLoadItemDirective, LL_PRO_NAME } from '../../directives/lazy-load-item.directive';
+ import { debounceTime } from 'rxjs/internal/operators';
+ import { LzyLoadItemDirective, LL_PRO_NAME } from '../../directives/lzy-load-item.directive';
  import { Settings, LoadStrategy, UnloadStrategy } from '../../models/settings';
 
  @Component({
   selector: 'lzy-load-cont',
-  templateUrl: './lazy-load-content.component.html',
-  styleUrls: ['./lazy-load-content.component.css']
+  templateUrl: './lzy-load-content.component.html',
+  styleUrls: ['./lzy-load-content.component.css']
 })
 export class LzyLoadContComponent implements OnInit, AfterContentInit, OnDestroy {
   // IntersectionObserver settings

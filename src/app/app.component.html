@@ -1,4 +1,23 @@
-<ng-container [queryParamGroup]="paramGroup">
-  <input type="text" queryParamName="searchText" />
-  <input type="number" queryParamName="numberOfItems" />
-</ng-container>
+<mat-sidenav-container>
+  <mat-sidenav mode="over" #sidebarMenu>
+    <nav class="color-primary">
+      <ul>
+        <li routerLinkActive="active">
+            <a [routerLink]="[ '/lzy-load' ]">Lzy Load Lib</a>
+        </li>
+        <li routerLinkActive="active">
+            <a color [routerLink]="[ '/ng-query-params' ]">Ng Query Params</a>
+        </li>
+      </ul>
+    </nav>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <button mat-mini-fab class="menu-icon" (click)="sidebarMenu.toggle()">
+        <mat-icon *ngIf="!sidebarMenu.opened else sideBarOpenedIcon">menu</mat-icon>
+        <ng-template #sideBarOpenedIcon>
+            <mat-icon *ngIf="!sidebarMenu.opened">menu_open</mat-icon>
+        </ng-template>
+    </button>
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>
