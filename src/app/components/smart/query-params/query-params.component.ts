@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { QueryParamsFormGroup } from 'src/app/modules/query-params/classes/query-params-form-group';
-import { QueryParamsDefaultRouterService } from 'src/app/modules/query-params/services/query-params-default-router.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { QpRoot } from 'src/app/modules/query-params/classes/qp-root';
+import { QpBuilderService } from 'src/app/modules/query-params/services/qp-builder.service';
 
 @Component({
   selector: 'app-query-params',
@@ -10,32 +9,31 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class QueryParamsComponent implements OnInit {
 
-  formGroupQP: QueryParamsFormGroup;
+  qpRoot: QpRoot;
   formGroupQPSettings = {autoUpdating: true, isRoot: true, replaceState: false};
 
-  constructor(private queryParamsDefaultRouterService: QueryParamsDefaultRouterService) {
-    this.formGroupQP = new QueryParamsFormGroup(this.queryParamsDefaultRouterService, {
-      username: {control: new FormControl(), controlSettings: {defaultVal: ''}},
-      password: {control: new FormControl(), controlSettings: {defaultVal: ''}},
-      addresses: {control: new QueryParamsFormGroup(this.queryParamsDefaultRouterService, {
-        address1: {control: new QueryParamsFormGroup(this.queryParamsDefaultRouterService, {
-          address: {control: new FormControl(), controlSettings: {defaultVal: ''}},
-          state: {control: new FormControl(), controlSettings: {defaultVal: ''}},
-          country: {control: new FormControl(), controlSettings: {defaultVal: ''}},
-        }), controlSettings: {type: 'form-group', defaultVal: ''}},
-        address2: {control: new QueryParamsFormGroup(this.queryParamsDefaultRouterService, {
-          address: {control: new FormControl(), controlSettings: {defaultVal: ''}},
-          state: {control: new FormControl(), controlSettings: {defaultVal: ''}},
-          country: {control: new FormControl(), controlSettings: {defaultVal: ''}},
-        }), controlSettings: {type: 'form-group', defaultVal: ''}},
-        address3: {control: new QueryParamsFormGroup(this.queryParamsDefaultRouterService, {
-          address: {control: new FormControl(), controlSettings: {defaultVal: ''}},
-          state: {control: new FormControl(), controlSettings: {defaultVal: ''}},
-          country: {control: new FormControl(), controlSettings: {defaultVal: ''}},
-        }), controlSettings: {type: 'form-group', defaultVal: ''}},
-      }),
-      controlSettings: {type: 'form-group', defaultVal: ''}},
-    }, this.formGroupQPSettings);
+  constructor(private qpBuilderService: QpBuilderService) {
+    this.qpRoot = this.qpBuilderService.qpRoot({autoUpdating: true, replaceState: false}, {
+      username: this.qpBuilderService.qpFormControl(),
+      password: this.qpBuilderService.qpFormControl(),
+      addresses: this.qpBuilderService.qpGroup({
+        address1: this.qpBuilderService.qpGroup({
+          address: this.qpBuilderService.qpFormControl(),
+          state: this.qpBuilderService.qpFormControl(),
+          country: this.qpBuilderService.qpFormControl(),
+        }),
+        address2: this.qpBuilderService.qpGroup({
+          address: this.qpBuilderService.qpFormControl(),
+          state: this.qpBuilderService.qpFormControl(),
+          country: this.qpBuilderService.qpFormControl(),
+        }),
+        address3: this.qpBuilderService.qpGroup({
+          address: this.qpBuilderService.qpFormControl(),
+          state: this.qpBuilderService.qpFormControl(),
+          country: this.qpBuilderService.qpFormControl(),
+        }),
+      })
+    });
   }
 
   ngOnInit() {

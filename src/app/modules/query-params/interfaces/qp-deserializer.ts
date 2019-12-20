@@ -1,6 +1,6 @@
-import { QpAbstractControl } from '../types/types';
+import { QpDeserializeFunc } from '../types/types';
 
 export interface QpDeserializer {
   type: string;
-  serializerFunc: (value: any, control: QpAbstractControl) => void;
+  deserializerFunc: QpDeserializeFunc;
 }

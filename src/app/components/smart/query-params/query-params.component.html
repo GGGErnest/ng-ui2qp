@@ -1,5 +1,5 @@
 <h1>Query Params</h1>
-<div [formGroup]="formGroupQP">
+<div [formGroup]="qpRoot.qpGroup">
     <mat-form-field>
         <label for="">Username</label>
         <input matInput formControlName="username">
@@ -15,8 +15,8 @@
       <div formGroupName="address1">
           <mat-form-field>
               <label for="">Address</label>
-                <input matInput formControlName="address">
-            </mat-form-field>
+              <input matInput formControlName="address">
+          </mat-form-field>
             <mat-form-field>
                 <label for="">State</label>
                 <input matInput formControlName="state">

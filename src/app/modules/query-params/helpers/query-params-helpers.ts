@@ -41,7 +41,7 @@ Location, replaceState = false) {
 export function builtQueryParamsObjectFromAnObject(object: Object): Params {
    const params: Params = {};
    const functionToExecute = (path: string[], element: any, data:
-URLSearchParams) => {
+   URLSearchParams) => {
      if (!isEmpty(element)) {
        const keyName = path.join('.');
        data[keyName] = element;

@@ -10,7 +10,7 @@ import { LzyLoadComponent } from './components/smart/lzy-load/lzy-load.component
 import { QueryParamsComponent } from './components/smart/query-params/query-params.component';
 import { LzyLoadContentModule } from './modules/lzy-load-content/lzy-load-content.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule, MatIconModule, MatButtonModule, MatFormFieldModule } from '@angular/material';
+import { MatSidenavModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -31,7 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSidenavModule,
     MatIconModule,
     MatButtonModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

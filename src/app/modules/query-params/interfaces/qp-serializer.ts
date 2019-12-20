@@ -1,6 +1,6 @@
-import { QpAbstractControl } from '../types/types';
+import { QpSerializeFunc } from '../types/types';
 
 export interface QpSerializer {
   type: string;
-  serializerFunc: (value: any, control: QpAbstractControl) => void;
+  serializerFunc: QpSerializeFunc;
 }

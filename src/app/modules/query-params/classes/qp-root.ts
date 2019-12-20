@@ -1,15 +1,17 @@
 import { QpGroup } from './qp-group';
-import { AsyncValidatorFn, ValidatorFn } from '@angular/forms';
+import { AsyncValidatorFn, ValidatorFn, AbstractControl } from '@angular/forms';
 import { QpRouter } from '../interfaces/qp-router';
 import { QpDefaultSettings, QpSettings } from '../interfaces/qp-settings';
 import merge from 'lodash/merge';
 import { Subscription } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { builtQueryParamsObjectFromAnObject } from '../helpers/query-params-helpers';
-import { QpAbstractControl } from '../types/types';
+import { QpControl } from './qp-control';
+import { QpSerializer } from '../interfaces/qp-serializer';
+import { QpDeserializer } from '../interfaces/qp-deserializer';
 
 export class QpRoot {
-  private qpGroup: QpGroup;
+  public qpGroup: QpGroup;
   private settings = QpDefaultSettings;
   private currentQpObject: object;
 
@@ -20,8 +22,9 @@ export class QpRoot {
   constructor(
     private router: QpRouter,
     settings: QpSettings,
-    controls?: { [key: string]: QpAbstractControl },
-    validatorOrOpts?: ValidatorFn | ValidatorFn[] | null, asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+    controls?: { [key: string]: AbstractControl },
+    validatorOrOpts?: ValidatorFn | ValidatorFn[] | null,
+    asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null,
   ) {
     this.qpGroup = new QpGroup({} , validatorOrOpts, asyncValidators);
 
@@ -47,7 +50,7 @@ export class QpRoot {
     });
   }
 
-  private insertControls(controls: { [key: string]: QpAbstractControl }) {
+  private insertControls(controls: { [key: string]: AbstractControl }) {
    // initializing the controls provided in the constructor
    this.qpGroup.insertControls(controls, this.currentQpObject);
   }
