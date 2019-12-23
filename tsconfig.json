@@ -25,6 +25,12 @@
       ],
       "lzy-load/*": [
         "dist/lzy-load/*"
+      ],
+      "form-qp": [
+        "dist/form-qp"
+      ],
+      "form-qp/*": [
+        "dist/form-qp/*"
       ]
     }
   },

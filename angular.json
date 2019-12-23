@@ -160,6 +160,41 @@
           }
         }
       }
+    },
+    "form-qp": {
+      "projectType": "library",
+      "root": "projects/form-qp",
+      "sourceRoot": "projects/form-qp/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/form-qp/tsconfig.lib.json",
+            "project": "projects/form-qp/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/form-qp/src/test.ts",
+            "tsConfig": "projects/form-qp/tsconfig.spec.json",
+            "karmaConfig": "projects/form-qp/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/form-qp/tsconfig.lib.json",
+              "projects/form-qp/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "ng-projects"

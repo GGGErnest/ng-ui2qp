@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { QueryParamsDefaultRouterService } from 'src/app/modules/query-params/services/query-params-default-router.service';
+import { QpDefaultRouterService } from 'src/app/modules/form-qp/services/qp-default-router.service';
 
 @Component({
   templateUrl: './ng-query-params-route.component.html',
   styleUrls: ['./ng-query-params-route.component.scss'],
-  providers: [QueryParamsDefaultRouterService]
+  providers: [QpDefaultRouterService]
 })
 export class NgQueryParamsRouteComponent implements OnInit {
 

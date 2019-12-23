@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router, NavigationExtras, Params } from '@angular/router';
+import { QpRouter } from '../interfaces/qp-router';
+import { Params, NavigationExtras, Router, ActivatedRoute } from '@angular/router';
 
 @Injectable()
-export class QueryParamsDefaultRouterService {
-   constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+export class QpDefaultRouterService implements QpRouter {
 
-   public get url() {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {}
+
+   public getUrl() {
      return this.router.url;
    }
 
-   public get queryParamMapObservable() {
+   public getQueryParamMapObservable() {
      return this.activatedRoute.queryParamMap;
    }
 
-   public get queryParamMap() {
+   public getQueryParamMap() {
      return this.activatedRoute.snapshot.queryParamMap;
    }
 
@@ -29,7 +31,4 @@ export class QueryParamsDefaultRouterService {
    public getCurrentNavigation() {
      return this.router.getCurrentNavigation();
    }
-
 }
-
-
