@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { QueryParamsComponent } from './query-params.component';
+import { FormQpComponent } from './form-qp.component';
 
-describe('QueryParamsComponent', () => {
-  let component: QueryParamsComponent;
-  let fixture: ComponentFixture<QueryParamsComponent>;
+describe('FormQpComponent', () => {
+  let component: FormQpComponent;
+  let fixture: ComponentFixture<FormQpComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QueryParamsComponent ]
+      declarations: [ FormQpComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(QueryParamsComponent);
+    fixture = TestBed.createComponent(FormQpComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

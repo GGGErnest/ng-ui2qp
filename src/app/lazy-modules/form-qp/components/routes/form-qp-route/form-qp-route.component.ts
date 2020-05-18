@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { QpDefaultRouterService } from 'src/app/modules/form-qp/services/qp-default-router.service';
 
 @Component({
-  templateUrl: './ng-query-params-route.component.html',
-  styleUrls: ['./ng-query-params-route.component.scss'],
+  templateUrl: './form-qp-route.component.html',
+  styleUrls: ['./form-qp-route.component.scss'],
   providers: [QpDefaultRouterService]
 })
-export class NgQueryParamsRouteComponent implements OnInit {
+export class FormQpRouteComponent implements OnInit {
 
   constructor() { }
 

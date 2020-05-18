@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NgQueryParamsRouteComponent } from './ng-query-params-route.component';
+import { NgQueryParamsRouteComponent } from './form-qp-route.component';
 
 describe('NgQueryParamsRouteComponent', () => {
   let component: NgQueryParamsRouteComponent;

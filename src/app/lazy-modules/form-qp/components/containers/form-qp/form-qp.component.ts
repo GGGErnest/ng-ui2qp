@@ -4,11 +4,11 @@ import { QpBuilderService } from 'src/app/modules/form-qp/services/qp-builder.se
 import { QpGroup } from 'src/app/modules/form-qp/classes/qp-group';
 
 @Component({
-  selector: 'app-query-params',
-  templateUrl: './query-params.component.html',
-  styleUrls: ['./query-params.component.scss']
+  selector: 'app-form-qp',
+  templateUrl: './form-qp.component.html',
+  styleUrls: ['./form-qp.component.scss']
 })
-export class QueryParamsComponent implements OnInit {
+export class FormQpComponent implements OnInit {
 
   qpRoot: QpRoot;
   formGroupQPSettings = {autoUpdating: true, isRoot: true, replaceState: false};
