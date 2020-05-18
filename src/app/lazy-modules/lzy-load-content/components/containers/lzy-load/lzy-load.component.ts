@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadStrategy, UnloadStrategy } from '../../../../../modules/lzy-load-content/models/settings';
+import { LoadStrategy, UnloadStrategy } from '../../../../../modules/lzy-load/models/settings';
 
 @Component({
   selector: 'app-lzy-load',

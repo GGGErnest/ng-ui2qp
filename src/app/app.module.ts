@@ -3,15 +3,16 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LzyLoadRouteComponent } from './lazy-modules/lzy-load-content/components/route/lzy-load-route/lzy-load-route.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSidenavModule, MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { QpDefaultRouterService } from './modules/form-qp/services/qp-default-router.service';
+import { QP_ROUTER_ADAPTER } from './modules/form-qp/interfaces/qp-router';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LzyLoadRouteComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -21,7 +22,7 @@ import { MatSidenavModule, MatIconModule, MatButtonModule, MatFormFieldModule, M
     MatButtonModule,
     MatInputModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{ provide: QP_ROUTER_ADAPTER, useClass: QpDefaultRouterService }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

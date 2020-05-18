@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { FormQpComponent } from './form-qp.component';
+import { FormQpComponent } from './components/containers/form-qp/form-qp.component';
 
 const routes: Routes = [{ path: '', component: FormQpComponent }];
 

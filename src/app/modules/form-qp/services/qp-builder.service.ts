@@ -1,7 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
 import { QpRouter, QP_ROUTER_ADAPTER } from '../interfaces/qp-router';
 import { QpRoot } from '../classes/qp-root';
-import { ValidatorFn, AbstractControl, AsyncValidatorFn, AbstractControlOptions } from '@angular/forms';
+import {
+  ValidatorFn,
+  AbstractControl,
+  AsyncValidatorFn,
+  AbstractControlOptions,
+} from '@angular/forms';
 import { QpGroup } from '../classes/qp-group';
 import { QpSettings } from '../types/qp-settings';
 import { CUSTOM_DESERIALIZERS } from '../serializers/custom-deserializers';
@@ -10,39 +15,52 @@ import { DEFAULT_SERIALIZER } from '../serializers/custom-serializers';
 import { QpSerializeFunc, QpDeserializeFunc } from '../types/types';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class QpBuilderService {
-
   private customDeserializers = CUSTOM_DESERIALIZERS;
   private defaultSerializer = DEFAULT_SERIALIZER;
 
-  constructor(@Inject(QP_ROUTER_ADAPTER) private qpRouter: QpRouter) {
-
-  }
+  constructor(@Inject(QP_ROUTER_ADAPTER) private qpRouter: QpRouter) {}
 
   public qpRoot(
     settings: QpSettings,
     controls?: { [key: string]: AbstractControl },
     validatorOrOpts?: ValidatorFn | ValidatorFn[] | null,
-    asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+    asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null
   ): QpRoot {
-    const qpRoot = new QpRoot(this.qpRouter, settings, controls, validatorOrOpts, asyncValidators);
+    const qpRoot = new QpRoot(
+      this.qpRouter,
+      settings,
+      controls,
+      validatorOrOpts,
+      asyncValidators
+    );
     return qpRoot;
   }
 
   public qpGroup(
     controls?: { [key: string]: AbstractControl },
-    validatorOrOpts?: ValidatorFn | ValidatorFn[] | null, asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null,
+    validatorOrOpts?: ValidatorFn | ValidatorFn[] | null,
+    asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null
   ): QpGroup {
     const qpGroup = new QpGroup(controls, validatorOrOpts, asyncValidators);
     return qpGroup;
   }
 
-  public qpFormControl(type: string = 'string', defaultVal: any = null, serializer?: QpSerializeFunc,
-    deserializer?: QpDeserializeFunc, formState?: any, validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null,
-    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null): QpControl {
-
+  public qpFormControl(
+    type: string = 'string',
+    defaultVal: any = null,
+    serializer?: QpSerializeFunc,
+    deserializer?: QpDeserializeFunc,
+    formState?: any,
+    validatorOrOpts?:
+      | ValidatorFn
+      | ValidatorFn[]
+      | AbstractControlOptions
+      | null,
+    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null
+  ): QpControl {
     let serializerToInclude = serializer;
     let deserializerToInclude = deserializer;
 
@@ -58,11 +76,18 @@ export class QpBuilderService {
         }
       }
       if (deserializerToInclude === undefined) {
-        throw new Error ('You need to provide a deserializer for the control');
+        throw new Error('You need to provide a deserializer for the control');
       }
     }
 
-    return new QpControl(type, defaultVal, serializerToInclude, deserializerToInclude,
-      formState, validatorOrOpts, asyncValidator);
+    return new QpControl(
+      type,
+      defaultVal,
+      serializerToInclude,
+      deserializerToInclude,
+      formState,
+      validatorOrOpts,
+      asyncValidator
+    );
   }
 }

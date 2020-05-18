@@ -31,7 +31,9 @@ export class QpGroup extends FormGroup {
       });
     }
   }
-
+  /**
+   * Returns the current value of the form group
+   */
   getValue(): any {
     const value = {};
     Object.keys(this.controls).forEach(key => {
@@ -98,7 +100,7 @@ export class QpGroup extends FormGroup {
         break;
       }
       case 'patch-value': {
-        this.qpValue = notification.data;
+        // this.qpValue = notification.data;
         this.patchValue(notification.data);
         break;
       }
