@@ -10,10 +10,10 @@ const routes: Routes = [
       ),
   },
   {
-    path: 'form-qp',
+    path: 'ng-ui2qp',
     loadChildren: () =>
-      import('./lazy-modules/form-qp/form-qp.module').then(
-        (m) => m.LazyFormQpModule
+      import('./lazy-modules/ng-ui2qp/lazy-ui2qp.module').then(
+        (m) => m.LazyUi2QpModule
       ),
   },
 ];
