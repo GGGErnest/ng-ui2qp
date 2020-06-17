@@ -82,9 +82,12 @@ export class Ui2QpBuilder {
     const serializerToInclude = this.serializersService.getSerializer(type);
     const deserializerToInclude = this.deserializersService.getDeserializer(type);
 
+    if (!serializerToInclude) {
+      throw new Error(`We couldn't find any registered serializer for the control type "${type}". Please register one for this type`);
+    }
+
     if (!(serializerToInclude || deserializerToInclude)) {
-      throw new Error('We couldn\'t find any registered serializer or deserializer for the' +
-        ' selected control type. Please check the registered serializers and deserializers');
+      throw new Error(`We couldn't find any registered deserializer for the control type "${type}". Please register one for this type`);
     }
 
     return new Ui2QpFormControl(
