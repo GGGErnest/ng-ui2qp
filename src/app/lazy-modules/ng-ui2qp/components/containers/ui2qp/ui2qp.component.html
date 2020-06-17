@@ -10,6 +10,12 @@
     <input matInput formControlName="password" type="password">
   </mat-form-field>
 
+  <mat-form-field>
+    <label for="">Birthday</label>
+    <input matInput [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" formControlName="birthday" type="text">
+    <owl-date-time [pickerType]="'timer'" #dt2></owl-date-time>
+  </mat-form-field>
+
   <div formGroupName="addresses">
     <b>Addresses</b>
     <div formGroupName="address1">

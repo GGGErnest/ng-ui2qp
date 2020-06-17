@@ -41,7 +41,7 @@ export class Ui2QpFormControl extends FormControl {
    * Return the FormControls value after applying the serializer
    */
   getValue(): any {
-    return this.serializer(this);
+    return this.serializer(this.value);
   }
 
   /** Set a new Value to the FormControl

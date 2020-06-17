@@ -17,10 +17,10 @@ export const numberDeserializer: Deserializer = {
   type: 'number',
   deserializerFunc: (value: any, defaultVal: any) => {
     // tslint:disable-next-line:radix
-    let returnValue = parseInt(value);
+    const returnValue = parseInt(value);
     if (typeof returnValue !== 'number') {
-      console.error(`The current value ${value} couldn't be deserialized instead used the default value`);
-      returnValue = defaultVal;
+      console.error(`The current value ${value} couldn't be deserialized, instead we used the default value`);
+      return defaultVal;
     }
     return returnValue;
   },
@@ -40,7 +40,7 @@ export const stringArrayDeserializer: Deserializer = {
  * Numbers Array Deserializer. It deserializes the value retrieved from the QueryParams to an Array of numbers
  */
 export const arrayNumberDeserializer: Deserializer = {
-  type: 'array-number',
+  type: 'number-array',
   deserializerFunc: (value: any, defaultVal: any) => {
     // tslint:disable-next-line:radix
     let returnValue = value.map((item) => parseInt(item));

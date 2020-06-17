@@ -139,7 +139,7 @@ export class Ui2QpRoot {
    * Synchronize the formGroup value with the URL's query params
    */
   updateQp() {
-    const query = qpFromObject(this.model.value);
+    const query = qpFromObject(this.model.getValue());
     this.router.navigate(query, this.settings.replaceState);
   }
 

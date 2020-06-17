@@ -7,6 +7,7 @@ import { Ui2QpRouteComponent } from './components/routes/ui2qp-route/ui2qp-route
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
+import {OwlDateTimeModule, OwlNativeDateTimeModule} from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [Ui2QpComponent, Ui2QpRouteComponent],
@@ -17,6 +18,8 @@ import { MatInputModule } from '@angular/material/input';
     FormsModule,
     MatFormFieldModule,
     MatInputModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
   ],
 })
 export class LazyUi2QpModule { }
