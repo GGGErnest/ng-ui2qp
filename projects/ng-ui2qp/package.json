@@ -1,6 +1,24 @@
 {
   "name": "ng-ui2qp",
-  "version": "1.0.0",
+  "version": "0.0.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GGGErnest/ng-projects.git"
+  },
+  "keywords": [
+    "angular",
+    "router",
+    "url",
+    "queryparams",
+    "query-params",
+    "declarative",
+    "reactive"
+  ],
+  "author": "Ernesto Pedrosa Alonso <ernestop891123@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/GGGErnest/ng-projects/issues"
+  },
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "9.1.7",
     "@angular/core": "9.1.7",
