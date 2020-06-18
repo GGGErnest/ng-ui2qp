@@ -44,13 +44,20 @@ Using Ui2Qp generally is only a matter of some few steps:
 3. Create a model structure that defines the parameters you want to synchronize with the URl.  
 4. Bind the created model to the UI components responsible to update the value of each property of the model.
  
+## Pre-requisites 
+ 
+Check where you want to use the lib all these requisites are fill:
+
+ - You are using Routing in your app, so Angular Router Service is available. This is only required if you use the Ui2QpDefaultRouterService.
+ - ReactiveFormsModule must be imported and accessible in the module your are going to use the artifacts the lib provides.
+ 
 ## Quick Start
  
 1. Install the Lib.
  
-```
-ng add ng-ui2qp
-```
+   ```
+   ng add ng-ui2qp
+   ```
 
 2. Provide the default, or a custom Route Adapter ([Creating a Custom Router Adapter](#creating-a-custom-router-adapter)).
  
@@ -59,7 +66,7 @@ ng add ng-ui2qp
    // AppModule providers array
    providers:[{ provide: QP_ROUTER_ADAPTER, useClass: Ui2QpDefaultRouterService }]
    ```
-
+   
 3. Inject the Ui2QpBuilder class in the component.
 
    ```
@@ -86,31 +93,29 @@ ng add ng-ui2qp
       }
      );
    ```
-    
-  We could also have done it in these other ways too:
+   We could also have done it in these other ways too:
+   ```
+   const model = this.ui2QpBuilder.group(
+       {
+         category: this.ui2QpBuilder.control(),
+         price: this.ui2QpBuilder.control(),
+       });
+   const root: Ui2QpRoot  = this.ui2QpBuilder.root(
+       { replaceState: true },
+       model
+      );
+   ```
    
-  ```
-  const model = this.ui2QpBuilder.group(
-      {
-        category: this.ui2QpBuilder.control(),
-        price: this.ui2QpBuilder.control(),
-      });
-  const root: Ui2QpRoot  = this.ui2QpBuilder.root(
-      { replaceState: true },
-      model
-     );
-  ```
-   
-  ```
-  const model = this.ui2QpBuilder.group(
-      {
-        category: this.ui2QpBuilder.control(),
-        price: this.ui2QpBuilder.control(),
-      });
-  const root: Ui2QpRoot  = this.ui2QpBuilder.root({autoUpdating: {enabled: true}, replaceState: false});
-  // In this moment the model will be updated with the query-params values if they exist at that point in time.
-  root.model = model;
-  ```
+   ```
+   const model = this.ui2QpBuilder.group(
+       {
+         category: this.ui2QpBuilder.control(),
+         price: this.ui2QpBuilder.control(),
+       });
+   const root: Ui2QpRoot  = this.ui2QpBuilder.root({autoUpdating: {enabled: true}, replaceState: false});
+   // In this moment the model will be updated with the query-params values if they exist at that point in time.
+   root.model = model;
+   ```
    
 5. The last step is binding the model with the template, like you'll do with ReactiveForms, here's an example.
 
@@ -122,9 +127,8 @@ ng add ng-ui2qp
        <input matInput formControlName="price">     
     </ng-container>
    ```
-   ****Note that is the same as using ReactiveForms****
+   Note that is the same as using ReactiveForms in your templates.
    
-   **Important:** The ReactiveFormsModule must be imported in the module.
 
 ## Configurations
 
@@ -165,12 +169,12 @@ Defines if the Ui2QpRoot will create a new state in the browser history every ti
 ## Serializers and Deserializers
 
 Serializers and Deserializers determine how the value of the Ui2QpFormControl is serialized into a string for the URL and, 
-vice versa, how the parameter value is converted into the value used in the Ui2QpFormControl. You could creat your own
-ones if needed and pass them to the Ui2QpFormControl.
+vice versa, how the value gotten from the QP is transformed to the value used in the Ui2QpFormControl.
+You could create your own ones if you needed it, check that [section](#creating-and-registering-your-own-custom-serializers-and-deserializers) in the documentation.
 
 ### Built-in Serializers and Deserializers
 
-We have created for you some Serializers and Deserializers for most of the common types. here are they:
+We've created for you some Serializers and Deserializers for most of the common types. here they are:
 
 | Type of Value | Type ID | 
 | ----------- | ----------- |
@@ -179,8 +183,7 @@ We have created for you some Serializers and Deserializers for most of the commo
 | Array of number number | number-array |
 | Array of string | string-array |
 
-*Note*: Booleans are treated as numbers(false=0,true=1) if you want a different behavior feel free to create your own 
-serializer and deserializer (check [Creating and registering your own custom Serializers and Deserializers]#creating-and-registering-your-own-custom-serializers-and-deserializers)). 
+**Note**: Booleans are treated as numbers(false=0,true=1). 
 
 ### Deserializers
 
@@ -344,7 +347,7 @@ to create your own one and use it instead.
 ### Creating a Custom Router Adapter
 
 1. Create a new service. 
-2. Implement the interface "Ui2QpRouter" and implement the methods the interface has. Here is the code of the 
+2. Implement the interface "Ui2QpRouter" and implement its method. Here is the code of the 
 "Ui2QpDefaultRouterService" which is provided by us, but it's a good example:
 
 ```
@@ -383,7 +386,7 @@ export class Ui2QpDefaultRouterService implements Ui2QpRouter {
 }
 ```
 
-3. Provide (normally in the app.module of your app) your new Service as the RouterAdapter to use, here is how:
+3. Provide (normally in the app.module of your app) your new Service as the RouterAdapter to use.
 
  ```
  // AppModule providers array
@@ -397,10 +400,11 @@ That's all you have to do for creating and using your own custom Router Adapter 
 We've created a set of examples in [stackblitz](https://stackblitz.com/edit/ng-ui2qp) which can help to understand 
 and give a glance of what can be done with the ng-ui2qp.
 
+**IMPORTANT:** The examples are a work in progress, so don't forget to check on them from time to time.
+
 ## Warning
 
 Please keep in mind that for compatibility matters between browsers you have to take care of the URL's length doesn't 
 get beyond 2,083 characters because that could cause some unexpected behaviour in old browsers. From our experience 
 this could happen if you are working with very deep nested forms or long texts.
 Please read [this](https://www.quora.com/What-is-the-max-length-for-URLs-in-each-browser) form more information.
-
