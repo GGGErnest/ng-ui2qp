@@ -1,5 +1,5 @@
 import {Ui2QpFormGroup} from './ui2qp-form-group';
-import {AsyncValidatorFn, ValidatorFn, AbstractControl} from '@angular/forms';
+import {AsyncValidatorFn, ValidatorFn} from '@angular/forms';
 import {Ui2QpRouter} from '../interfaces/ui2qp-router';
 import {DefaultSettings, Settings} from '../types/settings';
 import merge from 'lodash/merge';
@@ -56,7 +56,7 @@ export class Ui2QpRoot {
       this.settings = merge(this.settings, settings);
     }
 
-    if (this.settings.autoUpdating) {
+    if (this.settings.autoUpdating.enabled) {
       // enabling the auto synchronization with the url
       this.enableAutoSync();
     }
@@ -71,6 +71,9 @@ export class Ui2QpRoot {
     if (model) {
       this._model = model;
       this._model.patchValue(this.getObjectFromQp(this.router.getQueryParamMap()));
+      if (this.settings.autoUpdating.enabled) {
+        this.enableAutoSync();
+      }
     }
   }
 
@@ -92,12 +95,14 @@ export class Ui2QpRoot {
    * AutoSync is a feature that will automatically update the QueryParams while the Ui2QpFormGroup's value changes
    */
   private enableAutoSync() {
-    this.subscriptions.add(
-      this.model.valueChanges.pipe(debounceTime(this.settings.autoUpdating.debounce)).subscribe(() => {
-        // update the query params when the value of the form changes
-        this.updateQp();
-      }),
-    );
+    if (this.model) {
+      this.subscriptions.add(
+        this.model.valueChanges.pipe(debounceTime(this.settings.autoUpdating.debounce)).subscribe(() => {
+          // update the query params when the value of the form changes
+          this.updateQp();
+        }),
+      );
+    }
   }
 
   /**
