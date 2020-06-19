@@ -36,7 +36,7 @@ Here's an overview of how the Ui2Qp classes matches ReactiveForms:
 | FormGroup | Ui2QpFormGroup | Extends |
 |     X     | Ui2QpRoot | Ui2Qp specific | 
 | FormBuilder | Ui2QpBuilder | Doesn't extends |
- 
+
 Using Ui2Qp generally is only a matter of some few steps:
 
 1. Provide a Router Adapter
@@ -48,7 +48,8 @@ Using Ui2Qp generally is only a matter of some few steps:
  
 Check where you want to use the lib all these requisites are fill:
 
- - You are using Routing in your app, so Angular Router Service is available. This is only required if you use the Ui2QpDefaultRouterService.
+ - You are using Routing in your app, so Angular Router Service is available. This is only required if you use the
+ Ui2QpDefaultRouterService.
  - ReactiveFormsModule must be imported and accessible in the module your are going to use the artifacts the lib provides.
  
 ## Quick Start
@@ -286,7 +287,8 @@ const dateTimePickerType = 'datetime-picker';
 const datetimePickerDeserializer: Deserializer = {
   type: dateTimePickerType,
   deserializerFunc: (value: string, defaultValue: Date) => {
-    return new Date(value);    }
+    return value !== null && value !== '' ? new Date(value) : '';
+  }
 };
 ```
 
@@ -298,7 +300,7 @@ Notice how the value which is type string it's converted to a Date object since 
 const datetimePickerSerializer: Serializer = {
   type: dateTimePickerType,
   serializerFunc: (value: Date) => {
-     return value.toISOString();
+     return value !== null && value !== undefined ? value.toISOString() : null;
   }
 };
 ```

@@ -26,7 +26,7 @@ export class Ui2QpComponent {
     const datetimePickerSerializer: Serializer = {
       type: dateTimePickerType,
       serializerFunc: (value: Date) => {
-        return value.toISOString();
+        return value !== null && value !== undefined ? value.toISOString() : null;
       }
     };
 
@@ -34,35 +34,33 @@ export class Ui2QpComponent {
 
     // defining a custom deserializer for the datetime-picker
     const datetimePickerDeserializer: Deserializer = {
-     type: dateTimePickerType,
-     deserializerFunc: (value: string, defaultValue: Date) => {
-       return new Date(value);
-     }
+      type: dateTimePickerType,
+      deserializerFunc: (value: string, defaultValue: Date) => {
+        return value !== null && value !== '' ? new Date(value) : '';
+      }
     };
 
     this.deserializersService.register(datetimePickerDeserializer);
 
-    this.model = this.ui2QpBuilder.group({
-      username: this.ui2QpBuilder.control(),
-      password: this.ui2QpBuilder.control(),
-      birthday: this.ui2QpBuilder.control(dateTimePickerType),
-      addresses: this.ui2QpBuilder.group({
-        address1: this.ui2QpBuilder.group({
-          address: this.ui2QpBuilder.control(),
-          state: this.ui2QpBuilder.control(),
-          country: this.ui2QpBuilder.control(),
-          number: this.ui2QpBuilder.control('number'),
+    this.root = this.ui2QpBuilder.root({autoUpdating: {enabled: true}, replaceState: true},
+      this.ui2QpBuilder.group({
+        username: this.ui2QpBuilder.control(),
+        password: this.ui2QpBuilder.control(),
+        birthday: this.ui2QpBuilder.control(dateTimePickerType),
+        addresses: this.ui2QpBuilder.group({
+          address1: this.ui2QpBuilder.group({
+            address: this.ui2QpBuilder.control(),
+            state: this.ui2QpBuilder.control(),
+            country: this.ui2QpBuilder.control(),
+            number: this.ui2QpBuilder.control('number'),
+          }),
+          address2: this.ui2QpBuilder.group({
+            address: this.ui2QpBuilder.control(),
+            state: this.ui2QpBuilder.control(),
+            country: this.ui2QpBuilder.control(),
+          }),
         }),
-        address2: this.ui2QpBuilder.group({
-          address: this.ui2QpBuilder.control(),
-          state: this.ui2QpBuilder.control(),
-          country: this.ui2QpBuilder.control(),
-        }),
-      }),
-    });
-
-    this.root = this.ui2QpBuilder.root({autoUpdating: {enabled: true}, replaceState: false});
-    this.root.model = this.model;
+      }));
   }
 
   toggleAddress3() {
