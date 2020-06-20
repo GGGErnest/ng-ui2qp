@@ -2,7 +2,7 @@
  * Public API Surface of ng-ui2qp
  */
 export * from './lib/classes/ui2qp-root';
-export * from './lib/classes/ui2qp-form-group.js';
+export * from './lib/classes/ui2qp-form-group';
 export * from './lib/classes/ui2qp-form-control';
 export * from './lib/interfaces/ui2qp-router';
 export * from './lib/serializers/serializers';
