@@ -1,4 +1,3 @@
-
 /**
  * Serializer that is used to mapping the values retrieved from a QpControl to the corresponding Query param
  */

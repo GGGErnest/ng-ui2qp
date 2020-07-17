@@ -57,7 +57,7 @@ Check where you want to use the lib all these requisites are fill:
 1. Install the Lib.
  
    ```
-   ng add ng-ui2qp
+   npm i ng-ui2qp
    ```
 
 2. Provide the default, or a custom Route Adapter ([Creating a Custom Router Adapter](#creating-a-custom-router-adapter)).

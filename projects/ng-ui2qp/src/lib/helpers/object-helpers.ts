@@ -1,24 +1,3 @@
-import {isEmpty} from './empty-helper';
-import {Params} from '@angular/router';
-
-
-/**
- * Creates Params from an Object
- * @param object Source Object
- */
-export function qpFromObject(object: object): Params {
-  const params: Params = {};
-  const exec = (path: string[], element: any, data: URLSearchParams) => {
-    if (!isEmpty(element)) {
-      const keyName = path.join('.');
-      data[keyName] = element;
-    }
-  };
-  traverse(object, exec, params);
-  return params;
-}
-
-
 /**
  * Traverse an Object and execute actions on each of it's member properties. This happens recursively
  * @param objectToTraverse Object to traverse
@@ -66,3 +45,21 @@ export function execOnProperty(
   }
 }
 
+/**
+ * This method sets the value of a property in a object using a path to the desired property. The path will be followed
+ * from the root of the object. If the property to set the value doesn't exist, will be created.
+ * @param keyPath Path from the root of the object to the current position
+ * @param value Current value
+ * @param object Object to traverse
+ */
+export function setValueInPath(keyPath: Array<string>, value: string | string[], object: object) {
+  const firstElement = keyPath.shift();
+  if (keyPath.length > 0) {
+    if (object[firstElement] === undefined) {
+      object[firstElement] = {};
+    }
+    setValueInPath(keyPath, value, object[firstElement]);
+  } else {
+    object[firstElement] = value;
+  }
+}

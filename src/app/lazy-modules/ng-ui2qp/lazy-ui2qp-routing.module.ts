@@ -7,6 +7,5 @@ const routes: Routes = [{ path: '', component: Ui2QpComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
 })
 export class LazyUi2QpRoutingModule { }

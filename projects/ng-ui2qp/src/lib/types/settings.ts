@@ -1,20 +1,23 @@
+import {LogLevel} from './logger';
+
 /**
- * Settings that define the behavior of the QpRoot
+ * Defines Ui2QpRoot settings
  */
 export interface Settings {
-  autoUpdating?: AutoUpdatingSettings;
+  autoUpdating?: AutoUpdating;
   replaceState?: boolean;
+  logLevel?: LogLevel;
 }
 
 /**
  * AutoUpdating specific settings
  */
-export interface AutoUpdatingSettings {
+export interface AutoUpdating {
   enabled?: boolean;
   debounce?: number;
 }
 
 /**
- * Default Settings for the QpRoot
+ * Default Settings for the Ui2QpRoot
  */
-export const DefaultSettings = {autoUpdating: {enabled: true, debounce: 500}, replaceState: true};
+export const DefaultSettings = {autoUpdating: {enabled: true, debounce: 500}, replaceState: true, logLevel: LogLevel.Off};

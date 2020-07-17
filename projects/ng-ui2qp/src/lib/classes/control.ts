@@ -6,10 +6,12 @@ import {
 } from '@angular/forms';
 import {SerializeFunc} from '../types/serializer';
 import {DeserializeFunc} from '../types/deserializer';
+import {IUi2QpLogger} from '../interfaces/logger';
 
-export class Ui2QpFormControl extends FormControl {
+export class Ui2QpControl extends FormControl {
   /**
    * Creates a Ui2QpFormControl
+   * @param logger Logger to be use
    * @param type Type of the FormControl
    * @param defaultVal Default value to used when the Control will be set to invalid values or empty values,
    * also is going be used when resetting the Control's value.
@@ -22,6 +24,7 @@ export class Ui2QpFormControl extends FormControl {
    * @param asyncValidator — A single async validator or array of async validator functions
    */
   constructor(
+    private logger: IUi2QpLogger,
     public type: string,
     public defaultVal: any,
     private serializer: SerializeFunc,
@@ -32,16 +35,26 @@ export class Ui2QpFormControl extends FormControl {
       | ValidatorFn[]
       | AbstractControlOptions
       | null,
-    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null
+    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null,
   ) {
     super(state, validatorOrOpts, asyncValidator);
+
+    this.logger.debug('Ui2QpControl.constructor');
+    this.logger.debug('Params passed into the function: ', this.type, this.defaultVal, this.serializer,
+
+    this.deserializer, state, validatorOrOpts, asyncValidator);
   }
 
   /**
    * Return the FormControls value after applying the serializer
    */
   getValue(): any {
-    return this.serializer(this.value);
+    this.logger.info('Ui2QpControl.getValue');
+
+    const returnValue = this.serializer(this.value);
+    this.logger.debug('returnValue: ', returnValue);
+
+    return returnValue;
   }
 
   /** Set a new Value to the FormControl
@@ -50,13 +63,20 @@ export class Ui2QpFormControl extends FormControl {
    * and emits events when the value changes.
    */
   setValue(value: any, options?: any) {
+
+    this.logger.info('Ui2QpControl.setValue');
+    this.logger.debug('Params passed into the function', value, options);
+
     let valueToSet;
     if (value === undefined || value === null) {
+      this.logger.trace('Value passed is undefined or null');
       valueToSet = this.defaultVal;
     } else {
+      this.logger.trace('Value passed is not undefined or null so is passed to the deserializer');
       valueToSet = this.deserializer(value, this.defaultVal);
     }
 
+    this.logger.debug('Value to set to the Control: ', valueToSet);
     super.setValue(valueToSet, options);
   }
 }

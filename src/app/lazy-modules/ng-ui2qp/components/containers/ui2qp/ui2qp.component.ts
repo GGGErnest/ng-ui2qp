@@ -1,22 +1,16 @@
-import {Component} from '@angular/core';
-import {Ui2QpRoot} from '../../../../../modules/ng-ui2qp/classes/ui2qp-root';
-import {Ui2QpBuilder} from '../../../../../modules/ng-ui2qp/services/ui2qp-builder.service';
-import {Ui2QpFormGroup} from '../../../../../modules/ng-ui2qp/classes/ui2qp-form-group';
-import {Ui2QpSerializersService} from '../../../../../modules/ng-ui2qp/services/ui2qp-serializers.service';
-import {Ui2QpDeserializersService} from '../../../../../modules/ng-ui2qp/services/ui2qp-deserializers.service';
-import {Serializer} from '../../../../../modules/ng-ui2qp/types/serializer';
-import {Deserializer} from '../../../../../modules/ng-ui2qp/types/deserializer';
+import {Component, OnDestroy} from '@angular/core';
+import {Deserializer, Serializer, Ui2QpBuilder, Ui2QpDeserializersService, Ui2QpGroup, Ui2QpRoot, Ui2QpSerializersService} from 'ng-ui2qp';
 
 @Component({
   selector: 'app-form-qp',
   templateUrl: './ui2qp.component.html',
   styleUrls: ['./ui2qp.component.scss'],
 })
-export class Ui2QpComponent {
+export class Ui2QpComponent implements OnDestroy {
 
   root: Ui2QpRoot;
   showAddress3 = false;
-  model: Ui2QpFormGroup;
+  model: Ui2QpGroup;
 
   constructor(private ui2QpBuilder: Ui2QpBuilder, private serializersService: Ui2QpSerializersService,
               private deserializersService: Ui2QpDeserializersService) {
@@ -35,7 +29,7 @@ export class Ui2QpComponent {
     // defining a custom deserializer for the datetime-picker
     const datetimePickerDeserializer: Deserializer = {
       type: dateTimePickerType,
-      deserializerFunc: (value: string, defaultValue: Date) => {
+      deserializerFunc: (value: string) => {
         return value !== null && value !== '' ? new Date(value) : '';
       }
     };
@@ -73,12 +67,12 @@ export class Ui2QpComponent {
         country: this.ui2QpBuilder.control(),
       });
 
-      (this.model.get('addresses') as Ui2QpFormGroup).addControl('address3', addressGroup);
+      (this.root.model.get('addresses') as Ui2QpGroup).addControl('address3', addressGroup);
 
       this.showAddress3 = true;
 
     } else {
-      (this.model.get('addresses') as Ui2QpFormGroup).removeControl('address3');
+      (this.root.model.get('addresses') as Ui2QpGroup).removeControl('address3');
       this.showAddress3 = false;
     }
 
@@ -86,5 +80,9 @@ export class Ui2QpComponent {
 
   updateQp() {
     this.root.updateQp();
+  }
+
+  ngOnDestroy() {
+    this.root.destroy();
   }
 }
