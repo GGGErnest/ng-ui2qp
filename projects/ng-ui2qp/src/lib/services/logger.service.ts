@@ -72,7 +72,7 @@ export class Ui2QpLogger implements IUi2QpLogger {
   private log(logLevel: LogLevel, message: any, optionalParams: any[] = []) {
     const logLevelName = LOG_LVL_NAMES[logLevel];
     const color = this.colors[logLevel];
-    const metaString = this.getMetaString(logLevelName);
+    const metaString = Ui2QpLogger.getMetaString(logLevelName);
 
     if (!isEmpty(optionalParams) && optionalParams.length > 1) {
       console.log(`%c${metaString}`, `color:${color}`, message);

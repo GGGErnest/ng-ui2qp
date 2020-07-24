@@ -12,7 +12,7 @@ import {isEmpty} from '../helpers/empty-helper';
 export class Ui2QpRoot {
 
   /**
-   * Root Ui2QpFormGroup acts the same like a FormGroup
+   * Root Ui2QpGroup acts the same like a FormGroup
    */
     // tslint:disable-next-line:variable-name
   private _model: Ui2QpGroup;
@@ -28,7 +28,12 @@ export class Ui2QpRoot {
   private subscriptions = new Subscription();
 
   /**
-   * Creates a new instance of Ui2QpRoot with a default Ui2QpFormGroup
+   * Defines if the model was initialized with the value from the QPs
+   */
+  private wasModelSynchronized = false;
+
+  /**
+   * Creates a new instance of Ui2QpRoot with a default Ui2QpGroup
    * @param router QpRouter adapter to be use
    * @param logger Logger to be use
    * @param settings Settings which define how this Ui2QpRoot will behave
@@ -83,6 +88,8 @@ export class Ui2QpRoot {
 
     this.logger.debug('Current settings used: ', this.settings);
 
+    this.logger.trace('Subscribing to model value changes');
+
     if (this.settings.autoUpdating.enabled) {
 
       this.logger.trace('Enabling AutoSync');
@@ -90,8 +97,6 @@ export class Ui2QpRoot {
       // enabling the auto synchronization with the url
       this.enableAutoSync();
     }
-
-    this.logger.trace('Subscribing to model value changes');
 
     // Subscribe to QueryParams Changes
     this.subscriptions.add(this.router.getQueryParamMapObservable().subscribe((queryParams: any) => {
@@ -103,7 +108,14 @@ export class Ui2QpRoot {
 
       this.logger.debug('Current value to set to the model after the QPs have changed: ', objectFromQp);
 
-      this._model.patchValue(objectFromQp);
+      if (!this.wasModelSynchronized) {
+
+        this._model.patchValue(objectFromQp, {emitEvent: false});
+        this.wasModelSynchronized = true;
+      } else {
+
+        this._model.patchValue(objectFromQp);
+      }
     }));
 
   }
@@ -113,6 +125,7 @@ export class Ui2QpRoot {
     this.logger.info('Ui2QpRoot.set model');
     this.logger.debug('Params passed into the function', model);
     this.logger.info('Adding the model to the Ui2QpRoot initializing its value from the Qps and subscribing to form value changes');
+
     if (model) {
 
       this.logger.trace('Assigning the new model passed');
@@ -126,7 +139,7 @@ export class Ui2QpRoot {
       this.logger.debug('queryParamsObject: ', queryParamsObject);
       this.logger.debug('initializing the new model with the Qps value just retrieved');
 
-      this._model.patchValue(queryParamsObject);
+      this._model.patchValue(queryParamsObject, {emitEvent: false});
 
       if (this.settings.autoUpdating.enabled) {
 
@@ -161,7 +174,7 @@ export class Ui2QpRoot {
    */
   private enableAutoSync() {
     this.logger.info('Ui2QpRoot.enableAutoSync');
-    this.logger.info('Autosync enabled for the current model');
+    this.logger.info('Auto-sync enabled for the current model');
     if (this.model) {
 
       this.logger.trace('Subscribing to model\'s value changes');

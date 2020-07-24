@@ -8,6 +8,7 @@ import {isEmpty} from '../helpers/empty-helper';
 import {Ui2QpControl} from './control';
 import {Action, ActionType} from '../types/action';
 import {IUi2QpLogger} from '../interfaces/logger';
+import {UpdateValueOptions} from '../types/update-value-options';
 
 export class Ui2QpGroup extends FormGroup {
   /** Query param value for this FormGroup */
@@ -37,7 +38,7 @@ export class Ui2QpGroup extends FormGroup {
   }
 
   /**
-   * Add controls to the Ui2QpFormGroup
+   * Add controls to the Ui2QpGroup
    * @param controls - Controls to insert.
    */
   addControls(controls: { [key: string]: AbstractControl }) {
@@ -108,10 +109,10 @@ export class Ui2QpGroup extends FormGroup {
   }
 
   /**
-   * Sets the initial value of a control after being added to a Ui2QpFormGroup.
+   * Sets the initial value of a control after being added to a Ui2QpGroup.
    * This method tries to find the corresponding value for the control
    * in the query params and if it exist then it assigns the value to the control.
-   * Is important to mention that the value of a control depends of it's position in the Ui2QpFormGroup, this is due to
+   * Is important to mention that the value of a control depends of it's position in the Ui2QpGroup, this is due to
    * the query params are defined depending of the structure of the form.
    * @param name Name or key that identifies the control.
    * @param control QpControl to initialize
@@ -128,7 +129,7 @@ export class Ui2QpGroup extends FormGroup {
 
       const payloadValue = this.qpValue[name] !== undefined ? this.qpValue[name] : {};
 
-      // If the control to add is a Ui2QpFormGroup then update its path and the value of the controls it contains
+      // If the control to add is a Ui2QpGroup then update its path and the value of the controls it contains
       const actionToExecute = {
         type: ActionType.Add,
         data: {
@@ -159,8 +160,8 @@ export class Ui2QpGroup extends FormGroup {
   }
 
   /**
-   * Adds a Control to the Ui2QpFormGroup.
-   * When whatever kind of Control is added to a Ui2QpFormGroup its initial value will depends if
+   * Adds a Control to the Ui2QpGroup.
+   * When whatever kind of Control is added to a Ui2QpGroup its initial value will depends if
    * a corresponding value is found in the Query Params of the URL, if not then the current value of
    * the Control will be kept.
    * @param name Name of the control to be added.
@@ -193,9 +194,9 @@ export class Ui2QpGroup extends FormGroup {
 
   /**
    * Execute some predefined actions.
-   * This method is used for executing predefined actions in the Ui2QpFormGroup from outside
-   * is the way the a parent Ui2QpFormGroup notifies it's Ui2QpFormGroup children of what they should do.
-   * @param action Action to execute in this Ui2QpFormGroup
+   * This method is used for executing predefined actions in the Ui2QpGroup from outside
+   * is the way the a parent Ui2QpGroup notifies it's Ui2QpGroup children of what they should do.
+   * @param action Action to execute in this Ui2QpGroup
    */
   exec(action?: Action): any {
 
@@ -232,7 +233,7 @@ export class Ui2QpGroup extends FormGroup {
         this.logger.trace('Action type is PatchValue');
         this.logger.trace('Calling patchValue with "action.data" as params');
 
-        this.patchValue(action.data);
+        this.patchValue(action.data.value, action.data.controlOptions);
         break;
       }
       case ActionType.GetValue: {
@@ -251,11 +252,13 @@ export class Ui2QpGroup extends FormGroup {
   }
 
   /**
-   * Updates the current value of the Ui2QpFormGroup with the new value provided.
+   * Updates the current value of the Ui2QpGroup with the new value provided.
    * It updates all the children values too if required.
-   * @param object New value for the Ui2QpFormGroup
+   * @param object New value for the Ui2QpGroup
+   * @param options Configuration options that determine how the control propagates changes and
+   * emits events after the value is updated.
    */
-  patchValue(object: { [key: string]: any }) {
+  patchValue(object: { [key: string]: any }, options?: UpdateValueOptions) {
 
     this.logger.debug('Ui2QpGroup.patchValue');
     this.logger.debug('Params passed into the function', object);
@@ -267,11 +270,10 @@ export class Ui2QpGroup extends FormGroup {
     this.logger.trace('Iterating through all controls');
 
     Object.keys(this.controls).forEach((key) => {
-      const value = this.qpValue[key];
 
       this.logger.trace('key', key);
       this.logger.debug('Current Control', this.controls[key]);
-      this.logger.trace('Query Params corresponding value for this Control', value);
+      this.logger.trace('Query Params corresponding value for this Control', this.qpValue[key]);
 
       if (this.controls[key] instanceof Ui2QpGroup) {
 
@@ -279,7 +281,7 @@ export class Ui2QpGroup extends FormGroup {
 
         const actionToExecute = {
           type: ActionType.PatchValue,
-          data: value,
+          data: {value: this.qpValue[key], controlOptions: options},
         };
 
         this.logger.debug('Action to pass into the Ui2QpGroup to be executed: ', actionToExecute);
@@ -290,9 +292,9 @@ export class Ui2QpGroup extends FormGroup {
       } else if (this.controls[key] instanceof Ui2QpControl) {
 
         this.logger.trace('Current Control is a Ui2QpControl');
-        this.logger.debug('value to set in the current control: ', value);
+        this.logger.debug('value to set in the current control: ',  this.qpValue[key]);
 
-        this.controls[key].setValue(value);
+        this.controls[key].setValue( this.qpValue[key], options);
       }
     });
   }

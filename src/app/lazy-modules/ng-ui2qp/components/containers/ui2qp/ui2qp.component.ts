@@ -10,7 +10,6 @@ export class Ui2QpComponent implements OnDestroy {
 
   root: Ui2QpRoot;
   showAddress3 = false;
-  model: Ui2QpGroup;
 
   constructor(private ui2QpBuilder: Ui2QpBuilder, private serializersService: Ui2QpSerializersService,
               private deserializersService: Ui2QpDeserializersService) {
