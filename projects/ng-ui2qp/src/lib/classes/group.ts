@@ -155,7 +155,7 @@ export class Ui2QpGroup extends FormGroup {
 
       this.logger.debug('valueToAssign', valueToAssign);
 
-      control.setValue(valueToAssign);
+      control.updateValue(valueToAssign);
     }
   }
 
@@ -294,7 +294,7 @@ export class Ui2QpGroup extends FormGroup {
         this.logger.trace('Current Control is a Ui2QpControl');
         this.logger.debug('value to set in the current control: ',  this.qpValue[key]);
 
-        this.controls[key].setValue( this.qpValue[key], options);
+        (this.controls[key] as Ui2QpControl).updateValue(this.qpValue[key], options);
       }
     });
   }

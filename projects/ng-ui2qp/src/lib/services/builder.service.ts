@@ -3,7 +3,7 @@ import {IUi2QpRouter, UI2QP_ROUTER_INJ_TOK} from '../interfaces/router';
 import {Ui2QpRoot} from '../classes/root';
 import {AbstractControl, AbstractControlOptions, AsyncValidatorFn, ValidatorFn} from '@angular/forms';
 import {Ui2QpGroup} from '../classes/group';
-import {Settings} from '../types/settings';
+import {NgUI2QpSettings, UI2QP_SETTINGS_INJ_TOK} from '../types/settings';
 import {Ui2QpControl} from '../classes/control';
 import {Ui2QpSerializersService} from './serializers.service';
 import {Ui2QpDeserializersService} from './deserializers.service';
@@ -18,8 +18,10 @@ export class Ui2QpBuilder {
    * @param logger Logger service to be used
    * @param serializersService Serializers service where to get all the registered serializers
    * @param deserializersService Deserializers service where to get all the registered deserializers
+   * @param settings NgUI2QpSettings settings to be used mainly by the Ui2QpRoot.
    */
-  constructor(@Inject(UI2QP_ROUTER_INJ_TOK) private router: IUi2QpRouter,
+  constructor(@Inject(UI2QP_SETTINGS_INJ_TOK) private settings: NgUI2QpSettings,
+              @Inject(UI2QP_ROUTER_INJ_TOK) private router: IUi2QpRouter,
               @Inject(UI2QP_LOGGER_INJ_TOK) private logger: IUi2QpLogger,
               private serializersService: Ui2QpSerializersService,
               private deserializersService: Ui2QpDeserializersService) {
@@ -30,27 +32,25 @@ export class Ui2QpBuilder {
 
   /**
    * Creates an instance of the Ui2qpRoot
-   * @param settings Settings to be used
    * @param model Initial model that defines the parameters
    * @param validatorOrOpts Initial Validators or Options
    * @param asyncValidators Initial AsyncValidators
    */
   public root(
-    settings: Settings,
     model?: { [key: string]: Ui2QpGroup | Ui2QpControl } | Ui2QpGroup,
     validatorOrOpts?: ValidatorFn | ValidatorFn[] | null,
     asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null
   ): Ui2QpRoot {
 
     this.logger.info('Ui2QpBuilder.root');
-    this.logger.debug('Params passed into the function', settings, model, validatorOrOpts, asyncValidators);
+    this.logger.debug('Params passed into the function', this.settings, model, validatorOrOpts, asyncValidators);
     this.logger.info('Creating a Ui2QpRoot');
     this.logger.trace('Creating a new Ui2QpRoot');
 
     return new Ui2QpRoot(
       this.router,
       this.logger,
-      settings,
+      this.settings,
       model,
       validatorOrOpts,
       asyncValidators

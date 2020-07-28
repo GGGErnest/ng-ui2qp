@@ -1,20 +1,46 @@
-import {Injectable} from '@angular/core';
-import {BUILT_IN_DESERIALIZERS_MAP} from '../serializers/deserializers';
+import {Inject, Injectable} from '@angular/core';
 import {Deserializer} from '../types/deserializer';
+import {Serializer} from '../types/serializer';
+import {BUILD_IN_SERIALIZERS} from '../serializers/serializers';
+import {NgUI2QpSettings, UI2QP_SETTINGS_INJ_TOK} from '../types/settings';
+import * as CryptoJS from 'crypto-js';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class Ui2QpDeserializersService {
   /**
    * Map that contains all the registered deserializers
    */
-  private registered = BUILT_IN_DESERIALIZERS_MAP;
+  private registered = new Map<string, any>();
 
   /**
    * Creates a new Ui2QpDeserializersService which is used to register and deregister deserializers
    */
-  constructor() {
+  constructor(@Inject(UI2QP_SETTINGS_INJ_TOK) private settings: NgUI2QpSettings) {
+    this.registerBuiltInDeserializers();
+  }
+
+  /**
+   * Register all built-in deserializers
+   */
+  private registerBuiltInDeserializers() {
+    BUILD_IN_SERIALIZERS.forEach((serializer: Serializer) => {
+      this.registered.set(serializer.type, serializer.serializerFunc);
+    });
+
+    // This built-in deserializer is placed here because has a dependency with the settings
+
+    const encryptedFunction = () => {
+      const key = this.settings.cryptoSecretKey;
+      return (cipherText: string, defaultValue: any) => {
+        const decryptValue = CryptoJS.AES.decrypt(cipherText, key).toString(CryptoJS.enc.Utf8);
+        if (!decryptValue) {
+          return defaultValue;
+        }
+        return decryptValue;
+      };
+    };
+
+    this.registered.set('encrypted', encryptedFunction());
   }
 
   /**

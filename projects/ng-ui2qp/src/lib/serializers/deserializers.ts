@@ -1,11 +1,11 @@
-import {DeserializeFunc, Deserializer} from '../types/deserializer';
+import {Deserializer} from '../types/deserializer';
 
 /**
  * String deserializer. It deserializes the value retrieved from the QueryParams to a string
  */
 export const stringDeserializer: Deserializer = {
   type: 'string',
-  deserializerFunc: (value: any, defaultVal: any) => {
+  deserializerFunc: (value: any) => {
     return value;
   },
 };
@@ -31,7 +31,7 @@ export const numberDeserializer: Deserializer = {
  */
 export const stringArrayDeserializer: Deserializer = {
   type: 'string-array',
-  deserializerFunc: (value: any, defaultVal: any) => {
+  deserializerFunc: (value: any) => {
     return value;
   },
 };
@@ -52,11 +52,8 @@ export const arrayNumberDeserializer: Deserializer = {
   },
 };
 
+
 /**
  * Map of all built-in deserializers.
  */
-export const BUILT_IN_DESERIALIZERS_MAP = new Map<string, DeserializeFunc>();
-BUILT_IN_DESERIALIZERS_MAP.set(stringDeserializer.type, stringDeserializer.deserializerFunc);
-BUILT_IN_DESERIALIZERS_MAP.set(numberDeserializer.type, numberDeserializer.deserializerFunc);
-BUILT_IN_DESERIALIZERS_MAP.set(stringArrayDeserializer.type, stringArrayDeserializer.deserializerFunc);
-BUILT_IN_DESERIALIZERS_MAP.set(arrayNumberDeserializer.type, arrayNumberDeserializer.deserializerFunc);
+export const BUILT_IN_DESERIALIZERS = [stringDeserializer, numberDeserializer, stringArrayDeserializer, arrayNumberDeserializer];

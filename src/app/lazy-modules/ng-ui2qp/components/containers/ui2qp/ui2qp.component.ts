@@ -35,10 +35,10 @@ export class Ui2QpComponent implements OnDestroy {
 
     this.deserializersService.register(datetimePickerDeserializer);
 
-    this.root = this.ui2QpBuilder.root({autoUpdating: {enabled: true}, replaceState: true},
+    this.root = this.ui2QpBuilder.root(
       this.ui2QpBuilder.group({
         username: this.ui2QpBuilder.control(),
-        password: this.ui2QpBuilder.control(),
+        password: this.ui2QpBuilder.control('encrypted'),
         birthday: this.ui2QpBuilder.control(dateTimePickerType),
         addresses: this.ui2QpBuilder.group({
           address1: this.ui2QpBuilder.group({

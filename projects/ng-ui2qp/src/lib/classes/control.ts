@@ -47,12 +47,12 @@ export class Ui2QpControl extends FormControl {
   }
 
   /**
-   * Validate the value passed and if it's invalid returns the default value
+   * Deserialize the value passed and if it's invalid returns the default value
    * @param value Value to Validate
    */
-  private validateValue(value: any): any {
+  private deserializeValue(value: any): any {
 
-    this.logger.info('Ui2QpControl.validateValue');
+    this.logger.info('Ui2QpControl.deserializeValue');
     this.logger.debug('Params passed into the function', value);
 
     if (value === undefined || value === null) {
@@ -85,20 +85,20 @@ export class Ui2QpControl extends FormControl {
     return returnValue;
   }
 
-  /** Set a Value to the Control
+  /** Updates Control's value after been deserialized
    * @param value The new value for the control.
    * @param options Configuration options that determine how the control propagates changes
    * and emits events when the value changes.
    */
-  setValue(value: any, options?: UpdateValueOptions) {
+  updateValue(value: any, options?: UpdateValueOptions) {
 
     this.logger.info('Ui2QpControl.setValue');
     this.logger.debug('Params passed into the function', value, options);
 
-    const valueToSet = this.validateValue(value);
+    const valueToSet = this.deserializeValue(value);
 
     this.logger.debug('Value to set to the Control: ', valueToSet);
 
-    super.setValue(valueToSet, options);
+    this.setValue(valueToSet, options);
   }
 }

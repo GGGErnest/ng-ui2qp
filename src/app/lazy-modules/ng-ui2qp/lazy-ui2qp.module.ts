@@ -21,7 +21,13 @@ import {LogLevel, NgUi2QpModule} from 'ng-ui2qp';
     MatInputModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    NgUi2QpModule.withProviders({logLevel: LogLevel.Debug})
+    NgUi2QpModule.withSettings({
+      autoUpdating: {enabled: true},
+      replaceState: true,
+      cryptoSecretKey: 'Th3M0st5ecureS3cretK3Y',
+      logLevel: LogLevel.Debug,
+    })
   ],
 })
-export class LazyUi2QpModule { }
+export class LazyUi2QpModule {
+}

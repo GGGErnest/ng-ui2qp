@@ -1,7 +1,7 @@
 import {Ui2QpGroup} from './group';
 import {AsyncValidatorFn, ValidatorFn} from '@angular/forms';
 import {IUi2QpRouter} from '../interfaces/router';
-import {DefaultSettings, Settings} from '../types/settings';
+import {DefaultSettings, NgUI2QpSettings} from '../types/settings';
 import merge from 'lodash/merge';
 import {Subscription} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
@@ -44,7 +44,7 @@ export class Ui2QpRoot {
   constructor(
     private router: IUi2QpRouter,
     private logger: IUi2QpLogger,
-    settings: Settings,
+    settings: NgUI2QpSettings,
     model?: { [key: string]: Ui2QpGroup | Ui2QpControl } | Ui2QpGroup,
     validatorOrOpts?: ValidatorFn | ValidatorFn[] | null,
     asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null,
@@ -108,14 +108,8 @@ export class Ui2QpRoot {
 
       this.logger.debug('Current value to set to the model after the QPs have changed: ', objectFromQp);
 
-      if (!this.wasModelSynchronized) {
-
-        this._model.patchValue(objectFromQp, {emitEvent: false});
-        this.wasModelSynchronized = true;
-      } else {
-
-        this._model.patchValue(objectFromQp);
-      }
+      this._model.patchValue(objectFromQp);
+      this.wasModelSynchronized = true;
     }));
 
   }
@@ -181,11 +175,14 @@ export class Ui2QpRoot {
 
       this.subscriptions.add(
         this.model.valueChanges.pipe(debounceTime(this.settings.autoUpdating.debounce)).subscribe(() => {
+          if (!this.wasModelSynchronized) {
+            this.logger.trace('Updating the Qp');
 
-          this.logger.trace('Updating the Qp');
-
-          // update the query params when the value of the form changes
-          this.updateQp();
+            // update the query params when the value of the form changes
+            this.updateQp();
+          } else {
+            this.wasModelSynchronized = false;
+          }
         })
       );
     }
