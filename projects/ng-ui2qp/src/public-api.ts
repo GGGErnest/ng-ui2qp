@@ -13,6 +13,7 @@ export * from './lib/types/serializer';
 export * from './lib/types/settings';
 export * from './lib/types/logger';
 export * from './lib/types/update-value-options';
+export * from './lib/types/control-settings';
 export * from './lib/services/builder.service';
 export * from './lib/services/router.service';
 export * from './lib/services/serializers.service';

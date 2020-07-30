@@ -1,9 +1,4 @@
-import {
-  FormGroup,
-  ValidatorFn,
-  AsyncValidatorFn,
-  AbstractControl,
-} from '@angular/forms';
+import {AbstractControl, AbstractControlOptions, AsyncValidatorFn, FormGroup, ValidatorFn} from '@angular/forms';
 import {isEmpty} from '../helpers/empty-helper';
 import {Ui2QpControl} from './control';
 import {Action, ActionType} from '../types/action';
@@ -21,11 +16,13 @@ export class Ui2QpGroup extends FormGroup {
    * such functions, or an `AbstractControlOptions` object that contains validation functions
    * and a validation trigger.
    * @param asyncValidators A single async validator or array of async validator functions
+   * @param qpName Query Param name that identifies this control
    */
   constructor(
     private logger: IUi2QpLogger,
+    public qpName?: string,
     controls?: { [key: string]: AbstractControl },
-    validatorOrOpts?: ValidatorFn | ValidatorFn[] | null,
+    validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null,
     asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null,
   ) {
     super({}, validatorOrOpts, asyncValidators);
@@ -76,6 +73,9 @@ export class Ui2QpGroup extends FormGroup {
 
     Object.keys(this.controls).forEach((key) => {
       const control = this.controls[key];
+      // Finding if the control has a defined qpName. Treating the control as a Ui2QpControl just to get the qpName, this is possible
+      // because both Ui2QpControl and Ui2QpGroup have that property
+      const qpName = (control as Ui2QpGroup).qpName || key;
 
       this.logger.trace('control: ', control);
       this.logger.trace('key: ', key);
@@ -88,17 +88,17 @@ export class Ui2QpGroup extends FormGroup {
 
         this.logger.trace('Action to pass into the Ui2QpGroup to be executed: ', actionToExecute);
 
-        value[key] = control.exec({type: ActionType.GetValue});
+        value[qpName] = control.exec({type: ActionType.GetValue});
 
-        this.logger.trace('value returned by the Ui2QpGroup: ', value[key]);
+        this.logger.trace('value returned by the Ui2QpGroup: ', value[qpName]);
 
       } else if (control instanceof Ui2QpControl) {
 
         this.logger.trace('The current control is a Ui2QpControl');
 
-        value[key] = control.getValue();
+        value[qpName] = control.getValue();
 
-        this.logger.trace('value returned by the Ui2QpControl: ', value[key]);
+        this.logger.trace('value returned by the Ui2QpControl: ', value[qpName]);
 
       }
     });
@@ -123,11 +123,15 @@ export class Ui2QpGroup extends FormGroup {
     this.logger.debug('Params passed into the function', name, control);
     this.logger.info('Overrides the control\'s initial value with it\'s corresponding value from the Qps if exist');
 
+    // Finding if the control has a defined qpName. Treating the control as a Ui2QpControl just to get the qpName, this is possible
+    // because both Ui2QpControl and Ui2QpGroup have that property
+    const qpName = (control as Ui2QpGroup).qpName || name;
+
     if (control instanceof Ui2QpGroup) {
 
       this.logger.debug('control is a Ui2QpGroup');
 
-      const payloadValue = this.qpValue[name] !== undefined ? this.qpValue[name] : {};
+      const payloadValue = this.qpValue[qpName] !== undefined ? this.qpValue[qpName] : {};
 
       // If the control to add is a Ui2QpGroup then update its path and the value of the controls it contains
       const actionToExecute = {
@@ -145,7 +149,7 @@ export class Ui2QpGroup extends FormGroup {
 
       this.logger.debug('control is a Ui2QpControl');
 
-      const queryParamValue = (this.qpValue !== undefined && this.qpValue !== null) ? this.qpValue[name] : null;
+      const queryParamValue = (this.qpValue !== undefined && this.qpValue !== null) ? this.qpValue[qpName] : null;
 
       this.logger.trace('queryParamValue', queryParamValue);
       this.logger.trace('Setting the value gotten from the QPs to this control if is not empty');
@@ -181,7 +185,10 @@ export class Ui2QpGroup extends FormGroup {
     this.setControlInitValue(name, control);
   }
 
-  // Removes controls from the formGroup and its settings
+  /**
+   * Removes the control from the Ui2QpGroup.
+   * @param name Name of the control to be removed. The name provided is the control name not the Qp's name
+   */
   removeControl(name: string) {
 
     this.logger.info('Ui2QpGroup.removeControl');
@@ -215,7 +222,7 @@ export class Ui2QpGroup extends FormGroup {
         this.qpValue = action.data.value;
 
         this.logger.trace('qpValue: ', this.qpValue);
-        this.logger.trace('Iterating through all the controls');
+        this.logger.trace('Iterating through all the controls of this Ui2QpGroup');
 
         Object.keys(this.controls).forEach((key) => {
 
@@ -270,31 +277,38 @@ export class Ui2QpGroup extends FormGroup {
     this.logger.trace('Iterating through all controls');
 
     Object.keys(this.controls).forEach((key) => {
+      const control = this.controls[key];
+
+      // Finding if the control has a defined qpName. Treating the control as a Ui2QpControl just to get the qpName, this is possible
+      // because both Ui2QpControl and Ui2QpGroup have that property
+      const qpName = (control as Ui2QpGroup).qpName || key;
 
       this.logger.trace('key', key);
-      this.logger.debug('Current Control', this.controls[key]);
+      this.logger.debug('Current Control', control);
       this.logger.trace('Query Params corresponding value for this Control', this.qpValue[key]);
 
-      if (this.controls[key] instanceof Ui2QpGroup) {
+      if (control instanceof Ui2QpGroup) {
 
-        this.logger.debug('Current Control is a Ui2QpGroup');
+        this.logger.trace('Current Control is a Ui2QpGroup');
 
         const actionToExecute = {
           type: ActionType.PatchValue,
-          data: {value: this.qpValue[key], controlOptions: options},
+          data: {
+            value: this.qpValue[qpName],
+            controlOptions: options
+          },
         };
 
         this.logger.debug('Action to pass into the Ui2QpGroup to be executed: ', actionToExecute);
 
-        (this.controls[key] as Ui2QpGroup).exec(actionToExecute);
+        (control as Ui2QpGroup).exec(actionToExecute);
 
-
-      } else if (this.controls[key] instanceof Ui2QpControl) {
+      } else if (control instanceof Ui2QpControl) {
 
         this.logger.trace('Current Control is a Ui2QpControl');
-        this.logger.debug('value to set in the current control: ',  this.qpValue[key]);
+        this.logger.debug('value to set in the current control: ', this.qpValue[qpName]);
 
-        (this.controls[key] as Ui2QpControl).updateValue(this.qpValue[key], options);
+        (control as Ui2QpControl).updateValue(this.qpValue[qpName], options);
       }
     });
   }

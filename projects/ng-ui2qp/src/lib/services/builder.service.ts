@@ -1,13 +1,14 @@
 import {Inject, Injectable} from '@angular/core';
 import {IUi2QpRouter, UI2QP_ROUTER_INJ_TOK} from '../interfaces/router';
 import {Ui2QpRoot} from '../classes/root';
-import {AbstractControl, AbstractControlOptions, AsyncValidatorFn, ValidatorFn} from '@angular/forms';
 import {Ui2QpGroup} from '../classes/group';
 import {NgUI2QpSettings, UI2QP_SETTINGS_INJ_TOK} from '../types/settings';
 import {Ui2QpControl} from '../classes/control';
 import {Ui2QpSerializersService} from './serializers.service';
 import {Ui2QpDeserializersService} from './deserializers.service';
 import {IUi2QpLogger, UI2QP_LOGGER_INJ_TOK} from '../interfaces/logger';
+import {DefaultUi2QpControlSettings, DefaultUi2QpGroupSettings, Ui2QpControlSettings, Ui2QpGroupSettings} from '../types/control-settings';
+import {mergeSettings} from '../helpers/object-helpers';
 
 @Injectable()
 export class Ui2QpBuilder {
@@ -31,19 +32,15 @@ export class Ui2QpBuilder {
   }
 
   /**
-   * Creates an instance of the Ui2qpRoot
+   * Creates an instance of the Ui2QpRoot
    * @param model Initial model that defines the parameters
-   * @param validatorOrOpts Initial Validators or Options
-   * @param asyncValidators Initial AsyncValidators
    */
   public root(
-    model?: { [key: string]: Ui2QpGroup | Ui2QpControl } | Ui2QpGroup,
-    validatorOrOpts?: ValidatorFn | ValidatorFn[] | null,
-    asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null
+    model?: Ui2QpGroup,
   ): Ui2QpRoot {
 
     this.logger.info('Ui2QpBuilder.root');
-    this.logger.debug('Params passed into the function', this.settings, model, validatorOrOpts, asyncValidators);
+    this.logger.debug('Params passed into the function', this.settings, model);
     this.logger.info('Creating a Ui2QpRoot');
     this.logger.trace('Creating a new Ui2QpRoot');
 
@@ -51,78 +48,77 @@ export class Ui2QpBuilder {
       this.router,
       this.logger,
       this.settings,
-      model,
-      validatorOrOpts,
-      asyncValidators
+      model
     );
   }
 
   /**
-   * Creates a Ui2QpFormGroup
+   * Creates a Ui2QpGroup
    * @param controls Initial controls to be added to the QpGroup
-   * @param validatorOrOpts Initial Validators or Options
-   * @param asyncValidators Initial AsyncValidators
+   * @param settings Settings to be set to the Ui2QpGroup that will be created
    */
   public group(
-    controls?: { [key: string]: AbstractControl },
-    validatorOrOpts?: ValidatorFn | ValidatorFn[] | null,
-    asyncValidators?: AsyncValidatorFn | AsyncValidatorFn[] | null
+    controls?: { [key: string]: Ui2QpControl | Ui2QpGroup },
+    settings?: Ui2QpGroupSettings
   ): Ui2QpGroup {
 
     this.logger.info('Ui2QpBuilder.group');
-    this.logger.debug('Params passed into the function', controls, validatorOrOpts, asyncValidators);
+    this.logger.debug('Params passed into the function', controls, settings);
     this.logger.info('Creating a Ui2QpGroup');
+
+    const settingsToUse = mergeSettings(settings, DefaultUi2QpGroupSettings);
+
+    this.logger.debug('Current used settings', settingsToUse);
     this.logger.trace('Creating q new Ui2QpGroup');
 
-    return new Ui2QpGroup(this.logger, controls, validatorOrOpts, asyncValidators);
+    return new Ui2QpGroup(
+      this.logger,
+      settingsToUse.qpName,
+      controls,
+      settingsToUse.validatorOrOpts,
+      settingsToUse.asyncValidators
+    );
   }
 
   /**
-   * Creates a new Ui2QpFormControl
-   * @param type QpControl's type
-   * @param defaultVal Default value
-   * @param state Initial state of this control
-   * @param validatorOrOpts Initial Validators or Options
-   * @param asyncValidator Initial AsyncValidators
+   * Creates a new Ui2QpControl
+   * @param settings Settings to be set to the Ui2QpControl that will be created
    */
   public control(
-    type: string = 'string',
-    defaultVal: any = null,
-    state?: any,
-    validatorOrOpts?:
-      | ValidatorFn
-      | ValidatorFn[]
-      | AbstractControlOptions
-      | null,
-    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[] | null
+    settings?: Ui2QpControlSettings
   ): Ui2QpControl {
 
     this.logger.info('Ui2QpBuilder.control');
-    this.logger.debug('Params passed into the function', type, defaultVal, state, validatorOrOpts, asyncValidator);
+    this.logger.debug('Params passed into the function', settings);
     this.logger.info('Creating a Ui2QpControl');
     this.logger.trace('Resolving the right deserializer and serializer from the SerializersServices DeserializersServices');
 
-    const serializerToInclude = this.serializersService.getSerializer(type);
-    const deserializerToInclude = this.deserializersService.getDeserializer(type);
+    const settingsToUse = mergeSettings(settings, DefaultUi2QpControlSettings);
+    const serializerToInclude = this.serializersService.getSerializer(settingsToUse.type);
+    const deserializerToInclude = this.deserializersService.getDeserializer(settingsToUse.type);
 
+    this.logger.debug('controlType: ', settingsToUse.type);
+    this.logger.debug('controlDefaultVal: ', settingsToUse.defaultVal);
     this.logger.debug('serializerToInclude: ', serializerToInclude);
     this.logger.debug('deserializerToInclude: ', deserializerToInclude);
 
     if (!(serializerToInclude || deserializerToInclude)) {
-      throw new Error(`We couldn't find any registered deserializer for the control type "${type}". Please register one for this type`);
+      // tslint:disable-next-line:max-line-length
+      throw new Error(`We couldn't find any registered deserializer for the control type "${settingsToUse.type}". Please register one for this type`);
     }
 
     this.logger.trace('Creating a new Ui2QpControl');
 
     return new Ui2QpControl(
       this.logger,
-      type,
-      defaultVal,
+      settingsToUse.type,
+      settingsToUse.defaultVal,
       serializerToInclude,
       deserializerToInclude,
-      state,
-      validatorOrOpts,
-      asyncValidator
+      settingsToUse.qpName,
+      settingsToUse.state,
+      settingsToUse.validatorOrOpts,
+      settingsToUse.asyncValidators
     );
   }
 }

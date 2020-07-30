@@ -37,23 +37,27 @@ export class Ui2QpComponent implements OnDestroy {
 
     this.root = this.ui2QpBuilder.root(
       this.ui2QpBuilder.group({
-        username: this.ui2QpBuilder.control(),
-        password: this.ui2QpBuilder.control('encrypted'),
-        birthday: this.ui2QpBuilder.control(dateTimePickerType),
+        username: this.ui2QpBuilder.control({qpName: 'us'}),
+        password: this.ui2QpBuilder.control({qpName: 'pass', type: 'encrypted'}),
+        birthday: this.ui2QpBuilder.control({qpName: 'brt', type: dateTimePickerType}),
         addresses: this.ui2QpBuilder.group({
-          address1: this.ui2QpBuilder.group({
-            address: this.ui2QpBuilder.control(),
-            state: this.ui2QpBuilder.control(),
-            country: this.ui2QpBuilder.control(),
-            number: this.ui2QpBuilder.control('number'),
-          }),
-          address2: this.ui2QpBuilder.group({
-            address: this.ui2QpBuilder.control(),
-            state: this.ui2QpBuilder.control(),
-            country: this.ui2QpBuilder.control(),
-          }),
-        }),
-      }));
+            address1: this.ui2QpBuilder.group({
+                address: this.ui2QpBuilder.control(),
+                state: this.ui2QpBuilder.control(),
+                country: this.ui2QpBuilder.control(),
+                number: this.ui2QpBuilder.control({type: 'number', qpName: 'haNum'})
+              },
+              {qpName: 'ad1'}),
+            address2: this.ui2QpBuilder.group({
+                address: this.ui2QpBuilder.control(),
+                state: this.ui2QpBuilder.control(),
+                country: this.ui2QpBuilder.control(),
+              },
+              {qpName: 'ad2'}),
+          },
+          {qpName: 'adds'})
+      })
+    );
   }
 
   toggleAddress3() {

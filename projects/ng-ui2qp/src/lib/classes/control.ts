@@ -23,6 +23,7 @@ export class Ui2QpControl extends FormControl {
    * @param validatorOrOpts — A synchronous validator function, or an array of such functions,
    * or an AbstractControlOptions object that contains validation functions and a validation trigger.
    * @param asyncValidator — A single async validator or array of async validator functions
+   * @param qpName Query Param name that identifies this control
    */
   constructor(
     private logger: IUi2QpLogger,
@@ -30,6 +31,7 @@ export class Ui2QpControl extends FormControl {
     public defaultVal: any,
     private serializer: SerializeFunc,
     private deserializer: DeserializeFunc,
+    public qpName?: string,
     state?: any,
     validatorOrOpts?:
       | ValidatorFn
@@ -41,9 +43,8 @@ export class Ui2QpControl extends FormControl {
     super(state, validatorOrOpts, asyncValidator);
 
     this.logger.debug('Ui2QpControl.constructor');
-    this.logger.debug('Params passed into the function: ', this.type, this.defaultVal, this.serializer,
-
-      this.deserializer, state, validatorOrOpts, asyncValidator);
+    this.logger.debug('Params passed into the function: ', this.type, this.defaultVal, this.serializer, this.deserializer, state,
+      validatorOrOpts, asyncValidator);
   }
 
   /**
