@@ -8,7 +8,7 @@
     "ng-ui2qp:build": "ng build ng-ui2qp",
     "ng-ui2qp:build:prod": "ng build ng-ui2qp --prod",
     "ng-ui2qp:build:schematics": "cd projects/ng-ui2qp && npm run build:schematics",
-    "ng-ui2qp:build:all": "npm run ng-ui2qp:build:prod && ng-ui2qp:build:schematics",
+    "ng-ui2qp:build:all": "npm run ng-ui2qp:build:prod && npm run ng-ui2qp:build:schematics",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
