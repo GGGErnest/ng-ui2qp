@@ -1,9 +1,4 @@
-import {
-  FormControl,
-  ValidatorFn,
-  AbstractControlOptions,
-  AsyncValidatorFn,
-} from '@angular/forms';
+import {AbstractControlOptions, AsyncValidatorFn, FormControl, ValidatorFn} from '@angular/forms';
 import {SerializeFunc} from '../types/serializer';
 import {DeserializeFunc} from '../types/deserializer';
 import {IUi2QpLogger} from '../interfaces/logger';

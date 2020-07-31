@@ -68,7 +68,7 @@ export function setValueInPath(keyPath: Array<string>, value: string | string[],
 }
 
 /**
- * Merges two settings in one overriding the default settings with the values(if exist) in the settings passed into the method
+ * Merges two settings in one overriding the default settings with the values(if exist) in the other settings passed
  * @param settings Settings that will override the default ones
  * @param defaultSettings Default settings that will be overridden by the settings provided
  */
