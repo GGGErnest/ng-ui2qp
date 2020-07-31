@@ -1,6 +1,12 @@
 {
   "name": "ng-ui2qp",
   "version": "1.0.4",
+  "description": "Synchronize a form with the browser's URL query params",
+  "author": "Ernesto Pedrosa Alonso <ernestop891123@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/GGGErnest/ng-projects/issues"
+  },
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/GGGErnest/ng-projects.git"
@@ -11,23 +17,31 @@
     "url",
     "queryparams",
     "query-params",
+    "query params",
     "declarative",
-    "reactive"
+    "reactive",
+    "forms"
   ],
-  "author": "Ernesto Pedrosa Alonso <ernestop891123@gmail.com>",
-  "bugs": {
-    "url": "https://github.com/GGGErnest/ng-projects/issues"
-  },
-  "license": "MIT",
   "peerDependencies": {
-    "@angular/common": "9.1.7",
-    "@angular/core": "9.1.7",
-    "@angular/router": "9.1.7",
-    "@angular/forms": "9.1.7",
-    "@types/lodash": "4.14.149",
-    "lodash": "4.17.19",
-    "crypto-js": "4.0.0",
-    "rxjs": "6.5.5",
-    "tslib": "1.10.0"
+    "@angular/common": "^9.1.7",
+    "@angular/core": "^9.1.7",
+    "@angular/router": "^9.1.7",
+    "@angular/forms": "^9.1.7",
+    "@types/lodash": "^4.14.149",
+    "lodash": "^4.17.19",
+    "crypto-js": "^4.0.0",
+    "rxjs": "^6.5.5",
+    "tslib": "^1.10.0"
+  },
+  "schematics": "./schematics/collection.json",
+  "ng-add": {
+    "save": "dependencies"
+  },
+  "scripts": {
+    "build:schematics": "../../node_modules/.bin/tsc -p tsconfig.schematics.json && npm run postbuild",
+    "copy:schemas": "cp --parents schematics/*/schema.json ../../dist/my-lib/",
+    "copy:files": "cp --parents -p schematics/*/files/** ../../dist/my-lib/",
+    "copy:collection": "cp schematics/collection.json ../../dist/my-lib/schematics/collection.json",
+    "postbuild": "npm run copy:schemas && npm run copy:files && npm run copy:collection"
   }
 }
