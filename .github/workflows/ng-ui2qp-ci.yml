@@ -6,7 +6,7 @@ on:
     branches:
       - master
     paths:
-      - projects/ng-ui2qp/*
+      - 'projects/ng-ui2qp/**'
 jobs:
   build:
     runs-on: ubuntu-latest
