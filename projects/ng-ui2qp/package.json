@@ -39,9 +39,7 @@
   },
   "scripts": {
     "build:schematics": "../../node_modules/.bin/tsc -p tsconfig.schematics.json && npm run postbuild",
-    "copy:schemas": "cp --parents schematics/*/schema.json ../../dist/my-lib/",
-    "copy:files": "cp --parents -p schematics/*/files/** ../../dist/my-lib/",
-    "copy:collection": "cp schematics/collection.json ../../dist/my-lib/schematics/collection.json",
+    "copy:collection": "cp schematics/collection.json ../../dist/ng-ui2qp/schematics/collection.json",
     "postbuild": "npm run copy:schemas && npm run copy:files && npm run copy:collection"
   }
 }
