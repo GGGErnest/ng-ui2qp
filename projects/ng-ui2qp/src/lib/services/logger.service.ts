@@ -7,10 +7,13 @@ export const loggerFactory = (loggerLevel: LogLevel) => {
   return () => new Ui2QpLogger(loggerLevel);
 };
 
-
 @Injectable()
 export class Ui2QpLogger implements IUi2QpLogger {
 
+  /**
+   * Default color palette used depending of the Logger level
+   * @private
+   */
   private colors = ['purple', 'teal', 'gray', 'orange', 'red'];
 
   /**

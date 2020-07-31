@@ -11,12 +11,12 @@ export class Ui2QpGroup extends FormGroup {
 
   /** Creates a Ui2QpGroup
    * @param logger Logger to be use
+   * @param qpName Query Param name that identifies this control
    * @param controls Set of Controls that are initialized with the Group.
    * @param validatorOrOpts A synchronous validator function, or an array of
    * such functions, or an `AbstractControlOptions` object that contains validation functions
    * and a validation trigger.
    * @param asyncValidators A single async validator or array of async validator functions
-   * @param qpName Query Param name that identifies this control
    */
   constructor(
     private logger: IUi2QpLogger,

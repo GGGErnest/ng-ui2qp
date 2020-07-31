@@ -18,12 +18,12 @@ export class Ui2QpControl extends FormControl {
    * also is going be used when resetting the Control's value.
    * @param serializer Serializer to use when setting the FormControl value
    * @param deserializer Deserializer to use when retrieving the value from the FormControl
+   * @param qpName Query Param name that identifies this control
    * @param state Initializes the control with an initial value, or an object that defines
    * the initial value and disabled state.
    * @param validatorOrOpts — A synchronous validator function, or an array of such functions,
    * or an AbstractControlOptions object that contains validation functions and a validation trigger.
    * @param asyncValidator — A single async validator or array of async validator functions
-   * @param qpName Query Param name that identifies this control
    */
   constructor(
     private logger: IUi2QpLogger,

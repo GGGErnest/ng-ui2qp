@@ -1,5 +1,6 @@
 import merge from 'lodash/merge';
 import cloneDeep from 'lodash/cloneDeep';
+
 /**
  * Traverse an Object and execute actions on each of it's member properties. This happens recursively
  * @param objectToTraverse Object to traverse
@@ -66,6 +67,11 @@ export function setValueInPath(keyPath: Array<string>, value: string | string[],
   }
 }
 
+/**
+ * Merges two settings in one overriding the default settings with the values(if exist) in the settings passed into the method
+ * @param settings Settings that will override the default ones
+ * @param defaultSettings Default settings that will be overridden by the settings provided
+ */
 export function mergeSettings(settings: object, defaultSettings: object): any {
   let returnValue = settings;
   // Cloning the default settings so doesn't get overridden by the merge
