@@ -3,7 +3,7 @@ import {Deserializer} from '../types/deserializer';
 /**
  * String deserializer. It deserializes the value retrieved from the QueryParams to a string
  */
-export const stringDeserializer: Deserializer = {
+const stringDeserializer: Deserializer = {
   type: 'string',
   deserializerFunc: (value: any) => {
     return value;
@@ -13,7 +13,7 @@ export const stringDeserializer: Deserializer = {
 /**
  * Number Deserializer. It deserializes the value retrieved from the QueryParams to a number
  */
-export const numberDeserializer: Deserializer = {
+const numberDeserializer: Deserializer = {
   type: 'number',
   deserializerFunc: (value: any, defaultVal: any) => {
     // tslint:disable-next-line:radix
@@ -29,7 +29,7 @@ export const numberDeserializer: Deserializer = {
 /**
  * Strings Array Deserializer. It deserializes the value retrieved from the QueryParams to an Array of strings
  */
-export const stringArrayDeserializer: Deserializer = {
+const stringArrayDeserializer: Deserializer = {
   type: 'string-array',
   deserializerFunc: (value: any) => {
     return value;
@@ -39,7 +39,7 @@ export const stringArrayDeserializer: Deserializer = {
 /**
  * Numbers Array Deserializer. It deserializes the value retrieved from the QueryParams to an Array of numbers
  */
-export const arrayNumberDeserializer: Deserializer = {
+const arrayNumberDeserializer: Deserializer = {
   type: 'number-array',
   deserializerFunc: (value: any, defaultVal: any) => {
     // tslint:disable-next-line:radix

@@ -1,9 +1,8 @@
 import {Inject, Injectable} from '@angular/core';
 import {Deserializer} from '../types/deserializer';
-import {Serializer} from '../types/serializer';
-import {BUILD_IN_SERIALIZERS} from '../serializers/serializers';
 import {NgUI2QpSettings, UI2QP_SETTINGS_INJ_TOK} from '../types/settings';
 import * as CryptoJS from 'crypto-js';
+import {BUILT_IN_DESERIALIZERS} from '../serializers/deserializers';
 
 @Injectable()
 export class Ui2QpDeserializersService {
@@ -23,8 +22,8 @@ export class Ui2QpDeserializersService {
    * Register all built-in deserializers
    */
   private registerBuiltInDeserializers() {
-    BUILD_IN_SERIALIZERS.forEach((serializer: Serializer) => {
-      this.registered.set(serializer.type, serializer.serializerFunc);
+    BUILT_IN_DESERIALIZERS.forEach((deserializer: Deserializer) => {
+      this.registered.set(deserializer.type, deserializer.deserializerFunc);
     });
 
     // This built-in deserializer is placed here because has a dependency with the settings

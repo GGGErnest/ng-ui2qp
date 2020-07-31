@@ -3,7 +3,7 @@ import {Serializer} from '../types/serializer';
 /**
  * Built in serializer that is used for serializing the values retrieved from the Ui2QpFormGroup to the query params in the URL
  */
-export const stringSerializer: Serializer = {
+const stringSerializer: Serializer = {
   type: 'string',
   serializerFunc: (value: any) => {
     return value;
@@ -13,7 +13,7 @@ export const stringSerializer: Serializer = {
 /**
  * Number Deserializer. It deserializes the value retrieved from the QueryParams to a number
  */
-export const numberSerializer: Serializer = {
+const numberSerializer: Serializer = {
   type: 'number',
   serializerFunc: (value: any) => {
     return value;
@@ -23,7 +23,7 @@ export const numberSerializer: Serializer = {
 /**
  * Strings Array Deserializer. It deserializes the value retrieved from the QueryParams to an Array of strings
  */
-export const stringArraySerializer: Serializer = {
+const stringArraySerializer: Serializer = {
   type: 'string-array',
   serializerFunc: (value: any) => {
     return value;
@@ -33,7 +33,7 @@ export const stringArraySerializer: Serializer = {
 /**
  * Numbers Array Deserializer. It deserializes the value retrieved from the QueryParams to an Array of numbers
  */
-export const arrayNumberSerializer: Serializer = {
+const arrayNumberSerializer: Serializer = {
   type: 'array-number',
   serializerFunc: (value: any) => {
     return value;
