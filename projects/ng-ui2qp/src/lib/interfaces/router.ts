@@ -1,5 +1,5 @@
 import {Observable} from 'rxjs';
-import {Navigation, ParamMap, Params} from '@angular/router';
+import {Navigation, ParamMap, Params, QueryParamsHandling} from '@angular/router';
 import {InjectionToken} from '@angular/core';
 
 /**
@@ -26,8 +26,9 @@ export interface IUi2QpRouter {
    * Execute the navigation that changes the query params
    * @param queryParams Query params
    * @param replaceState Defines if the browser should create a new entry in the history or just replace the current one
+   * @param  queryParamsHandling Defines how the query params will affect the previous one
    */
-  updateQps(queryParams: Params, replaceState: boolean): Promise<boolean>;
+  updateQps(queryParams: Params, replaceState: boolean, queryParamsHandling?: QueryParamsHandling): Promise<boolean>;
 
   /**
    * Returns the navigation object

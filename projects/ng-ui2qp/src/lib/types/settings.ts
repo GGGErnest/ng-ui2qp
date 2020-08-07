@@ -1,5 +1,6 @@
 import {LogLevel} from './logger';
 import {InjectionToken} from '@angular/core';
+import {mergeSettings} from '../helpers/object-helpers';
 
 /**
  * Defines Ui2QpRoot settings
@@ -40,12 +41,21 @@ export interface AutoUpdating {
 /**
  * Default Settings for the Ui2QpRoot
  */
-export const DefaultSettings = {
+export const DefaultNgUi2QpSettings = {
   autoUpdating: {enabled: true, debounce: 500},
   replaceState: true,
   logLevel: LogLevel.Off,
   cryptoSecretKey: 'Th3M0st5ecureS3cretK3Y'
 };
+
+/**
+ * Factory settings for the NgUI2QpSettings. It merges the user provided settings with the default ones
+ * which guaranties no missing settings and gives the possibility to only provide what wants to be changed
+ * @param settings Settings to be replaced in the default ones
+ */
+export function factorySettings(settings: NgUI2QpSettings) {
+  return () => mergeSettings(settings, DefaultNgUi2QpSettings);
+}
 
 export const UI2QP_SETTINGS_TOKEN_ID = 'NGUI2QP_SETTINGS';
 

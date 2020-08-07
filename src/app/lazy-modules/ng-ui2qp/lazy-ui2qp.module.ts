@@ -25,7 +25,7 @@ import {LogLevel, NgUi2QpModule} from 'ng-ui2qp';
       autoUpdating: {enabled: true},
       replaceState: true,
       cryptoSecretKey: 'Th3M0st5ecureS3cretK3Y',
-      logLevel: LogLevel.Debug,
+      logLevel: LogLevel.Off,
     })
   ],
 })

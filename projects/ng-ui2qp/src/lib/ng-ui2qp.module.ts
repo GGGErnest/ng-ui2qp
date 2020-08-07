@@ -1,7 +1,7 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule} from '@angular/forms';
-import {DefaultSettings, NgUI2QpSettings, UI2QP_SETTINGS_INJ_TOK} from './types/settings';
+import {DefaultNgUi2QpSettings, factorySettings, NgUI2QpSettings, UI2QP_SETTINGS_INJ_TOK} from './types/settings';
 import {UI2QP_LOGGER_INJ_TOK} from './interfaces/logger';
 import {loggerFactory} from './services/logger.service';
 import {UI2QP_ROUTER_INJ_TOK} from './interfaces/router';
@@ -10,19 +10,21 @@ import {Router, RouterModule} from '@angular/router';
 import {Ui2QpBuilder} from './services/builder.service';
 import {Ui2QpDeserializersService} from './services/deserializers.service';
 import {Ui2QpSerializersService} from './services/serializers.service';
+import { Ui2QpControlDirective } from './directives/control.directive';
 
 @NgModule({
-  declarations: [],
+  declarations: [Ui2QpControlDirective],
+  exports: [Ui2QpControlDirective],
   imports: [
     CommonModule,
     ReactiveFormsModule,
     RouterModule
   ],
   providers: [
-    {provide: UI2QP_SETTINGS_INJ_TOK, useValue: DefaultSettings },
+    {provide: UI2QP_SETTINGS_INJ_TOK, useValue: DefaultNgUi2QpSettings },
     Ui2QpSerializersService,
     Ui2QpDeserializersService,
-    {provide: UI2QP_LOGGER_INJ_TOK, useFactory: loggerFactory(DefaultSettings.logLevel)},
+    {provide: UI2QP_LOGGER_INJ_TOK, useFactory: loggerFactory(DefaultNgUi2QpSettings.logLevel)},
     {
       provide: UI2QP_ROUTER_INJ_TOK, useClass: Ui2QpRouter, deps: [
         UI2QP_LOGGER_INJ_TOK,
@@ -37,7 +39,7 @@ export class NgUi2QpModule {
     return {
       ngModule: NgUi2QpModule,
       providers: [
-        {provide: UI2QP_SETTINGS_INJ_TOK, useValue: settings },
+        {provide: UI2QP_SETTINGS_INJ_TOK, useFactory: factorySettings(settings) },
         Ui2QpSerializersService,
         Ui2QpDeserializersService,
         {provide: UI2QP_LOGGER_INJ_TOK, useFactory: loggerFactory(settings.logLevel)},

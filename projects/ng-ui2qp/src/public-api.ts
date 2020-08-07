@@ -4,6 +4,7 @@
 export * from './lib/classes/root';
 export * from './lib/classes/group';
 export * from './lib/classes/control';
+export * from './lib/directives/control.directive';
 export * from './lib/interfaces/router';
 export * from './lib/interfaces/logger';
 export * from './lib/serializers/serializers';

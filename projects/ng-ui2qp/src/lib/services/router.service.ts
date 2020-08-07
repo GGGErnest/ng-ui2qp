@@ -1,6 +1,6 @@
 import {Inject, Injectable} from '@angular/core';
 import {IUi2QpRouter} from '../interfaces/router';
-import {ParamMap, Params, Router} from '@angular/router';
+import {ParamMap, Params, QueryParamsHandling, Router} from '@angular/router';
 import {Observable} from 'rxjs';
 import {isEmpty} from '../helpers/empty-helper';
 import {setValueInPath, traverse} from '../helpers/object-helpers';
@@ -41,7 +41,7 @@ export class Ui2QpRouter implements IUi2QpRouter {
     return (this.router.routerState.root.snapshot.queryParamMap as any).params;
   }
 
-  public updateQps(queryParams: Params, replaceState: boolean): Promise<boolean> {
+  public updateQps(queryParams: Params, replaceState: boolean, queryParamsHandling?: QueryParamsHandling): Promise<boolean> {
 
     this.logger.debug('Ui2QpRouter.getQueryParamMap');
     this.logger.debug('Params passed into the function', queryParams, replaceState);
@@ -50,7 +50,8 @@ export class Ui2QpRouter implements IUi2QpRouter {
     return this.router.navigate([], {
       relativeTo: this.router.routerState.root,
       queryParams,
-      replaceUrl: replaceState
+      replaceUrl: replaceState,
+      queryParamsHandling
     });
   }
 

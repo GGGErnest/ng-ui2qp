@@ -34,7 +34,7 @@ const stringArraySerializer: Serializer = {
  * Numbers Array Deserializer. It deserializes the value retrieved from the QueryParams to an Array of numbers
  */
 const arrayNumberSerializer: Serializer = {
-  type: 'array-number',
+  type: 'number-array',
   serializerFunc: (value: any) => {
     return value;
   },

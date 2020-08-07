@@ -1,6 +1,6 @@
 import {Ui2QpGroup} from './group';
 import {IUi2QpRouter} from '../interfaces/router';
-import {DefaultSettings, NgUI2QpSettings} from '../types/settings';
+import {DefaultNgUi2QpSettings, NgUI2QpSettings} from '../types/settings';
 import merge from 'lodash/merge';
 import {Subscription} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
@@ -17,7 +17,7 @@ export class Ui2QpRoot {
   /**
    * Settings of the Ui2QpRoot. Once defined can't be changed
    */
-  readonly settings = DefaultSettings;
+  readonly settings = DefaultNgUi2QpSettings;
 
   /**
    * Subscriptions that should be cleared when this Object is destroyed

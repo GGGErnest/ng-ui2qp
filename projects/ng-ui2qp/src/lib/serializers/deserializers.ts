@@ -32,6 +32,9 @@ const numberDeserializer: Deserializer = {
 const stringArrayDeserializer: Deserializer = {
   type: 'string-array',
   deserializerFunc: (value: any) => {
+    if (!Array.isArray(value)) {
+      return new Array(value);
+    }
     return value;
   },
 };
@@ -41,12 +44,17 @@ const stringArrayDeserializer: Deserializer = {
  */
 const arrayNumberDeserializer: Deserializer = {
   type: 'number-array',
-  deserializerFunc: (value: any, defaultVal: any) => {
-    // tslint:disable-next-line:radix
-    let returnValue = value.map((item) => parseInt(item));
-    if (returnValue instanceof Array) {
-      console.error(`The current value ${value.toString()} couldn't be deserialized instead used the default value`);
-      returnValue = defaultVal;
+  deserializerFunc: (value: Array<any>[] | any, defaultVal: any) => {
+    let returnValue;
+    if (Array.isArray(value)) {
+      // tslint:disable-next-line:radix
+      returnValue = value.map((item) => parseInt(item));
+      if (Array.isArray(returnValue)) {
+        returnValue = defaultVal;
+      }
+    } else {
+      // tslint:disable-next-line:radix
+      returnValue = new Array(parseInt(value));
     }
     return returnValue;
   },

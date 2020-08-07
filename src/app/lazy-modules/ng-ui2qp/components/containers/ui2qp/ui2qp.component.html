@@ -1,5 +1,27 @@
 <h1>Query Params</h1>
-<div [formGroup]="root.model">
+
+
+
+
+<input  [ui2qpControl]="{qpName:'test'}" [(ngModel)]="test" name="test" type="text">
+<!--<input type="checkbox" [ui2qpControl]="{qpName:'check'}" [customValueAccessor]="checkboxAccessor">-->
+<select name="select" [ui2qpControl]="{qpName:'select',type:'number-array'}" [customValueAccessor]="multiselectAccessor" multiple>
+  <option value="">Empty</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+</select>
+<!--<mat-form-field>
+  <label for="">Birthday</label>
+  <input matInput
+         [owlDateTimeTrigger]="dt2"
+         [owlDateTime]="dt2"
+         [ui2qpControl]="{qpName:'birthday', type:'datetime-picker'}"
+         name="birthday" type="text">
+  <owl-date-time [pickerType]="'timer'" #dt2></owl-date-time>
+</mat-form-field>-->
+
+<!--<div [formGroup]="root.model">
   <mat-form-field>
     <label for="">Username</label>
     <input matInput formControlName="username">
@@ -65,7 +87,7 @@
       </mat-form-field>
     </div>
   </div>
-</div>
+</div>-->
 <div>
   <button mat-button color="primary" (click)="toggleAddress3()">Toggle address3</button>
   <button mat-button color="primary" (click)="updateQp()">Update QP</button>
