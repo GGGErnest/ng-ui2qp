@@ -11,10 +11,11 @@ import {Ui2QpBuilder} from './services/builder.service';
 import {Ui2QpDeserializersService} from './services/deserializers.service';
 import {Ui2QpSerializersService} from './services/serializers.service';
 import { Ui2QpControlDirective } from './directives/control.directive';
+import {Ui2qpValueAccessorDirective} from './directives/ui2qp-value-accessor.directive';
 
 @NgModule({
-  declarations: [Ui2QpControlDirective],
-  exports: [Ui2QpControlDirective],
+  declarations: [Ui2QpControlDirective, Ui2qpValueAccessorDirective],
+  exports: [Ui2QpControlDirective, Ui2qpValueAccessorDirective],
   imports: [
     CommonModule,
     ReactiveFormsModule,

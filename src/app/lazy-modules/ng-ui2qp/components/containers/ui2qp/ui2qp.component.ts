@@ -1,6 +1,6 @@
 import {Component, OnDestroy} from '@angular/core';
 import {Deserializer, Serializer, Ui2QpBuilder, Ui2QpDeserializersService, Ui2QpGroup, Ui2QpRoot, Ui2QpSerializersService} from 'ng-ui2qp';
-import {FormControl} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-form-qp',
@@ -13,37 +13,15 @@ export class Ui2QpComponent implements OnDestroy {
   showAddress3 = false;
   test = 'test';
   checkbox = true;
-  checkboxAccessor = {
-    event: 'input',
-    readValue: (element: any) => element.checked,
-    writeValue: (element: any, value: any) => element.checked = value
-  };
-  selectAccessor = {
-    event: 'input',
+  dateTimeValueAccessor = {
+    event: 'dateTimeChange',
     readValue: (element: any) => element.value,
-    writeValue: (element: any, value: any) => element.value = value
-  };
-  multiselectAccessor = {
-    event: 'input',
-    readValue: (element: HTMLSelectElement): any => {
-      const returnValue = [];
-      const options = element.selectedOptions;
-      for (let i = 0; i < options.length; i++) {
-        const option = options[i];
-        returnValue.push((option as HTMLOptionElement).value);
-      }
-      return returnValue;
-    },
-    writeValue: (element: HTMLSelectElement, value: any[]) => {
-      const options = element.options;
-      for (let i = 0; i < options.length; i++) {
-        const option = options[i];
-        // No-strict comparison between the values on propose
-        // tslint:disable-next-line:triple-equals
-        option.selected = value.find((item: any) => item == option.value);
-      }
+    writeValue: (element: any, value: any) => {
+      element.value = value;
     }
   };
+
+  controlTest =  new FormControl();
 
   constructor(private ui2QpBuilder: Ui2QpBuilder, private serializersService: Ui2QpSerializersService,
               private deserializersService: Ui2QpDeserializersService) {
