@@ -8,7 +8,7 @@ import {Ui2QpSerializersService} from './serializers.service';
 import {Ui2QpDeserializersService} from './deserializers.service';
 import {IUi2QpLogger, UI2QP_LOGGER_INJ_TOK} from '../interfaces/logger';
 import {DefaultUi2QpControlSettings, DefaultUi2QpGroupSettings, Ui2QpControlSettings, Ui2QpGroupSettings} from '../types/control-settings';
-import {mergeSettings} from '../helpers/object-helpers';
+import {mergeObjects} from '../helpers/object-helpers';
 
 @Injectable()
 export class Ui2QpBuilder {
@@ -66,7 +66,7 @@ export class Ui2QpBuilder {
     this.logger.debug('Params passed into the function', controls, settings);
     this.logger.info('Creating a Ui2QpGroup');
 
-    const settingsToUse = mergeSettings(settings, DefaultUi2QpGroupSettings);
+    const settingsToUse = mergeObjects(settings, DefaultUi2QpGroupSettings);
 
     this.logger.debug('Current used settings', settingsToUse);
     this.logger.trace('Creating q new Ui2QpGroup');
@@ -93,7 +93,7 @@ export class Ui2QpBuilder {
     this.logger.info('Creating a Ui2QpControl');
     this.logger.trace('Resolving the right deserializer and serializer from the SerializersServices DeserializersServices');
 
-    const settingsToUse = mergeSettings(settings, DefaultUi2QpControlSettings);
+    const settingsToUse = mergeObjects(settings, DefaultUi2QpControlSettings);
     const serializerToInclude = this.serializersService.getSerializer(settingsToUse.type);
     const deserializerToInclude = this.deserializersService.getDeserializer(settingsToUse.type);
 
@@ -102,9 +102,9 @@ export class Ui2QpBuilder {
     this.logger.debug('serializerToInclude: ', serializerToInclude);
     this.logger.debug('deserializerToInclude: ', deserializerToInclude);
 
-    if (!(serializerToInclude || deserializerToInclude)) {
+    if (!(serializerToInclude && deserializerToInclude)) {
       // tslint:disable-next-line:max-line-length
-      throw new Error(`We couldn't find any registered deserializer for the control type "${settingsToUse.type}". Please register one for this type`);
+      this.logger.error(`We couldn't find any registered deserializer for the control type "${settingsToUse.type}". Please register one for this type`);
     }
 
     this.logger.trace('Creating a new Ui2QpControl');

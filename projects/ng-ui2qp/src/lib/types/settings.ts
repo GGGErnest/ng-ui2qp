@@ -1,6 +1,6 @@
 import {LogLevel} from './logger';
 import {InjectionToken} from '@angular/core';
-import {mergeSettings} from '../helpers/object-helpers';
+import {mergeObjects} from '../helpers/object-helpers';
 
 /**
  * Defines Ui2QpRoot settings
@@ -54,7 +54,7 @@ export const DefaultNgUi2QpSettings = {
  * @param settings Settings to be replaced in the default ones
  */
 export function factorySettings(settings: NgUI2QpSettings) {
-  return () => mergeSettings(settings, DefaultNgUi2QpSettings);
+  return () => mergeObjects(settings, DefaultNgUi2QpSettings);
 }
 
 export const UI2QP_SETTINGS_TOKEN_ID = 'NGUI2QP_SETTINGS';

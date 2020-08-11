@@ -60,8 +60,23 @@ const arrayNumberDeserializer: Deserializer = {
   },
 };
 
+/**
+ * Boolean Deserializer. It deserializes the value retrieved from the QueryParams to a boolean value
+ */
+const booleanDeserializer: Deserializer = {
+  type: 'boolean',
+  deserializerFunc: (value: string) => {
+    return value === '1';
+  },
+};
 
 /**
  * Map of all built-in deserializers.
  */
-export const BUILT_IN_DESERIALIZERS = [stringDeserializer, numberDeserializer, stringArrayDeserializer, arrayNumberDeserializer];
+export const BUILT_IN_DESERIALIZERS = [
+  stringDeserializer,
+  numberDeserializer,
+  stringArrayDeserializer,
+  arrayNumberDeserializer,
+  booleanDeserializer
+];

@@ -68,18 +68,19 @@ export function setValueInPath(keyPath: Array<string>, value: string | string[],
 }
 
 /**
- * Merges two settings in one overriding the default settings with the values(if exist) in the other settings passed
- * @param settings Settings that will override the default ones
- * @param defaultSettings Default settings that will be overridden by the settings provided
+ * Merges two objects. The not null or undefined properties of the first object will replace the similar properties
+ * of the second object provided.
+ * @param srcObject Source object
+ * @param objectToOverride Object which it's properties will be overridden
  */
-export function mergeSettings(settings: object, defaultSettings: object): any {
-  let returnValue = settings;
+export function mergeObjects(srcObject: object, objectToOverride: object): any {
+  let returnValue = srcObject;
   // Cloning the default settings so doesn't get overridden by the merge
-  const clonedDefaultSettings = cloneDeep(defaultSettings);
+  const clonedDefaultSettings = cloneDeep(objectToOverride);
   if (returnValue !== undefined && returnValue !== null) {
     returnValue = merge(clonedDefaultSettings, returnValue);
   } else {
-    returnValue = defaultSettings;
+    returnValue = objectToOverride;
   }
 
   return returnValue;

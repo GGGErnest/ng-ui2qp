@@ -40,8 +40,17 @@ const arrayNumberSerializer: Serializer = {
   },
 };
 
+/**
+ * Numbers Array Deserializer. It deserializes the value retrieved from the QueryParams to an Array of numbers
+ */
+const booleanSerializer: Serializer = {
+  type: 'boolean',
+  serializerFunc: (value: boolean) => {
+    return value ? '1' : '0';
+  },
+};
 
 /**
  * Map of all built-in serializers.
  */
-export const BUILD_IN_SERIALIZERS = [stringSerializer, numberSerializer, stringArraySerializer, arrayNumberSerializer];
+export const BUILD_IN_SERIALIZERS = [stringSerializer, numberSerializer, stringArraySerializer, arrayNumberSerializer, booleanSerializer];

@@ -1,8 +1,11 @@
 /**
- * Checks when a Object is empty. The criteria when is empty or not is in the implementation
+ * Checks when a Object is empty.
  * @param data Object to check
  */
 export function isEmpty(data) {
+  if (data instanceof Date) {
+    return false;
+  }
   if (typeof data === 'number' || typeof data === 'boolean') {
     return false;
   }
