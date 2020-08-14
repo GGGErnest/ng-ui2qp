@@ -1,34 +1,33 @@
 # ng-ui2qp
 
-ng-ui2qp is an angular library which saves UI components state as query parameters in the URL, making it easy to 
-serialize UI state into the URL.
+Angular library that serializes the state of UI components as query parameters(QPs) and viceversa.
 
 ## Description
  
-The lib gives you a way to synchronizing the state of UI components to the URL as query parameters.
-Using the library and the features it provides can improve the user experience in many ways, think in the next use cases:
+The lib provides a way of synchronize UI components state into query parameters(QPs) using a declarative and familiar approach, it extends ReactiveForm's API.
+Using the library's features could improve the user experience in some ways, think about the following use cases:
  
-* Accidentally or intentionally refreshing the page will keep the last state of the app. In mobiles, refreshing the page
-accidentally is very common. 
-* Save the UI state of a page and navigate through the app preserving the query-params and then go back to the initial
-page, and the last state will be automatically restored.
-* If you want to bookmark or share a specific state of the application using the browser bookmark feature or using hiperlinks. 
+* Accidentally or intentionally refreshing the page will keep the last state of the app which prevents the user lose the data entered. In mobiles, refreshing the page accidentally happens very commonly.
+* If you want to bookmark or share specific states of the application, you could do it simply copying the url and sending it to who you want or bookmarking the page which guarantees you to restore the page exactly how was.
 
-Ng-ui2qp uses a declarative approach in conjunction with the fact that it's integrated with Angular Reactive Forms,
-makes the lib intuitive and easy to use.
  
 ## Advantages
  
-- Extends ReactiveForms API which makes it easy to understand and work with it.
-- You can save whatever model(Object) to the QP of the URl. You could create complex nested forms and still use the lib to save it.
-- Compatibility with Angular Validations.
-- Possibility to add and remove dynamically properties of the defined model and will stay synchronized with the QPs.  
- 
-##Main Concepts
- 
-One of the strongest point that Ui2Qp has is that it **extends ReactiveForms classes**. Which makes it very easy to
-understand and use if you are familiar with ReactiveForms API.
-Here's an overview of how the Ui2Qp classes matches ReactiveForms:
+- Extends ReactiveForms API which makes the library features very familiar and easy to assimilate.
+- Allows saving and restoring whatever model(Object or state) to the QPs and from it, including deeply nested models.
+- It's compatible with Angular Validations.
+- Allows dynamically add and remove parts or peaces of the synchronized model.
+
+
+## Good to know
+
+Here are some concepts and knowledge we believe are important to know in order to get a better understanding of the features the lib provides and help to understand the documentation.
+
+* Serializer: It has the responsibility to transform the value retrieved from the model to the one actually will be set in the QPs. The serializer is needed because all the values send to the QP most be string and all model values are not going to be necessarily strings, so a preprocessor for those cases was needed to be introduced.
+
+* Deserializer: It's the opposite of the Serializer, it transforms the value retrieved from the QPs to the value that will be set in the model.
+
+* Ui2Qp **extends ReactiveForms**, which makes it very easy to understand and use if you are familiar with its API. Here's an overview of how the Ui2Qp classes matches ReactiveForms:
  
 | ReactiveForms | Ui2Qp | | 
 | ----------- | ----------- | -----------|
@@ -37,36 +36,31 @@ Here's an overview of how the Ui2Qp classes matches ReactiveForms:
 |     X     | Ui2QpRoot | Ui2Qp specific | 
 | FormBuilder | Ui2QpBuilder | Doesn't extends |
 
-Using Ui2Qp generally is only a matter of some few steps:
+* Using Ui2Qp generally is only a matter of some few steps:
 
-1. Provide a Router Adapter
-2. Create a Ui2QpRoot object and set some settings.
+1. Import Ui2QpModule and provide some configurations if needed
+2. Create a Ui2QpRoot object.
 3. Create a model structure that defines the parameters you want to synchronize with the URl.  
-4. Bind the created model to the UI components responsible to update the value of each property of the model.
- 
+4. Bind the created model to the UI components responsible to update the model's value.
+
 ## Pre-requisites 
  
-Check where you want to use the lib all these requisites are fill:
+Make sure all requisites are being filled before using the library:
 
- - You are using Routing in your app, so Angular Router Service is available. This is only required if you use the
- Ui2QpDefaultRouterService.
- - ReactiveFormsModule must be imported and accessible in the module your are going to use the artifacts the lib provides.
+ - Routing it is being used in the app so RouterModule has been imported. Angular Router Service must be available. This is only required if you use the
+ Ui2QpRouter.
+ - ReactiveFormsModule must be imported and accessible.
+
  
 ## Quick Start
  
 1. Install the Lib.
  
    ```
-   npm i ng-ui2qp
+   ng add ng-ui2qp
    ```
 
-2. Provide the default, or a custom Route Adapter ([Creating a Custom Router Adapter](#creating-a-custom-router-adapter)).
- 
-   You must provide a router adapter in the App's providers, here's an example:
-   ```
-   // AppModule providers array
-   providers:[{ provide: QP_ROUTER_ADAPTER, useClass: Ui2QpDefaultRouterService }]
-   ```
+2. Import the Ui2QpModule in the module you'll to use the library. If imported in the AppModule it will be globally available in the App.
    
 3. Inject the Ui2QpBuilder class in the component.
 
@@ -75,60 +69,48 @@ Check where you want to use the lib all these requisites are fill:
    ...
    }
    ```
-  
-4. Instantiate a Root Object (Ui2QpRoot) and the model.
- 
-   Here's an example of creating a Ui2QpRoot instance that will automatically update the QP which each update of the
-   model value and without creating a new entry in the browser history.
-    
-   **Notice that it's similar of creating a ReactiveForm**
- 
+   
+4. Create a Ui2QpGroup and it's corresponding controls
+   
+   **Notice its similarity with creating a ReactiveForm**
    ```
-   // Asumming the "ui2QpBuilder" is a reference to Ui2QpBuilder and it
-   // was injected in the component where this code is used 
-   const root: Ui2QpRoot  = this.ui2QpBuilder.root(
-      { replaceState: true },
-      {
-       category: this.ui2QpBuilder.control(),
-       price: this.ui2QpBuilder.control(),
-      }
-     );
-   ```
-   We could also have done it in these other ways too:
-   ```
-   const model = this.ui2QpBuilder.group(
-       {
-         category: this.ui2QpBuilder.control(),
-         price: this.ui2QpBuilder.control(),
-       });
-   const root: Ui2QpRoot  = this.ui2QpBuilder.root(
-       { replaceState: true },
-       model
-      );
+    // Asumming the "ui2QpBuilder" is a reference to Ui2QpBuilder and it
+    // was injected in the component where this code is used 
+    const model = this.ui2QpBuilder.group(
+           {
+             category: this.ui2QpBuilder.control(),
+             price: this.ui2QpBuilder.control(),
+           });
    ```
    
+5. Instantiate a Ui2QpRoot object and link the created Ui2QpGroup in the previous step with it.
+ 
+   Here's an example of creating a Ui2QpRoot instance that automatically updates the QPs which each update of the
+   model and without creating a new entry in the browser's history.
+   
    ```
-   const model = this.ui2QpBuilder.group(
-       {
-         category: this.ui2QpBuilder.control(),
-         price: this.ui2QpBuilder.control(),
-       });
-   const root: Ui2QpRoot  = this.ui2QpBuilder.root({autoUpdating: {enabled: true}, replaceState: false});
-   // In this moment the model will be updated with the query-params values if they exist at that point in time.
-   root.model = model;
+   const root: Ui2QpRoot  = this.ui2QpBuilder.root(model);
    ```
    
-5. The last step is binding the model with the template, like you'll do with ReactiveForms, here's an example.
+   It's also possible to do it all at once, take a look at the following example:
+   
+   ```
+      const root: Ui2QpRoot  = this.ui2QpBuilder.root(
+         this.ui2QpBuilder.group({
+          category: this.ui2QpBuilder.control(),
+          price: this.ui2QpBuilder.control(),
+         }));
+   ```
+   
+6. Bind the model with the template, like it's done with ReactiveForms.
 
    ```
-   // Using the code from the example above this will be the corresponding code in the template
-   // for binding the model with the template.
     <ng-container [formGroup]="root.model">
        <input matInput formControlName="category">
        <input matInput formControlName="price">     
     </ng-container>
    ```
-   Note that is the same as using ReactiveForms in your templates.
+   **Note that is the same as using ReactiveForms in your templates.**
    
 
 ## Configurations

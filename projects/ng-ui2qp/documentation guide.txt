@@ -1,0 +1,11 @@
+- Short summary of what the lib does.
+- Description
+- Advantages
+- Concepts(Explain here all the concepts within the lib scope)
+- Pre-requisites
+- Quick start guide
+- Configurations
+- Usage notes (Enclose different use case usages and examples)
+- Extensibility( Will contains the sections like serializers and deserializers etc)
+- Change log from previous version
+- Examples

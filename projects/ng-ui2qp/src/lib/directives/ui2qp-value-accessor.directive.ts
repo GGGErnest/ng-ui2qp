@@ -2,6 +2,8 @@ import { Directive, EventEmitter, forwardRef, Output } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
+ * This code was taken from ngqp lib check this https://www.ngqp.io/api-docs/directives/ControlValueAccessorDirective.html#source
+ *
  * Provides an ad-hoc ControlValueAccessor to a component that doesn't implements it.
  *
  * This directive provides a ControlValueAccessor for the host on which it is applied
