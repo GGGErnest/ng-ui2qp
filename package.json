@@ -9,7 +9,7 @@
     "ng-ui2qp:build:prod": "ng build ng-ui2qp --prod",
     "ng-ui2qp:build:schematics": "cd projects/ng-ui2qp && npm run build:schematics",
     "ng-ui2qp:build:all": "npm run ng-ui2qp:build:prod && npm run ng-ui2qp:build:schematics",
-    "gh-pages:build": "ng build gh-pages --prod --outputPath=docs --base-href 'https://gggernest.github.io/ng-projects/' ",
+    "gh-pages:build": "ng build gh-pages --prod --outputPath=docs --base-href https://gggernest.github.io/ng-projects/ ",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
