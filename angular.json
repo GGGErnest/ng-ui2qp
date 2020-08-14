@@ -122,46 +122,10 @@
               "devServerTarget": "ng-projects:serve:production"
             }
           }
-        }
-      }
-    },
-    "lzy-load": {
-      "projectType": "library",
-      "root": "projects/lzy-load",
-      "sourceRoot": "projects/lzy-load/src",
-      "prefix": "lzy",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/lzy-load/tsconfig.lib.json",
-            "project": "projects/lzy-load/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/lzy-load/tsconfig.lib.prod.json"
-            }
-          }
         },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/lzy-load/src/test.ts",
-            "tsConfig": "projects/lzy-load/tsconfig.spec.json",
-            "karmaConfig": "projects/lzy-load/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/lzy-load/tsconfig.lib.json",
-              "projects/lzy-load/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
     },
@@ -205,46 +169,127 @@
         }
       }
     },
-    "ui": {
-      "projectType": "library",
-      "root": "projects/ui",
-      "sourceRoot": "projects/ui/src",
-      "prefix": "lib",
+    "gh-pages": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/gh-pages",
+      "sourceRoot": "projects/gh-pages/src",
+      "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "tsConfig": "projects/ui/tsconfig.lib.json",
-            "project": "projects/ui/ng-package.json"
+            "outputPath": "dist/gh-pages",
+            "index": "projects/gh-pages/src/index.html",
+            "main": "projects/gh-pages/src/main.ts",
+            "polyfills": "projects/gh-pages/src/polyfills.ts",
+            "tsConfig": "projects/gh-pages/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/gh-pages/src/favicon.ico",
+              "projects/gh-pages/src/assets"
+            ],
+            "styles": [
+              "projects/gh-pages/src/styles.scss"
+            ],
+            "scripts": []
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/ui/tsconfig.lib.prod.json"
+              "fileReplacements": [
+                {
+                  "replace": "projects/gh-pages/src/environments/environment.ts",
+                  "with": "projects/gh-pages/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
             }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "gh-pages:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "gh-pages:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "gh-pages:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/ui/src/test.ts",
-            "tsConfig": "projects/ui/tsconfig.spec.json",
-            "karmaConfig": "projects/ui/karma.conf.js"
+            "main": "projects/gh-pages/src/test.ts",
+            "polyfills": "projects/gh-pages/src/polyfills.ts",
+            "tsConfig": "projects/gh-pages/tsconfig.spec.json",
+            "karmaConfig": "projects/gh-pages/karma.conf.js",
+            "assets": [
+              "projects/gh-pages/src/favicon.ico",
+              "projects/gh-pages/src/assets"
+            ],
+            "styles": [
+              "projects/gh-pages/src/styles.scss"
+            ],
+            "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/ui/tsconfig.lib.json",
-              "projects/ui/tsconfig.spec.json"
+              "projects/gh-pages/tsconfig.app.json",
+              "projects/gh-pages/tsconfig.spec.json",
+              "projects/gh-pages/e2e/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
           }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/gh-pages/e2e/protractor.conf.js",
+            "devServerTarget": "gh-pages:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "gh-pages:serve:production"
+            }
+          }
         }
       }
-    },
+    }
   },
   "defaultProject": "ng-projects"
 }

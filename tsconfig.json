@@ -20,25 +20,9 @@
       "dom"
     ],
     "paths": {
-      "lzy-load": [
-        "dist/lzy-load"
-      ],
-      "lzy-load/*": [
-        "dist/lzy-load/*"
-      ],
-      "form-qp": [
-        "dist/form-qp"
-      ],
-      "form-qp/*": [
-        "dist/form-qp/*"
-      ],
       "ng-ui2qp": [
         "dist/ng-ui2qp/ng-ui2qp",
         "dist/ng-ui2qp"
-      ],
-      "ui": [
-        "dist/ui/ui",
-        "dist/ui"
       ]
     }
   },
