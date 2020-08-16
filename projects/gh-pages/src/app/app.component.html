@@ -1,24 +1,12 @@
-<mat-toolbar color="primary" class="display-flex">
-  <a mat-flat-button [routerLink]="[ '/' ]">Ng-Ui2Qp</a>
-
-</mat-toolbar>
-<mat-sidenav-container class="display-flex">
-  <mat-sidenav mode="over" #sidebarMenu opened="opened">
-    <nav class="color-primary">
-      <ul>
-        <li routerLinkActive="active">
-          <a color [routerLink]="[ '/Home' ]">Form Query Params</a>
-        </li>
-      </ul>
-    </nav>
-  </mat-sidenav>
-  <mat-sidenav-content>
-    <button mat-mini-fab class="menu-icon" (click)="sidebarMenu.toggle()">
-      <mat-icon *ngIf="!sidebarMenu.opened else sideBarOpenedIcon">menu</mat-icon>
-      <ng-template #sideBarOpenedIcon>
-        <mat-icon *ngIf="!sidebarMenu.opened">menu_open</mat-icon>
-      </ng-template>
+<div class="app-navigation-header box-shadow mat-elevation-z6">
+  <mat-toolbar color="primary">
+    <button class="logo" color="accent" mat-icon-button [routerLink]="[ '/' ]">
+      <mat-icon class="icon-logo">published_with_changes</mat-icon>
     </button>
-    <router-outlet></router-outlet>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    <a mat-flat-button color="primary" [routerLink]="[ '/getting-started' ]">Getting started</a>
+    <a mat-flat-button color="primary" href="https://github.com/GGGErnest/ng-projects">Github</a>
+  </mat-toolbar>
+</div>
+<div class="container display-flex flex-grow-1">
+  <router-outlet></router-outlet>
+</div>

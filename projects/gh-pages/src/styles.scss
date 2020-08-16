@@ -1,15 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import 'assets/theme';
 
 html, body {
   height: 100%;
 }
 
+
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   width: 100%;
-  display: flex
+  display: flex;
+  overflow: hidden;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-auto {
+  overflow: auto;
 }
 
 .display-flex {
@@ -26,4 +36,42 @@ body {
 
 .flex-direction-row {
   flex-direction: row;
+}
+
+.h1 {
+  font-size: 45px;
+  margin: 15px;
+}
+
+.h2 {
+  font-size: 25px;
+  margin: 15px;
+}
+
+.box-shadow {
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.pentagon {
+  position: relative;
+  width: 54px;
+  box-sizing: content-box;
+  border-width: 50px 18px 0;
+  border-style: solid;
+  border-color:  mat-color($app-primary) transparent;
+}
+.pentagon:before {
+  content: "";
+  position: absolute;
+  height: 0;
+  width: 0;
+  top: -85px;
+  left: -18px;
+  border-width: 0 45px 35px;
+  border-style: solid;
+  border-color: transparent transparent  mat-color($app-primary);
 }

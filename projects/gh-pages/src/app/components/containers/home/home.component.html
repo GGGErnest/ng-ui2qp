@@ -1,0 +1,20 @@
+<header class="header accent-background-color">
+  <span class="h1">ng-ui2qp</span>
+  <p class="text-align-center">Angular library that synchronizes UI component's state with the Browser's query params, improving the user experience and allows the creation of shareable links.</p>
+  <button mat-raised-button color="primary" [routerLink]="[ '/getting-started' ]">Getting Started</button>
+</header>
+<h2>Description</h2>
+<p>
+  The lib provides a way of synchronize UI components state into query parameters(QPs) using a declarative and familiar
+  approach, it extends ReactiveForm's API.
+  Using the library's features could improve the user experience in some ways, think about the following use cases:
+</p>
+<ul>
+  <li>Accidentally or intentionally refreshing the page will keep the last state of the app which prevents the user lose
+    the data entered. In mobiles, refreshing the page accidentally happens very commonly.
+  </li>
+  <li>If you want to bookmark or share specific states of the application, you could do it simply copying the url and
+    sending it to who you want or bookmarking the page which guarantees you to restore the page exactly how was.
+  </li>
+</ul>
+<!--<app-embedded-stackblitz   [configurations]="{projectId: 'ng-ui2qp', opts: {embed:true, view:'preview',hideExplorer: true, hideNavigation: true}}"></app-embedded-stackblitz>-->

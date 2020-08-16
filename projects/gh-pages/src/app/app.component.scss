@@ -3,3 +3,25 @@
   flex-grow: 1;
   flex-direction: column;
 }
+
+
+.app-navigation-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2
+}
+
+.container {
+  position: relative;
+  top: 50px;
+  overflow: auto;
+}
+
+.icon-logo {
+ font-size: 30px;
+}
+
+.logo {
+}
