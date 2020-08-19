@@ -33,7 +33,6 @@
     "crypto-js": "^4.0.0",
     "hammerjs": "2.0.8",
     "lodash": "4.17.19",
-    "ng-pick-datetime": "^6.0.16",
     "rxjs": "6.5.5",
     "tslib": "^2.0.1",
     "zone.js": "~0.10.2"
