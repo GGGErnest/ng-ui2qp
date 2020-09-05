@@ -11,6 +11,8 @@
     "ng-ui2qp:build:all": "npm run ng-ui2qp:build:prod && npm run ng-ui2qp:build:schematics",
     "gh-pages:build": "ng build gh-pages --prod --outputPath=docs --base-href https://gggernest.github.io/ng-projects/ ",
     "gh-pages:serve": "ng s gh-pages",
+    "ng-ui2qp:compodoc:build": "compodoc -p projects/ng-ui2qp/tsconfig.lib.json -s --theme material -d dist/documentation",
+    "ng-ui2qp:compodoc:serve": "compodoc -p projects/ng-ui2qp/tsconfig.lib.json -s --theme material",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -32,6 +34,7 @@
     "@types/lodash": "4.14.149",
     "crypto-js": "^4.0.0",
     "lodash": "4.17.19",
+    "ngx-highlightjs": "^4.1.1",
     "rxjs": "6.5.5",
     "tslib": "^2.0.1",
     "zone.js": "~0.10.2"

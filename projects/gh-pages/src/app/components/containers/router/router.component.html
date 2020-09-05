@@ -1,0 +1,40 @@
+<h1 class="page-header">Router</h1>
+<div class="page-content">
+
+  <section class="">
+    <p>The Router is how the lib interacts with the browser's URL and the QPs, it's the one responsible of setting
+      the QPs into the URL and retrieves them from it.</p>
+    <p>We've provided our own Router adapter which uses Angular Router in background to interact with the QPs, and we
+      believe it's a good idea to use it instead of defining your own one, here are some reasons:</p>
+    <ul>
+      <li>It's easy to use.</li>
+      <li>Has been proved extensibility.</li>
+      <li>Compatibility with the Framework</li>
+    </ul>
+    <p>We still believe that you may find some cases where the one provided by us it's not enough, so we've included a
+      way
+      to create your own one and use it instead.</p>
+  </section>
+
+  <h2>Creating a Custom Router Adapter</h2>
+
+  <section class="">
+    <p>Here is and example of how to create a custom router adapter and provide it so replaces the one provided by us
+      out of the box. For this example we are going to use "Ui2qpRouter" implementation</p>
+    <ol>
+      <li>
+        <p>Create a new service that implements the "IUi2QpRouter"</p>
+      </li>
+      <li>
+        <p>Implement all the methods required. Here how it would look like after do all the previous steps</p>
+        <code-box [code]="routerAdapterCode"></code-box>
+      </li>
+      <li>
+        <p>Provide the created service as the Router to use. It can be provided at whatever level in the injectors
+        hierarchy.</p>
+        <code-box [code]="routerAdapterProvideCode"></code-box>
+      </li>
+    </ol>
+    <p>That's all you have to do for creating and using custom Router Adapters, it's really easy, right?.</p>
+  </section>
+</div>

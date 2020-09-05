@@ -1,0 +1,32 @@
+<mat-sidenav-container class="flex-grow-1">
+  <mat-sidenav class="max-width-300px border-right-none width-100pct min-width-0" mode="side" [opened]="sidebarOpened">
+    <nav class="nav-menu">
+      <a mat-flat-button [routerLink]="['introduction']" routerLinkActive="active">Introduction</a>
+      <a mat-flat-button [routerLink]="['concepts']" routerLinkActive="active">Concepts</a>
+      <a mat-flat-button [routerLink]="['how-to-use']" routerLinkActive="active">How to use
+      </a>
+      <a mat-flat-button [routerLink]="['configurations']" routerLinkActive="active">
+        Configurations
+      </a>
+      <div class="nav-submenu">
+        <div class="display-flex justify-content-space-between" (click)="onSubMenuClick($event)">
+          <span>Advance topics</span>
+          <mat-icon *ngIf="!advanceTopicsOpened">keyboard_arrow_right</mat-icon>
+          <mat-icon *ngIf="advanceTopicsOpened">keyboard_arrow_down</mat-icon>
+        </div>
+        <div *ngIf="advanceTopicsOpened">
+          <a mat-flat-button [routerLink]="['serializers-deserializers']" routerLinkActive="active">
+            Serializers and Deserializers
+          </a>
+          <a mat-flat-button [routerLink]="['router']" routerLinkActive="active">Router</a>
+          <a mat-flat-button [routerLink]="['root']" routerLinkActive="active">Root</a>
+          <a mat-flat-button [routerLink]="['group']" routerLinkActive="active">Group</a>
+          <a mat-flat-button [routerLink]="['control']" routerLinkActive="active">Control</a>
+        </div>
+      </div>
+    </nav>
+  </mat-sidenav>
+  <mat-sidenav-content class="background-color-white">
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

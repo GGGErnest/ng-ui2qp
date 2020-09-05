@@ -1,0 +1,132 @@
+<h1 class="page-header">Serializers and Deserializers</h1>
+<div class="page-content">
+
+  <h2>Serializer</h2>
+  <section class="">
+    <p>
+      The serializer is no more than an object which has two properties, a function and a type. It's used for
+      transforming
+      the value from a Ui2QpFormControl to its corresponding QP.
+    </p>
+    <p>A serializer has a similar structure to a Deserializer, a type and a function, here it's:</p>
+    <code-box [code]="serializerTypeCode"></code-box>
+
+    <p>As you can see it's alike the Deserializer structure, the main difference is in the params that the serializeFunc
+      takes and the return value. The reason is the serializers are executed at the moment of updating the QP and they
+      act as a map function that takes a value returned by a Ui2QpFormControl and maps it to string that is because the
+      QPs only accept string values.</p>
+    <p>This is the implementation of the string serializer and which is use as the default one when no one was provided:
+    </p>
+    <code-box [code]="stringSerializerCode"></code-box>
+
+    <p>As you can see in the above code the default serializer does not transform the value received, it just returns
+      it, that's wanted because all values in form in normal use cases will be primitives types(number,string, boolean
+      or an array of them) which all are possible to set as QP without any kind of mapping needed.
+      In other cases of not primitive types you may need to define custom serializers who map the value retrieved from
+      the form to string or other primitive types.
+      That will be the case for custom form controls which implement "ControlValueAccessor", and the value returned is
+      not a primitive or an array of them.</p>
+    <p class="light-primary-background-color padding-15px"><b>NOTE:</b> If you aren't using the Ui2QpRouter, or the
+      Angular router as a base router for you custom Router, you may need to define also your own serializers and
+      deserializers depending of what the custom router returns when getting QPs values.</p>
+  </section>
+
+  <h2>Deserializer</h2>
+  <section>
+    <p>A deserializer has a similar structure to a serializer, a type and a function:</p>
+    <code-box [code]="deserializerTypeCode"></code-box>
+    <p>
+      The "type" is for identifying the deserializer with a unique id that later will be used to find the right
+      deserializer
+      for a control with the same type.
+      The "deserializerFunc" is a function that transforms the value retrieved from the QP to the right type, son can be
+      set
+      as a value to its corresponding Ui2QpFormControl within the model.
+      Here's the Number Deserializer's implementation, take it as an example:
+    </p>
+    <code-box [code]="numberDeserializerCode"></code-box>
+    <p>
+      As you can see in the above implementation the value it's been transformed from string to number using the
+      "parseInt" function, which later it's being return and used as a value for its corresponding Ui2QpFormControl. In
+      addition, we are handling here another case, what should happen if after applying the transformation still the
+      values is not the correct, or an error occur as a result of trying to apply the transformation? For that case we
+      included in the params a default value, so it can be used in case of something goes wrong or is not clear which
+      value to return; going back to the previous, example if that "parseInt" returns a wrong value we show an error in
+      the console, and we use the default value provided instead and nothing stopped working :).</p>
+  </section>
+
+  <h2 id="built-in">Built-in serializers and deserializers</h2>
+
+  <section>
+    <p>We have provided some built-in serializers and deserializers for the most common types but you always can define
+      your own ones if needed.</p>
+    <table class="">
+      <tr class="primary-background-color accent-color">
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+      <tr class="light-primary-background-color">
+        <td>string</td>
+        <td>Serialize and deserialize strings. Are the default ones when no type is provided to the <a
+          routerLink="../builder">Ui2QpBuilder</a> when creating a
+          <a routerLink="../control">Ui2QpControl</a></td>
+      </tr>
+      <tr class="light-primary-background-color">
+        <td>number</td>
+        <td>Number serializer and deserializer.</td>
+      </tr>
+      <tr class="light-primary-background-color">
+        <td>string-array</td>
+        <td>Serialize and deserialize and array of strings</td>
+      </tr>
+      <tr class="light-primary-background-color">
+        <td>number-array</td>
+        <td>Serialize and deserialize and array of numbers</td>
+      </tr>
+      <tr class="light-primary-background-color">
+        <td>boolean</td>
+        <td>Boolean serializer and deserializer</td>
+      <tr class="light-primary-background-color">
+        <td>encrypted</td>
+        <td>Special type of serializer and deserializer that encrypt the value from a <a routerLink="../control">Ui2QpControl</a>
+          so can't be read from the Qps and decrypt the value from the Qp so can be assigned to the model.
+        </td>
+      </tr>
+    </table>
+  </section>
+
+  <h2>Creating and registering your own custom Serializers and Deserializers</h2>
+
+  <section>
+    <p>You may need to create custom Serializers and Deserializer for specific Ui2QpFormControl types or custom
+      components that implement "ControlValueAccessor" and don't use a primitive-based type for its value, in that case
+      you may think on
+      creating new Serializers and Deserializers to handle the value mapping.</p>
+    <p>
+      Here is an example of creating a custom Serializer and Deserializer for a datetime picker component from this
+      library <a href="https://www.pmjs.com/package/ng-pick-datetime">ng-pick-datetime</a>, it implements
+      "ControlValueAccessor", and its value's type is a Date object.
+    </p>
+
+    <ol>
+      <li>
+        <p>Choose a type for both serializer and deserialzer. The type needs to be the same for both
+          because it's used when assigning a serializer and a deserializer to for Ui2QpControls of the same type.</p>
+      </li>
+      <li>
+        <p>Create and register a new deserializer with the Ui2QpDeserializersService.</p>
+        <code-box [code]="customDeserializerCode"></code-box>
+        <i>Notice how the value which is type string it's converted to a Date object because we've got it from the QPs.
+        </i>
+      </li>
+      <li>
+        <p>Create and register a new serializer with the Ui2QpSerializerService.</p>
+        <code-box [code]="customSerializerCode"></code-box>
+        <i>Notice how the value which is a Date it's been transformed to an ISO string format which is what
+        </i>
+      </li>
+    </ol>
+    <p>That's all you need to do for creating customs Serializer and Deserializer.</p>
+  </section>
+
+</div>

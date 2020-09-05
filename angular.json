@@ -28,8 +28,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss",
-              "projects/gh-pages/src/assets/theme.scss"
+              "src/styles.scss"
             ],
             "scripts": []
           },
@@ -194,10 +193,16 @@
               "projects/gh-pages/src/assets"
             ],
             "styles": [
-              "projects/gh-pages/src/styles.scss"
+              "projects/gh-pages/src/assets/theme.scss",
+              "projects/gh-pages/src/styles.scss",
+              "projects/gh-pages/src/assets/atomic-css-rules.scss",
+              "./node_modules/highlight.js/styles/a11y-dark.css"
             ],
             "scripts": []
           },
+          "allowedCommonJsDependencies": [
+            "highlight.js"
+          ],
           "configurations": {
             "production": {
               "fileReplacements": [

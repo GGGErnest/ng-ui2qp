@@ -1,0 +1,100 @@
+<h1 class="page-header">Getting Started</h1>
+<div class="page-content">
+
+  <h2>Pre-requisites</h2>
+
+  <section class="">
+    <p>Before using the library are some requisites that should be fill here they are:</p>
+    <ul>
+      <li>
+        Angular Router Service must be available. This is only required if you use the Ui2QpRouter.
+      </li>
+      <li>
+        ReactiveFormsModule must be imported and accessible.
+      </li>
+    </ul>
+  </section>
+
+  <h2>Installation</h2>
+
+  <section class="">
+    <h3>Installing the library</h3>
+    <p>The library supports Angular Schematics so just run the following command:</p>
+    <code-box [code]="codesExamples.installation.schematics"></code-box>
+    <p>or just use npm:</p>
+    <code-box [code]="codesExamples.installation.npm"></code-box>
+  </section>
+
+  <section class="">
+    <h3>Import the Ui2QpModule</h3>
+    <p>Import the module in the AppModule of the app</p>
+    <code-box [code]="codesExamples.importModule"></code-box>
+    <p>The above code imports the NgUi2Qp module with default settings, which are:</p>
+    <code-box [code]="codesExamples.defaultSettings"></code-box>
+    <p>Checkout the <a [routerLink]="['../docs']">docs</a> to know more about them and what they mean</p>
+  </section>
+
+  <h2>How to use.</h2>
+
+  <section class="">
+    <h3>Inject the Ui2QpBuilder service</h3>
+    <code-box [code]="codesExamples.injectBuilder"></code-box>
+  </section>
+
+  <section class="">
+    <h3>Create a Ui2QpGroup and its controls, like you'll do when creating a ReactiveForm</h3>
+    <code-box [code]="codesExamples.createGroup"></code-box>
+  </section>
+
+  <section class="">
+    <h3>Instantiate a Ui2QpRoot object and link the created model with it</h3>
+    <code-box [code]="codesExamples.createRoot.withModel"></code-box>
+    <p> It's also possible to do the previous step and this one at once, here is how:</p>
+    <code-box [code]="codesExamples.createRoot.allInOnce"></code-box>
+    <p class="light-primary-background-color padding-15px"><b>WARNING</b>: The Ui2QpRoot will holds a subscription to the values changes observable of the model if the "autoUpdating"
+      settings was enabled, and this means that you most execute the "destroy" method in the Ui2QpRoot within the "onDestroy"
+      of the component where was created, this is needed in order to avoid memory leaks.</p>
+  </section>
+
+  <section class="">
+    <h2>Bind the model with the template, like it's done with ReactiveForms</h2>
+    <code-box [code]="codesExamples.bindModelWithTemplate"></code-box>
+  </section>
+
+  <h2>Full Example.</h2>
+
+  <section class="">
+    <p>This is how your code should look like after following all the previous steps</p>
+    <mat-tab-group class="code-example" mat-align-tabs="start">
+      <mat-tab label="HTML">
+        <code-box [code]="codesExamples.fullExample.html"></code-box>
+      </mat-tab>
+      <mat-tab label="TS">
+        <code-box [code]="codesExamples.fullExample.ts"></code-box>
+      </mat-tab>
+      <mat-tab label="CSS">
+        <code-box [code]="codesExamples.fullExample.css"></code-box>
+      </mat-tab>
+    </mat-tab-group>
+  </section>
+
+  <section class="">
+    <h3>Live example.</h3>
+    <p>This is how your code will behave when running.</p>
+    <p>Notice how the URL changes while you enter values in the
+      following inputs</p>
+    <div class="live-example display-flex flex-direction-column align-items-flex-start">
+      <ng-container [formGroup]="root.model">
+        <mat-form-field>
+          <mat-label for="">First Name</mat-label>
+          <input matInput formControlName="firstName">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label for="">Last Name</mat-label>
+          <input matInput formControlName="lastName">
+        </mat-form-field>
+      </ng-container>
+    </div>
+  </section>
+</div>
+

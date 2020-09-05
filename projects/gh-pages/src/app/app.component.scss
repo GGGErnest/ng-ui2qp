@@ -1,7 +1,7 @@
+@import '../assets/theme';
+
 :host {
-  display: flex;
-  flex-grow: 1;
-  flex-direction: column;
+
 }
 
 
@@ -17,6 +17,9 @@
   position: relative;
   top: 50px;
   overflow: auto;
+  height: calc(100% - 50px);
+  display: flex;
+  flex-direction: column;
 }
 
 .icon-logo {
@@ -24,4 +27,8 @@
 }
 
 .logo {
+}
+
+mat-toolbar button.active {
+  color: mat-color($app-accent);
 }

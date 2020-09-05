@@ -23,16 +23,17 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 // that you are using.
 @include angular-material-theme($app-theme);
 
+
 .primary-color {
   color: mat-color($app-primary, A700);
 }
 
 .accent-color {
-  color: mat-color($app-accent, A500);
+  color: mat-color($app-accent);
 }
 
 .warn-color {
-  color: mat-color($app-warn, $mat-red);
+  color: mat-color($app-warn);
 }
 
 .primary-background-color {
@@ -45,4 +46,28 @@ $app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
 
 .warn-background-color {
   background-color: mat-color($app-warn);
+}
+
+.light-primary-background-color {
+  background-color: mat-color($app-primary, A400);
+}
+
+.light-accent-background-color {
+  background-color: mat-color($app-accent, A100);
+}
+
+.light-warn-background-color {
+  background-color: mat-color($app-warn, A400);
+}
+
+.color-white {
+  color: white;
+}
+
+.background-color-white {
+  background-color: white;
+}
+
+.background-color-black {
+  background-color: black;
 }

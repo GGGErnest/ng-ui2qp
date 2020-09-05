@@ -1,0 +1,66 @@
+<h1 class="page-header">Ui2QpRoot</h1>
+<div class="page-content">
+
+  <h2>Description</h2>
+  <p>The Ui2QpRoot has the responsibility of synchronizing the model with the Qps and vice versa. It knows when and how
+    to keep the model and the Qps synchronized.</p>
+
+  <h2>Creation</h2>
+
+  <section>
+    <p>We recommend to use the Ui2QpBuilder to create objects of this class, like all the others classes within this
+      lib</p>
+  </section>
+
+  <h2 id="model">Ui2QpRoot's model</h2>
+
+  <section>
+    <p>Ui2QpRoot has a reference to a model(Ui2QpGroup), model that will be synchronized with the Qps. The important
+      thing to mention here is that UI2QpRoot doesn't required a model to be instantiated at all, that allows to change
+      the model at run time and reset the Qps to a new model if needed, this gives a lot of flexibility to the developer
+      at the moment of deciding when to bind the model with the Qps.</p>
+
+    <p>Here is an example of creating a Ui2QpRoot without a model:</p>
+    <code-box [code]="createRootCode.withoutModel"></code-box>
+    <p>with a model:</p>
+    <code-box [code]="createRootCode.withModel"></code-box>
+
+    <h3>Adding and removing the model</h3>
+    <p>Adding a model to a Ui2QpRoot instance is like creating a two-ways binging between the model and the Qps.
+      Currently in this version the only way to remove the model is replacing it with a new model, in future versions
+      this will be fixed.
+      Here is an example how you can do this:</p>
+    <code-box [code]="modelBindingCode"></code-box>
+
+    <h3>Qps naming and nested models</h3>
+    <p>Each property in the model contributes in how the Qps are going to be named by default, but is also possible
+      to assign a specific name to each of them if desired, check how can be that done in these links <a
+        routerLink="../configurations" fragment="group-configurations">Ui2QpGroup</a> and <a
+        routerLink="../configurations" fragment="control-configurations">Ui2QpControl</a>.</p>
+    <p>Take a look at the next model and how it's going to be mapped to the Qps</p>
+    <code-box [code]="flatModelExampleCode"></code-box>
+    <p>The previous example was a simple one, but what about having a more complex model? What if the model is not
+      flat but nested? here is an example:</p>
+    <code-box [code]="nestedModelExampleCode"></code-box>
+    <p>Notice how the property "address" is actually a Ui2QpGroup that contains other Ui2QpControls(This case is what we
+      called a nested model) and how the lib will create Qps that will map to those inner properties too.</p>
+
+    <h3>Other features</h3>
+    <p>When creating the model is possible to define some other configurations for Ui2QpControls and Ui2QpGroups read
+      more about them in the following links <a routerLink="../configurations" fragment="group-configurations">Ui2QpGroup</a> and <a
+        routerLink="../configurations" fragment="control-configurations">Ui2QpControl</a>.
+    </p>
+  </section>
+
+  <h2>Manual synchronization</h2>
+
+  <section>
+    <p>Ui2QpRoot will take care of updating the Qps automatically if the "autoUpdating" feature was enabled in the
+      configurations, but in case the feature is disabled it provides a way to do it programmatically using the
+      "updateQps" public method which will update the Qps with the model's current value.</p>
+    <p class="light-primary-background-color padding-15px"><b>IMPORTANT</b>: Keep in mind that if a model is not
+      provided to the Ui2QpRoot the Qps won't get updated when the
+      model changes(if the auto-updating feature is enable) or when manually updated with the "updateQps"
+      method</p>
+  </section>
+</div>

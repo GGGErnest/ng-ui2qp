@@ -1,6 +1,6 @@
 # ng-ui2qp
 
-Angular library that serializes the state of UI components as query parameters(QPs) and viceversa.
+Angular library that serializes the state of UI components as query parameters(QPs) and vice verse.
 
 ## Description
  
@@ -45,7 +45,7 @@ Here are some concepts and knowledge we believe are important to know in order t
 
 ## Pre-requisites 
  
-Make sure all requisites are being filled before using the library:
+Make sure all requisites are filled before using the library:
 
  - Routing it is being used in the app so RouterModule has been imported. Angular Router Service must be available. This is only required if you use the
  Ui2QpRouter.
@@ -116,7 +116,7 @@ Make sure all requisites are being filled before using the library:
 ## Configurations
 
 We know that every use case could be different and therefore we've provided some configurations that allows you to
-adjust it to your specific use cases. 
+adjust it to your specific use cases.
 
 ### Configuration Object
 
@@ -152,7 +152,7 @@ Defines if the Ui2QpRoot will create a new state in the browser history every ti
 ## Serializers and Deserializers
 
 Serializers and Deserializers determine how the value of the Ui2QpFormControl is serialized into a string for the URL and, 
-vice versa, how the value gotten from the QP is transformed to the value used in the Ui2QpFormControl.
+vice versa, how the value gotten from the QP is transformed into the value used in the Ui2QpFormControl.
 You could create your own ones if you needed it, check that [section](#creating-and-registering-your-own-custom-serializers-and-deserializers) in the documentation.
 
 ### Built-in Serializers and Deserializers
@@ -171,7 +171,7 @@ We've created for you some Serializers and Deserializers for most of the common 
 ### Deserializers
 
 The deserializer is no more than an object which has two properties, a function and a type. It's used for transforming 
-the values retrieved from the QPs (which are always string) to the right value expected by the Ui2QpFormControl its bind to.
+the values retrieved from the QPs (which are always string) to the right value expected by the Ui2QpFormControl it's bind to.
 
 ```
 {
@@ -256,7 +256,7 @@ component which implements "ControlValueAccessor", and its value's type is a Dat
 
 #### Steps
 
-1. Define de type for the Serializer and Deserializer, it should be provided while creating a Ui2QpFormControl using the 
+1. Define the type for the Serializer and Deserializer, it should be provided while creating a Ui2QpFormControl using the 
 Ui2QpBuilder.
 
 ```

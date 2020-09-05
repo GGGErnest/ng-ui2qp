@@ -1,0 +1,62 @@
+<h1 class="page-header">Ng-Ui2Qp Concepts</h1>
+<div class="page-content">
+
+  <h2>Important Concepts</h2>
+
+  <section>
+    <p>Here are some concepts we believe are important to know:
+    </p>
+    <p>
+      <b>Serializer</b>: It has the responsibility to transform the value retrieved from the model to the one actually
+      will be
+      set in the QPs. The serializer is needed because all the values send to the QP most be string and all model values
+      are not going to be necessarily strings, so a preprocessor for those cases was needed to be introduced.
+    </p>
+    <p>
+      <b>Deserializer</b>: It's the opposite of the Serializer, it transforms the value retrieved from the QPs to the
+      value that will be set in the model.
+    </p>
+    <p>
+      <b>Query Parameter(s) or QP(s)</b>: Is a part of a uniform resource locator (URL) that assigns values to specified
+      parameters. A query string commonly includes fields added to a base URL by a Web browser or other client
+      application. Whole concept <a href="https://en.wikipedia.org/wiki/Query_string">here</a>.
+    </p>
+  </section>
+
+  <h2>Good to know</h2>
+
+  <section>
+    <h3>Extends ReactiveForms API</h3>
+    <p> The main classes and services in ng-ui2qp almost fully match Angular's ReactiveForms which makes it familiar and easy to
+      understand and use.</p>
+    <p>Here is how ng-ui2qp matches ReactiveForms API</p>
+    <table class="text-align-center">
+      <tr class="primary-background-color accent-color">
+        <th>ReactiveForms Class</th>
+        <th>Ui2Qp Class</th>
+        <th></th>
+      </tr>
+      <tr class="light-primary-background-color">
+        <td>FormControl</td>
+        <td>Ui2QpFormControl</td>
+        <td>Extends</td>
+      </tr>
+      <tr class="light-primary-background-color">
+        <td>FormGroup</td>
+        <td>Ui2QpFormGroup</td>
+        <td>Extends</td>
+      </tr>
+      <tr class="light-primary-background-color">
+        <td>X</td>
+        <td>Ui2QpRoot</td>
+        <td>Ui2Qp specific</td>
+      </tr>
+      <tr class="light-primary-background-color">
+        <td>FormBuilder</td>
+        <td>Ui2QpBuilder</td>
+        <td>Doesn't extends</td>
+      </tr>
+    </table>
+
+  </section>
+</div>

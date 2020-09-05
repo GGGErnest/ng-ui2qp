@@ -12,7 +12,27 @@ import {GettingStarterComponent} from './components/containers/getting-starter/g
 import {MatButtonModule} from '@angular/material/button';
 import {HomeRouteComponent} from './components/routes/home-route/home-route.component';
 import {HomeComponent} from './components/containers/home/home.component';
-import { EmbeddedStackblitzComponent } from './components/dumbs/embeded-stackblitz/embedded-stackblitz.component';
+import {EmbeddedStackblitzComponent} from './components/dumbs/embeded-stackblitz/embedded-stackblitz.component';
+import {DocumentationRouteComponent} from './components/routes/documentation-route/documentation-route.component';
+import {IntroductionComponent} from './components/containers/introduction/introduction.component';
+import {HIGHLIGHT_OPTIONS, HighlightModule} from 'ngx-highlightjs';
+import {CodeBoxComponent} from './components/dumbs/code-box/code-box.component';
+import {MatTabsModule} from '@angular/material/tabs';
+import {ReactiveFormsModule} from '@angular/forms';
+import {NgUi2QpModule} from 'ng-ui2qp';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { ConceptsComponent } from './components/containers/concepts/concepts.component';
+import { ConfigurationsComponent } from './components/containers/configurations/configurations.component';
+import { SerializersDeserializersComponent } from './components/containers/serializers-deserializers/serializers-deserializers.component';
+import {MatDividerModule} from '@angular/material/divider';
+import { RouterComponent } from './components/containers/router/router.component';
+import { HowToUseComponent } from './components/containers/how-to-use/how-to-use.component';
+import { ControlComponent } from './components/containers/control/control.component';
+import { GroupComponent } from './components/containers/group/group.component';
+import { RootComponent } from './components/containers/root/root.component';
+import { LogoComponent } from './components/dumbs/logo/logo.component';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,17 +42,56 @@ import { EmbeddedStackblitzComponent } from './components/dumbs/embeded-stackbli
     HomeRouteComponent,
     HomeComponent,
     EmbeddedStackblitzComponent,
+    DocumentationRouteComponent,
+    IntroductionComponent,
+    CodeBoxComponent,
+    ConceptsComponent,
+    ConfigurationsComponent,
+    SerializersDeserializersComponent,
+    RouterComponent,
+    HowToUseComponent,
+    ControlComponent,
+    GroupComponent,
+    RootComponent,
+    LogoComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    NgUi2QpModule,
+    MatInputModule,
+    MatFormFieldModule,
     AppRoutingModule,
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    HighlightModule,
+    MatTabsModule,
+    MatDividerModule
   ],
-  providers: [],
+  providers: [
+    // {
+    //   provide: HIGHLIGHT_OPTIONS,
+    //   useValue: {
+    //     coreLibraryLoader: () => import('highlight.js/lib/highlight'),
+    //     // lineNumbersLoader: () => import('highlightjs-line-numbers.js'), // Optional, only if you want the line numbers
+    //     languages: {
+    //       typescript: () => import('highlight.js/lib/languages/typescript'),
+    //       css: () => import('highlight.js/lib/languages/css'),
+    //       xml: () => import('highlight.js/lib/languages/xml')
+    //     }
+    //   }
+    // },
+    {
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        fullLibraryLoader: () => import('highlight.js'),
+      }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

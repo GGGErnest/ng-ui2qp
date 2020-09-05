@@ -5,73 +5,55 @@ html, body {
   height: 100%;
 }
 
-
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   width: 100%;
-  display: flex;
+  //display: flex;
   overflow: hidden;
+  //flex-direction: column;
 }
 
-.overflow-hidden {
-  overflow: hidden;
-}
-
-.overflow-auto {
-  overflow: auto;
-}
-
-.display-flex {
-  display: flex;
-}
-
-.flex-grow-1 {
-  flex-grow: 1;
-}
-
-.flex-direction-column {
-  flex-direction: column;
-}
-
-.flex-direction-row {
-  flex-direction: row;
-}
-
-.h1 {
-  font-size: 45px;
-  margin: 15px;
-}
-
-.h2 {
-  font-size: 25px;
-  margin: 15px;
-}
 
 .box-shadow {
   box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
 }
 
-.text-align-center {
-  text-align: center;
+.page-header {
+  font-size: 38px;
+  margin: 0px 0px 40px 0px;
+  padding: 25px 15px;
+  background-color: mat-color($app-accent);
 }
 
-.pentagon {
-  position: relative;
-  width: 54px;
-  box-sizing: content-box;
-  border-width: 50px 18px 0;
-  border-style: solid;
-  border-color:  mat-color($app-primary) transparent;
+.live-example {
+  border: dashed 1px mat-color($app-primary, A400);
+  padding: 15px
 }
-.pentagon:before {
-  content: "";
-  position: absolute;
-  height: 0;
-  width: 0;
-  top: -85px;
-  left: -18px;
-  border-width: 0 45px 35px;
-  border-style: solid;
-  border-color: transparent transparent  mat-color($app-primary);
+
+.code-example {
+  border: dashed 1px mat-color($app-primary, A400);
+  padding: 15px
+}
+
+.footer{
+  background-color: mat-color($app-primary);
+  color: white;
+  padding: 16px;
+  z-index: 100;
+}
+
+.footer a {
+  color: mat-color($app-accent);
+  text-decoration: none;
+}
+
+.footer-version {
+  min-width: 150px;
+  max-width: 350px;
+}
+
+.footer-license {
+  min-width: 200px;
+  max-width: 400px;
 }
