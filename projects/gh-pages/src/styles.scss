@@ -57,3 +57,21 @@ body {
   min-width: 200px;
   max-width: 400px;
 }
+
+// Navigation styles
+nav.nav-menu a.active {
+  color: mat-color($app-accent);
+  background-color: mat-color($app-primary);
+}
+
+nav.nav-menu a:hover:not(.active) {
+  background-color: mat-color($app-primary, A400);
+}
+
+.nav-submenu > div:first-child:hover {
+  background-color: mat-color($app-primary, A400);
+}
+
+mat-toolbar button.active {
+  color: mat-color($app-accent);
+}

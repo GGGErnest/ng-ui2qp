@@ -1,9 +1,7 @@
-@import '../../../../assets/theme';
-
 :host {
   display: flex;
   flex-grow: 1;
-  padding: 15px 0px 0px 0px;
+  padding: 15px 0 0 0;
 }
 
 nav.nav-menu {
@@ -12,18 +10,9 @@ nav.nav-menu {
 
 nav.nav-menu a {
   text-align: left;
-  padding: 5px 15px 0px 15px;
-  border-radius: 0px;
+  padding: 5px 15px 0 15px;
+  border-radius: 0;
   transition: background-color .2s;
-}
-
-nav.nav-menu a.active {
-  color: mat-color($app-accent);
-  background-color: mat-color($app-primary);
-}
-
-nav.nav-menu a:hover:not(.active) {
-  background-color: mat-color($app-primary, A400);
 }
 
 .nav-menu > a {
@@ -31,15 +20,12 @@ nav.nav-menu a:hover:not(.active) {
 }
 
 .nav-submenu {
-  padding-left: 0px;
-}
-
-.nav-submenu > div:first-child:hover {
-  background-color: mat-color($app-primary, A400);
+  padding-left: 0;
 }
 
 .nav-submenu > div:first-child{
   height: 36px;
+  cursor: pointer;
 }
 
 .nav-submenu > div:first-child > span {
@@ -51,8 +37,8 @@ nav.nav-menu a:hover:not(.active) {
 }
 
 .nav-submenu > div:first-child {
-  padding: 5px 15px 0px 15px;
-  margin: 0px;
+  padding: 5px 15px 0 15px;
+  margin: 0;
 }
 
 .nav-submenu div > a {

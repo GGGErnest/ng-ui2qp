@@ -12,6 +12,9 @@ import {HowToUseComponent} from './components/containers/how-to-use/how-to-use.c
 import {ControlComponent} from './components/containers/control/control.component';
 import {GroupComponent} from './components/containers/group/group.component';
 import {RootComponent} from './components/containers/root/root.component';
+import {ChangelogComponent} from './components/containers/changelog/changelog.component';
+import {ModelDrivenComponent} from './components/containers/model-driven/model-driven.component';
+import {TemplateDrivenComponent} from './components/containers/template-driven/template-driven.component';
 
 const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
@@ -28,6 +31,8 @@ const routes: Routes = [
       {path: '', pathMatch: 'full', redirectTo: 'introduction'},
       {path: 'introduction', component: IntroductionComponent},
       {path: 'how-to-use', component: HowToUseComponent},
+      {path: 'model-driven', component: ModelDrivenComponent},
+      {path: 'template-driven', component: TemplateDrivenComponent},
       {path: 'concepts', component: ConceptsComponent},
       {path: 'configurations', component: ConfigurationsComponent},
       {path: 'serializers-deserializers', component: SerializersDeserializersComponent},
@@ -35,6 +40,7 @@ const routes: Routes = [
       {path: 'control', component: ControlComponent},
       {path: 'group', component: GroupComponent},
       {path: 'root', component: RootComponent},
+      {path: 'changelog', component: ChangelogComponent},
     ]
   },
 ];

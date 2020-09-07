@@ -100,4 +100,25 @@
     <code-box [code]="controlDefaultValueCode"></code-box>
 
   </section>
+
+  <h2 id="control-directive">Ui2qpControl directive configurations</h2>
+
+  <section>
+    <p>The directive accepts two inputs where some configurations are expected, here they are:</p>
+    <ul>
+      <li>
+        <p>
+          <b>ui2qpControl</b>: Input name of the directive configurations which have this structure:
+        </p>
+        <code-box [code]="controlDirectiveConfCode.config"></code-box>
+        <p>here is the default value for some of them if not provided:</p>
+        <code-box [code]="controlDirectiveConfCode.defaultVal"></code-box>
+        <p class="light-primary-background-color padding-15px"><b>NOTE</b>: Please note that the "qpName" setting
+          is required, if not provided then an error will be shown.</p>
+      </li>
+      <li><b>ui2qp</b>: Input name for <a routerLink="." fragment="configuration-object">Ui2Qp settings</a> that will be
+        use for this specific directive instance. Are the same set of configurations we've explained here.
+      </li>
+    </ul>
+  </section>
 </div>

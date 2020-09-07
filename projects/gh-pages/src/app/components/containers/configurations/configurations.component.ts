@@ -68,6 +68,18 @@ export class ConfigurationsComponent implements OnInit {
         amount: this.ui2QpBuilder.control({type: 'number', defaultVal: 1}),
      }));`;
 
+  controlDirectiveConfCode = {
+    config: `{
+      qpName: string;
+      defaultValue?: any;
+      type?: string;
+     }`,
+    defaultVal: `{
+      defaultValue: null,
+      type: 'string'
+    }`
+  };
+
   constructor() {
   }
 

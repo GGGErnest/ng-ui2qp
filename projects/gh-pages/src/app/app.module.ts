@@ -33,6 +33,14 @@ import { GroupComponent } from './components/containers/group/group.component';
 import { RootComponent } from './components/containers/root/root.component';
 import { LogoComponent } from './components/dumbs/logo/logo.component';
 import {HttpClientModule} from '@angular/common/http';
+import { ChangelogComponent } from './components/containers/changelog/changelog.component';
+import { ModelDrivenComponent } from './components/containers/model-driven/model-driven.component';
+import { TemplateDrivenComponent } from './components/containers/template-driven/template-driven.component';
+import { VariableDirective } from './directives/variable.directive';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -54,6 +62,10 @@ import {HttpClientModule} from '@angular/common/http';
     GroupComponent,
     RootComponent,
     LogoComponent,
+    ChangelogComponent,
+    ModelDrivenComponent,
+    TemplateDrivenComponent,
+    VariableDirective,
   ],
   imports: [
     BrowserModule,
@@ -70,21 +82,13 @@ import {HttpClientModule} from '@angular/common/http';
     MatButtonModule,
     HighlightModule,
     MatTabsModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
+    MatRadioModule,
   ],
   providers: [
-    // {
-    //   provide: HIGHLIGHT_OPTIONS,
-    //   useValue: {
-    //     coreLibraryLoader: () => import('highlight.js/lib/highlight'),
-    //     // lineNumbersLoader: () => import('highlightjs-line-numbers.js'), // Optional, only if you want the line numbers
-    //     languages: {
-    //       typescript: () => import('highlight.js/lib/languages/typescript'),
-    //       css: () => import('highlight.js/lib/languages/css'),
-    //       xml: () => import('highlight.js/lib/languages/xml')
-    //     }
-    //   }
-    // },
     {
       provide: HIGHLIGHT_OPTIONS,
       useValue: {

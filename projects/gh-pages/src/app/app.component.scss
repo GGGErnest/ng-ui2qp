@@ -1,5 +1,3 @@
-@import '../assets/theme';
-
 :host {
 
 }
@@ -29,6 +27,3 @@
 .logo {
 }
 
-mat-toolbar button.active {
-  color: mat-color($app-accent);
-}

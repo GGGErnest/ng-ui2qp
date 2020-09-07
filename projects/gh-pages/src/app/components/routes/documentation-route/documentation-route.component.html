@@ -3,13 +3,24 @@
     <nav class="nav-menu">
       <a mat-flat-button [routerLink]="['introduction']" routerLinkActive="active">Introduction</a>
       <a mat-flat-button [routerLink]="['concepts']" routerLinkActive="active">Concepts</a>
-      <a mat-flat-button [routerLink]="['how-to-use']" routerLinkActive="active">How to use
-      </a>
       <a mat-flat-button [routerLink]="['configurations']" routerLinkActive="active">
         Configurations
       </a>
       <div class="nav-submenu">
-        <div class="display-flex justify-content-space-between" (click)="onSubMenuClick($event)">
+        <div class="display-flex justify-content-space-between" (click)="onHowToUseSubMenuClick($event)">
+          <span>How to use</span>
+          <mat-icon *ngIf="!howToUseOpened">keyboard_arrow_right</mat-icon>
+          <mat-icon *ngIf="howToUseOpened">keyboard_arrow_down</mat-icon>
+        </div>
+        <div *ngIf="howToUseOpened">
+          <a mat-flat-button [routerLink]="['model-driven']" routerLinkActive="active">
+            Model-Driven
+          </a>
+          <a mat-flat-button [routerLink]="['template-driven']" routerLinkActive="active">Template-Driven</a>
+        </div>
+      </div>
+      <div class="nav-submenu">
+        <div class="display-flex justify-content-space-between" (click)="onAdvanceTopicsSubMenuClick($event)">
           <span>Advance topics</span>
           <mat-icon *ngIf="!advanceTopicsOpened">keyboard_arrow_right</mat-icon>
           <mat-icon *ngIf="advanceTopicsOpened">keyboard_arrow_down</mat-icon>
@@ -24,6 +35,9 @@
           <a mat-flat-button [routerLink]="['control']" routerLinkActive="active">Control</a>
         </div>
       </div>
+      <a mat-flat-button [routerLink]="['changelog']" routerLinkActive="active">
+        Changelog
+      </a>
     </nav>
   </mat-sidenav>
   <mat-sidenav-content class="background-color-white">

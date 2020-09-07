@@ -1,0 +1,156 @@
+<h1 class="page-header">Template-Driven</h1>
+<div class="page-content">
+
+  <h2>Overall view</h2>
+
+  <section>
+    <p>
+      This approach in general requires very few steps, here are they:
+    </p>
+    <ol>
+      <li>
+        Import Ui2QpModule.
+      </li>
+      <li>Use Ui2qpControl directive on the template.</li>
+    </ol>
+  </section>
+
+  <h2>Importing Ui2QpModule and configurations</h2>
+
+  <section>
+    <h3>Importing Ui2QpModule</h3>
+    <p>This can be done in two places:</p>
+    <ul>
+      <li><p><b>AppModule</b>: If imported in the AppModule all the library features will be available across the whole
+        App which will be the normal use case.</p></li>
+      <li>
+        <p><b>Module import</b>: The Ui2QpModule could also be imported in feature modules and will make the ng-ui2qp
+          features available only within the module that imports it.</p>
+        <i>It's important to remark that none of the injectables provided by the
+          lib will be automatically provided in the root injector.</i>
+      </li>
+    </ul>
+
+    <h3>Configurations</h3>
+    <p>When importing Ui2QpModule some default configurations are going to be used (<a
+      [routerLink]="['../configurations']" [fragment]="'default-configurations'">now more about the configurations</a>)
+      but those can be changed and the way to do it is with the "withConfig" method in the
+      Ui2QpModule when importing it, here is an example:</p>
+    <code-box [code]="withConfigCode"></code-box>
+  </section>
+
+  <h2>Using the Ui2qpControl directive</h2>
+
+  <section>
+    <h3>Requirements</h3>
+
+    <p>Before applying the Ui2qpControlDirective on a Ui component or any kind of HTML element is important to point out
+      that is required the host element implements the <a href="https://angular.io/api/forms/ControlValueAccessor">ControlValueAccessor</a>
+      because is the way the directive uses to interact with the host element state. If the host element doesn't have a
+      suitable ControlValueAccessor implementation that we have created we have created a helper
+      directive(Ui2qpValueAccessorDirective) that can be used on the host element and it offers a way to
+      include an ad-hoc control value accessor by wiring it up in the template directly, see in the next sections hot to
+      use it.</p>
+
+    <h3>Configurations</h3>
+    <p>The directive provide a set of configurations that can be passed in as inputs, check this
+      <a routerLink="../configurations" fragment="control-directive">link</a> to know more about it.</p>
+
+    <h3>Usage</h3>
+    <p>All the next examples are using the global configurations provided when importing the Ui2QpModule</p>
+    <p>When the host elements has a suitable ControlValueAccessor implementation.</p>
+    <mat-tab-group class="code-example" mat-align-tabs="start">
+      <mat-tab label="HTML">
+        <code-box [code]="controlDirectiveWithCVAExampleCode"></code-box>
+      </mat-tab>
+      <mat-tab label="TS">
+        <code-box [code]="'nothing to see here :)'"></code-box>
+      </mat-tab>
+      <mat-tab label="CSS">
+        <code-box [code]="'nothing to see here :)'"></code-box>
+      </mat-tab>
+    </mat-tab-group>
+
+    <p>If the host element does not implements ControlValueAccessor this is an example how the
+      Ui2qpValueAccessorDirective can be used as an ad-hoc to the host component to solve this issue.</p>
+    <mat-tab-group class="code-example" mat-align-tabs="start">
+      <mat-tab label="HTML">
+        <code-box [code]="controlDirectiveWithoutCVAExampleCode"></code-box>
+      </mat-tab>
+      <mat-tab label="TS">
+        <code-box [code]="'nothing to see here :)'"></code-box>
+      </mat-tab>
+      <mat-tab label="CSS">
+        <code-box [code]="'nothing to see here :)'"></code-box>
+      </mat-tab>
+    </mat-tab-group>
+
+    <p>Using Ui2qpControlDirective on native form inputs elements. </p>
+    <mat-tab-group class="code-example" mat-align-tabs="start">
+      <mat-tab label="HTML">
+        <code-box [code]="controlDirectiveNativeInputExampleCode.html"></code-box>
+      </mat-tab>
+      <mat-tab label="TS">
+        <code-box [code]="controlDirectiveNativeInputExampleCode.ts"></code-box>
+      </mat-tab>
+      <mat-tab label="CSS">
+        <code-box [code]="'nothing to see here :)'"></code-box>
+      </mat-tab>
+    </mat-tab-group>
+    <p>Note how we are assigning a Ui2QpControl instance to the select which makes angular provide the
+      ControlValueAccessor we needed. This also will work if instead of assigning a FormControl we assign a Ui2QpControl
+      instance. If desired the above approach can be
+      used here too.</p>
+
+    <h3>Important considerations</h3>
+
+    <p>Please be sure that all the Qps names defined in a template while using the approach described here are unique,
+      if not some weird thins could happen :). In future version we plan to validate this and show errors if happens,
+      but for now be careful.</p>
+  </section>
+
+  <h2>Full example</h2>
+
+  <section>
+    <p>Here is an example with the possibilities mentioned above.</p>
+    <mat-tab-group id="full-example" class="code-example" mat-align-tabs="start">
+      <mat-tab label="HTML">
+        <code-box [code]="fullExampleCode.html"></code-box>
+      </mat-tab>
+      <mat-tab label="TS">
+        <code-box [code]="fullExampleCode.ts"></code-box>
+      </mat-tab>
+      <mat-tab label="CSS">
+        <code-box [code]="'nothing to see here :)'"></code-box>
+      </mat-tab>
+    </mat-tab-group>
+
+    <p>Here is the code running from the example above. See how the URL changes and Qps are added.</p>
+    <div class="live-example display-flex flex-direction-column align-items-flex-start">
+
+      <div class="margin-bottom-25px">
+        <p>Custom component example using Material Design radio buttons</p>
+        <mat-radio-group color="primary" aria-label="Select an option" [ui2qpControl]="{qpName:'options'}">
+          <mat-radio-button class="margin-right-10px" value="Option1">Option 1</mat-radio-button>
+          <mat-radio-button class="margin-right-10px" value="Option2">Option 2</mat-radio-button>
+          <mat-radio-button class="margin-right-10px" value="Option3">Option 3</mat-radio-button>
+          <mat-radio-button value="Option4">Option 4</mat-radio-button>
+        </mat-radio-group>
+      </div>
+
+      <p>Using Ui2qpValueAccessorDirective on a native input.</p>
+      <mat-form-field>
+        <mat-label>Favorite animal</mat-label>
+        <input matInput type="text" [ui2qpControl]="{qpName:'animal'}"
+               ui2QpValueAccessor #accessor="controlValueAccessor" (controlValueChange)="ctrl.value = $event"
+               #ctrl (input)="accessor.notifyChange($event.target.value)">
+      </mat-form-field>
+
+      <p>Biding a FormControl instance to a native input as way of providing it with a ControlValueAccessor implementation.</p>
+      <mat-form-field>
+        <mat-label>Days</mat-label>
+        <input matInput type="number" [ui2qpControl]="{type:'number', qpName:'days'}" multiple [formControl]="options"/>
+      </mat-form-field>
+    </div>
+  </section>
+</div>
