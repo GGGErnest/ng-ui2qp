@@ -27,7 +27,7 @@ export function isAngularBuiltInAccessor(valueAccessor: ControlValueAccessor): b
   return ANGULAR_BUILTIN_ACCESSORS.some(a => valueAccessor.constructor === a);
 }
 
-export function selectValueAccessor(valueAccessors: ControlValueAccessor[]): ControlValueAccessor | null {
+export function selectValueAccessor(valueAccessors: ControlValueAccessor[]): ControlValueAccessor {
   if (!valueAccessors) {
     return null;
   }
@@ -64,6 +64,7 @@ export function selectValueAccessor(valueAccessors: ControlValueAccessor[]): Con
     return defaultAccessor;
   }
 
-  return null;
+  throw Error('No suitable ControlValueAccessor was found. Please provide one.');
+
 }
 

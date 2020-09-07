@@ -23,7 +23,7 @@ export class Ui2QpControlDirective implements OnInit, OnDestroy {
   /**
    * Control settings
    */
-  @Input('ui2qpControl') settings: ControlDirectiveSettings;
+  @Input('ui2qpControl') settings!: ControlDirectiveSettings;
   /**
    * NgUI2QpSettings that will define how to interact with the Qps. It's the same that the ones provided globally. If not passed to the
    * directive the defined globally will be used instead.
@@ -136,6 +136,10 @@ export class Ui2QpControlDirective implements OnInit, OnDestroy {
 
     this.logger.info('Ui2QpGroup.settingsSetup');
 
+    if (!this.settings.qpName) {
+      throw Error('No query param name was provided within the settings. Please provide a query param name.');
+    }
+
     this.settings = mergeObjects(this.settings, DefaultControlDirectiveSettings);
     this.ui2qp = this.ui2qp !== undefined ? mergeObjects(this.ui2qp, DefaultNgUi2QpSettings) : this.ui2qpSettings;
 
@@ -200,15 +204,6 @@ export class Ui2QpControlDirective implements OnInit, OnDestroy {
   }
 
 
-  ngOnDestroy() {
-
-    this.logger.info('Ui2QpGroup.ngOnDestroy');
-
-    this.subscriptions.unsubscribe();
-
-    this.logger.trace('Unsubscribing');
-  }
-
   /**
    * Called everytime the value changes in the view.
    * Used to notify when the value from the view has changed and for keeping synchronized the value
@@ -266,6 +261,15 @@ export class Ui2QpControlDirective implements OnInit, OnDestroy {
     }
 
     this.logger.debug('Value to update the model', this.value);
+  }
+
+  ngOnDestroy() {
+
+    this.logger.info('Ui2QpGroup.ngOnDestroy');
+
+    this.subscriptions.unsubscribe();
+
+    this.logger.trace('Unsubscribing');
   }
 
 }

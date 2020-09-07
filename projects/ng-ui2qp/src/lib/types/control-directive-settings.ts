@@ -2,7 +2,7 @@
  * Settings provided to the ControlDirective as an input
  */
 export interface ControlDirectiveSettings {
-  qpName?: string;
+  qpName: string;
   defaultValue?: any;
   type?: string;
 }
@@ -10,7 +10,7 @@ export interface ControlDirectiveSettings {
 /**
  * Default values for ControlDirective's settings
  */
-export const DefaultControlDirectiveSettings: ControlDirectiveSettings = {
+export const DefaultControlDirectiveSettings: Partial<ControlDirectiveSettings> = {
   defaultValue: null,
   type: 'string'
 };
