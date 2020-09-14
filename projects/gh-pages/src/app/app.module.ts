@@ -8,13 +8,11 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {GettingStarterRouteComponent} from './components/main-routes/getting-starter-route/getting-starter-route.component';
-import {GettingStarterComponent} from './components/children-routes/getting-starter/getting-starter.component';
 import {MatButtonModule} from '@angular/material/button';
 import {HomeRouteComponent} from './components/main-routes/home-route/home-route.component';
-import {HomeComponent} from './components/children-routes/home/home.component';
 import {EmbeddedStackblitzComponent} from './components/dumbs/embeded-stackblitz/embedded-stackblitz.component';
 import {DocumentationRouteComponent} from './components/main-routes/documentation-route/documentation-route.component';
-import {IntroductionComponent} from './components/children-routes/introduction/introduction.component';
+import {IntroductionComponent} from './components/documentation-children-routes/introduction/introduction.component';
 import {HIGHLIGHT_OPTIONS, HighlightModule} from 'ngx-highlightjs';
 import {CodeBoxComponent} from './components/dumbs/code-box/code-box.component';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -22,21 +20,21 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {NgUi2QpModule} from 'ng-ui2qp';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { ConceptsComponent } from './components/children-routes/concepts/concepts.component';
-import { ConfigurationsComponent } from './components/children-routes/configurations/configurations.component';
+import { ConceptsComponent } from './components/documentation-children-routes/concepts/concepts.component';
+import { ConfigurationsComponent } from './components/documentation-children-routes/configurations/configurations.component';
 // tslint:disable-next-line:max-line-length
-import { SerializersDeserializersComponent } from './components/children-routes/serializers-deserializers/serializers-deserializers.component';
+import { SerializersDeserializersComponent } from './components/documentation-children-routes/serializers-deserializers/serializers-deserializers.component';
 import {MatDividerModule} from '@angular/material/divider';
-import { RouterComponent } from './components/children-routes/router/router.component';
-import { HowToUseComponent } from './components/children-routes/how-to-use/how-to-use.component';
-import { ControlComponent } from './components/children-routes/control/control.component';
-import { GroupComponent } from './components/children-routes/group/group.component';
-import { RootComponent } from './components/children-routes/root/root.component';
+import { RouterComponent } from './components/documentation-children-routes/router/router.component';
+import { HowToUseComponent } from './components/documentation-children-routes/how-to-use/how-to-use.component';
+import { ControlComponent } from './components/documentation-children-routes/control/control.component';
+import { GroupComponent } from './components/documentation-children-routes/group/group.component';
+import { RootComponent } from './components/documentation-children-routes/root/root.component';
 import { LogoComponent } from './components/dumbs/logo/logo.component';
 import {HttpClientModule} from '@angular/common/http';
-import { ChangelogComponent } from './components/children-routes/changelog/changelog.component';
-import { ModelDrivenComponent } from './components/children-routes/model-driven/model-driven.component';
-import { TemplateDrivenComponent } from './components/children-routes/template-driven/template-driven.component';
+import { ChangelogComponent } from './components/documentation-children-routes/changelog/changelog.component';
+import { ModelDrivenComponent } from './components/documentation-children-routes/model-driven/model-driven.component';
+import { TemplateDrivenComponent } from './components/documentation-children-routes/template-driven/template-driven.component';
 import { TopBarLeftTemplateDirective } from './directives/top-bar-left-template.directive';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
@@ -48,9 +46,7 @@ import { PageNotFoundComponent } from './components/main-routes/page-not-found/p
   declarations: [
     AppComponent,
     GettingStarterRouteComponent,
-    GettingStarterComponent,
     HomeRouteComponent,
-    HomeComponent,
     EmbeddedStackblitzComponent,
     DocumentationRouteComponent,
     IntroductionComponent,

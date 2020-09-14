@@ -48,7 +48,7 @@
               (click)="sideBar.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>{{this.titleService.getTitle().split(' | ')[1] || ''}}</span>
+      <h1>{{this.titleService.getTitle().split(' | ')[1] || ''}}</h1>
     </div>
     <div class="page-content">
       <router-outlet></router-outlet>

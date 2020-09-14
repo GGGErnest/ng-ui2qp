@@ -41,6 +41,24 @@
   opacity: 1;
 }
 
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.toolbar-right-section, .toolbar-right-section {
+  display: flex;
+  align-items: center;
+}
+
+.toolbar-right-section {
+  justify-content: left;
+}
+
+.toolbar-right-section {
+ justify-content: right;
+}
+
 @media only screen and (max-width: 600px) {
   .container {
     position: relative;

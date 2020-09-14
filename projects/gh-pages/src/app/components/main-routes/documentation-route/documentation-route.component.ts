@@ -15,21 +15,22 @@ export class DocumentationRouteComponent implements OnInit, AfterViewInit {
   howToUseOpened = true;
   isScreenWidthBigger800px = false;
 
-  @ViewChild(MatSidenav) sideBar: MatSidenav;
+  @ViewChild(MatSidenav, {static: true}) sideBar: MatSidenav;
 
   constructor(private breakpointObserver: BreakpointObserver, private router: Router,
               private activatedRoute: ActivatedRoute, public titleService: Title) {
-
   }
 
   ngOnInit(): void {
   }
 
   ngAfterViewInit() {
-    this.breakpointObserver.observe(['(min-width: 800px)']).subscribe((result => {
-      this.sideBar.toggle(result.matches);
-      this.isScreenWidthBigger800px = result.matches;
-    }));
+    setTimeout(() => {
+      this.breakpointObserver.observe(['(min-width: 800px)']).subscribe((result => {
+        this.sideBar.toggle(result.matches);
+        this.isScreenWidthBigger800px = result.matches;
+      }));
+    }, 0);
   }
 
   onAdvanceTopicsSubMenuClick() {
