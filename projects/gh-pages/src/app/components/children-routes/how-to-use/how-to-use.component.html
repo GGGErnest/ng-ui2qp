@@ -1,0 +1,42 @@
+<h2>Introduction</h2>
+<section>
+  <p>For using the features this library provides are two main approaches you can choose from, "Model-Driven" and
+    "Template-Driven", each of them have their own characteristics and strengths is up to the developer to choose one
+    or in some cases use a mix of both. We recommend analysing the use case and see which suits better for it. They both
+    are
+    explained in more details in the next sections.</p>
+</section>
+
+<h2>Model-Driven</h2>
+
+<section>
+  <p>The model-driven approach provides a way of defining a model which later will be bind to a form or UI components
+    in the template and it will keep track of the changes of the states(values). It provides direct, explicit
+    access to the underlying object model in a synchronous way and compared with the Template-Driven approach is
+    way more robust, scalable, reusable, flexible and gives more control over the model.</p>
+</section>
+
+<h2>Template-Driven</h2>
+
+<section>
+  <p> This method is used to bing specific ui components to Qps without the need of creating a model(Ui2QpGroup) and
+    Ui2QpRoot. It relies on directives in the template to manipulate and synchronize the component's state to the Qp
+    defined.</p>
+</section>
+
+<h2>Choosing an approach</h2>
+
+<section>
+  <p>Choosing an approach will always depends of each specific use case, but we've learnt that are some conditions
+    that can help to decide which could be the approach to use. Think if the use case fill some of these
+    conditions:</p>
+  <ul>
+    <li>Few ui components</li>
+    <li>The components have no relation between them</li>
+    <li>Almost none or not manipulation is required for the state of the components</li>
+  </ul>
+  <p>If the previous conditions are filled for a use case then probably the Template-Driven is the right approach,
+    if not, Model-Driven is the way to go. When not sure in which one to choose go with Model-Driven approach is
+    our recommendation</p>
+</section>
+

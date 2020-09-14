@@ -7,14 +7,14 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatIconModule} from '@angular/material/icon';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {GettingStarterRouteComponent} from './components/routes/getting-starter-route/getting-starter-route.component';
-import {GettingStarterComponent} from './components/containers/getting-starter/getting-starter.component';
+import {GettingStarterRouteComponent} from './components/main-routes/getting-starter-route/getting-starter-route.component';
+import {GettingStarterComponent} from './components/children-routes/getting-starter/getting-starter.component';
 import {MatButtonModule} from '@angular/material/button';
-import {HomeRouteComponent} from './components/routes/home-route/home-route.component';
-import {HomeComponent} from './components/containers/home/home.component';
+import {HomeRouteComponent} from './components/main-routes/home-route/home-route.component';
+import {HomeComponent} from './components/children-routes/home/home.component';
 import {EmbeddedStackblitzComponent} from './components/dumbs/embeded-stackblitz/embedded-stackblitz.component';
-import {DocumentationRouteComponent} from './components/routes/documentation-route/documentation-route.component';
-import {IntroductionComponent} from './components/containers/introduction/introduction.component';
+import {DocumentationRouteComponent} from './components/main-routes/documentation-route/documentation-route.component';
+import {IntroductionComponent} from './components/children-routes/introduction/introduction.component';
 import {HIGHLIGHT_OPTIONS, HighlightModule} from 'ngx-highlightjs';
 import {CodeBoxComponent} from './components/dumbs/code-box/code-box.component';
 import {MatTabsModule} from '@angular/material/tabs';
@@ -22,25 +22,27 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {NgUi2QpModule} from 'ng-ui2qp';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
-import { ConceptsComponent } from './components/containers/concepts/concepts.component';
-import { ConfigurationsComponent } from './components/containers/configurations/configurations.component';
-import { SerializersDeserializersComponent } from './components/containers/serializers-deserializers/serializers-deserializers.component';
+import { ConceptsComponent } from './components/children-routes/concepts/concepts.component';
+import { ConfigurationsComponent } from './components/children-routes/configurations/configurations.component';
+// tslint:disable-next-line:max-line-length
+import { SerializersDeserializersComponent } from './components/children-routes/serializers-deserializers/serializers-deserializers.component';
 import {MatDividerModule} from '@angular/material/divider';
-import { RouterComponent } from './components/containers/router/router.component';
-import { HowToUseComponent } from './components/containers/how-to-use/how-to-use.component';
-import { ControlComponent } from './components/containers/control/control.component';
-import { GroupComponent } from './components/containers/group/group.component';
-import { RootComponent } from './components/containers/root/root.component';
+import { RouterComponent } from './components/children-routes/router/router.component';
+import { HowToUseComponent } from './components/children-routes/how-to-use/how-to-use.component';
+import { ControlComponent } from './components/children-routes/control/control.component';
+import { GroupComponent } from './components/children-routes/group/group.component';
+import { RootComponent } from './components/children-routes/root/root.component';
 import { LogoComponent } from './components/dumbs/logo/logo.component';
 import {HttpClientModule} from '@angular/common/http';
-import { ChangelogComponent } from './components/containers/changelog/changelog.component';
-import { ModelDrivenComponent } from './components/containers/model-driven/model-driven.component';
-import { TemplateDrivenComponent } from './components/containers/template-driven/template-driven.component';
-import { VariableDirective } from './directives/variable.directive';
+import { ChangelogComponent } from './components/children-routes/changelog/changelog.component';
+import { ModelDrivenComponent } from './components/children-routes/model-driven/model-driven.component';
+import { TemplateDrivenComponent } from './components/children-routes/template-driven/template-driven.component';
+import { TopBarLeftTemplateDirective } from './directives/top-bar-left-template.directive';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
+import { PageNotFoundComponent } from './components/main-routes/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +67,8 @@ import {MatRadioModule} from '@angular/material/radio';
     ChangelogComponent,
     ModelDrivenComponent,
     TemplateDrivenComponent,
-    VariableDirective,
+    TopBarLeftTemplateDirective,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

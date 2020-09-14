@@ -1,20 +1,22 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule, ExtraOptions} from '@angular/router';
-import {GettingStarterRouteComponent} from './components/routes/getting-starter-route/getting-starter-route.component';
-import {HomeRouteComponent} from './components/routes/home-route/home-route.component';
-import {DocumentationRouteComponent} from './components/routes/documentation-route/documentation-route.component';
-import {IntroductionComponent} from './components/containers/introduction/introduction.component';
-import {ConceptsComponent} from './components/containers/concepts/concepts.component';
-import {ConfigurationsComponent} from './components/containers/configurations/configurations.component';
-import {SerializersDeserializersComponent} from './components/containers/serializers-deserializers/serializers-deserializers.component';
-import {RouterComponent} from './components/containers/router/router.component';
-import {HowToUseComponent} from './components/containers/how-to-use/how-to-use.component';
-import {ControlComponent} from './components/containers/control/control.component';
-import {GroupComponent} from './components/containers/group/group.component';
-import {RootComponent} from './components/containers/root/root.component';
-import {ChangelogComponent} from './components/containers/changelog/changelog.component';
-import {ModelDrivenComponent} from './components/containers/model-driven/model-driven.component';
-import {TemplateDrivenComponent} from './components/containers/template-driven/template-driven.component';
+import {GettingStarterRouteComponent} from './components/main-routes/getting-starter-route/getting-starter-route.component';
+import {HomeRouteComponent} from './components/main-routes/home-route/home-route.component';
+import {DocumentationRouteComponent} from './components/main-routes/documentation-route/documentation-route.component';
+import {IntroductionComponent} from './components/children-routes/introduction/introduction.component';
+import {ConceptsComponent} from './components/children-routes/concepts/concepts.component';
+import {ConfigurationsComponent} from './components/children-routes/configurations/configurations.component';
+// tslint:disable-next-line:max-line-length
+import {SerializersDeserializersComponent} from './components/children-routes/serializers-deserializers/serializers-deserializers.component';
+import {RouterComponent} from './components/children-routes/router/router.component';
+import {HowToUseComponent} from './components/children-routes/how-to-use/how-to-use.component';
+import {ControlComponent} from './components/children-routes/control/control.component';
+import {GroupComponent} from './components/children-routes/group/group.component';
+import {RootComponent} from './components/children-routes/root/root.component';
+import {ChangelogComponent} from './components/children-routes/changelog/changelog.component';
+import {ModelDrivenComponent} from './components/children-routes/model-driven/model-driven.component';
+import {TemplateDrivenComponent} from './components/children-routes/template-driven/template-driven.component';
+import {PageNotFoundComponent} from './components/main-routes/page-not-found/page-not-found.component';
 
 const routerOptions: ExtraOptions = {
   scrollPositionRestoration: 'enabled',
@@ -43,6 +45,7 @@ const routes: Routes = [
       {path: 'changelog', component: ChangelogComponent},
     ]
   },
+  {path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({

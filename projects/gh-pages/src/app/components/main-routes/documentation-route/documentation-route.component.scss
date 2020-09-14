@@ -1,0 +1,73 @@
+:host {
+  display: flex;
+  flex-grow: 1;
+  padding: 15px 0 0 0;
+}
+
+nav.nav-menu {
+  position: relative;
+}
+
+nav.nav-menu a {
+  text-align: left;
+  padding: 5px 15px 0 15px;
+  border-radius: 0;
+  transition: background-color .2s;
+}
+
+.nav-menu > a {
+  width: 100%;
+}
+
+.nav-submenu {
+  padding-left: 0;
+}
+
+.nav-submenu > div:first-child {
+  height: 36px;
+  cursor: pointer;
+}
+
+.nav-submenu > div:first-child > span {
+  padding-top: 7px;
+}
+
+.nav-submenu > div:first-child mat-icon {
+  margin-top: 4px;
+}
+
+.nav-submenu > div:first-child {
+  padding: 5px 15px 0 15px;
+  margin: 0;
+}
+
+.nav-submenu div > a {
+  width: 100%;
+  padding-left: 25px;
+}
+
+.position-fixed {
+  position: fixed !important;
+}
+
+.page-content {
+  padding: 0 15px;
+}
+
+.top--10px {
+  top: -10px;
+}
+
+.margin-right-15px {
+  margin-right: 15px !important;
+}
+
+mat-sidenav {
+  top: 65px;
+}
+
+@media only screen and (max-width: 600px) {
+  mat-sidenav {
+    top: 55px;
+  }
+}

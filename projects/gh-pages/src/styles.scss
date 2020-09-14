@@ -21,7 +21,7 @@ body {
 
 .page-header {
   font-size: 38px;
-  margin: 0px 0px 40px 0px;
+  margin: 0  0  40px 0 ;
   padding: 25px 15px;
   background-color: mat-color($app-accent);
 }
@@ -40,7 +40,7 @@ body {
   background-color: mat-color($app-primary);
   color: white;
   padding: 16px;
-  z-index: 100;
+  z-index: 2;
 }
 
 .footer a {

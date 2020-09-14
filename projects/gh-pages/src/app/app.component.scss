@@ -18,12 +18,33 @@
   height: calc(100% - 50px);
   display: flex;
   flex-direction: column;
+  scroll-behavior: smooth;
 }
 
 .icon-logo {
- font-size: 30px;
+  font-size: 30px;
 }
 
 .logo {
+}
+
+.scroll-top-btn {
+  position: fixed;
+  top: 75px;
+  z-index: 3;
+  right: 45%;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.scroll-top-btn:hover {
+  opacity: 1;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    position: relative;
+    top: 40px;
+  }
 }
 

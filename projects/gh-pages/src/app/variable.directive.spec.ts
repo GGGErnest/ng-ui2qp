@@ -1,4 +1,4 @@
-import { VariableDirective } from './directives/variable.directive';
+import { VariableDirective } from './directives/top-bar-left-template.directive';
 
 describe('VariableDirective', () => {
   it('should create an instance', () => {

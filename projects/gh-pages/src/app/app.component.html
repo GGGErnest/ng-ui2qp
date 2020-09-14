@@ -7,12 +7,17 @@
       started
     </button>
     <button mat-flat-button color="primary" [routerLink]="[ '/docs' ]" routerLinkActive="active">Documentation</button>
-    <button mat-flat-button color="primary" href="api-url-when-is-ready" routerLinkActive="active">API</button>
-    <button mat-flat-button color="primary" href="https://github.com/GGGErnest/ng-projects">Github</button>
+    <a mat-flat-button color="primary" href="api-url-when-is-ready" routerLinkActive="active">API</a>
+    <a mat-flat-button color="primary" href="https://github.com/GGGErnest/ng-projects">Github</a>
   </mat-toolbar>
 </div>
-<div class="container">
+<div class="container" #container>
   <router-outlet></router-outlet>
+  <button color="accent" class="scroll-top-btn" mat-mini-fab
+          *ngIf="isToTopBtnVisible"
+          (click)="goToTop()">
+    <mat-icon>keyboard_arrow_up</mat-icon>
+  </button>
   <div class="footer display-flex justify-content-space-between">
     <div class="footer-version flex-grow-1 display-flex align-items-center"><span>Current Version 2.0.0</span></div>
     <div class="footer-license flex-grow-2">
