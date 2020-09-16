@@ -12,15 +12,14 @@ export class ModelDrivenComponent implements OnInit, OnDestroy {
   root: Ui2QpRoot;
 
   withConfigCode = `import { NgUi2Qp } from '@ng-ui2qp';
-
-    @NgModule({
-        imports: [
-            NgUi2Qp.withConfig({
-                // Provide configuration here
-            }),
-        ],
-    })
-    export class YourModule {}`;
+@NgModule({
+  imports: [
+    NgUi2Qp.withConfig({
+      // Provide configuration here
+    }),
+    ],
+})
+export class YourModule {}`;
 
   createRootCode = {
     withModel: `// Assuming ui2QpBuilder is a reference of Ui2QpBuilder that was injected in the component
@@ -35,16 +34,16 @@ export class ModelDrivenComponent implements OnInit, OnDestroy {
     this.root.model = <Ui2QpGroup instance>;`;
 
   nestedModelExampleCode = `// The comments are the Qps will be added to the URL for a model with this structure
-    {
-      firstname: this.ui2QpBuilder.control(),                   //firstname=Yazbel
-      lastname: this.ui2QpBuilder.control(),                    //lastname=Cordova
-      address: this.ui2QpBuilder.group({
-       houseNumber: this.ui2QpBuilder.control({type:'number'}), //address.houseNumber=12
-       street: this.ui2QpBuilder.control(),                     //address.street=MoritzburgerStr
-       country:this.ui2QpBuilder.control(),                     //address.country=Germany
-       state:this.ui2QpBuilder.control(),                       //address.state=Brandenburg
-       })
-     }`;
+{
+  firstname: this.ui2QpBuilder.control(),                   //firstname=Yazbel
+  lastname: this.ui2QpBuilder.control(),                    //lastname=Cordova
+  address: this.ui2QpBuilder.group({                        // This one won't be represented in the Qps because is a grouping property
+    houseNumber: this.ui2QpBuilder.control({type:'number'}), //address.houseNumber=12
+    street: this.ui2QpBuilder.control(),                     //address.street=MoritzburgerStr
+    country:this.ui2QpBuilder.control(),                     //address.country=Germany
+    state:this.ui2QpBuilder.control(),                       //address.state=Brandenburg
+  })
+}`;
 
   flatModelExampleCode = `// The comments are the Qps will be added to the URL for a model with this structure
     {
@@ -117,10 +116,10 @@ export class ModelDrivenComponent implements OnInit, OnDestroy {
   };
 
   controlDefaultValueCode = `// Assuming "ui2QpBuilder" is an instance of Ui2QpBuilder
-    this.ui2QpBuilder.group({
-        productName: this.ui2QpBuilder.control(),
-        amount: this.ui2QpBuilder.control({type: 'number', defaultVal: 1}),
-     }));`;
+this.ui2QpBuilder.group({
+  productName: this.ui2QpBuilder.control(),
+  amount: this.ui2QpBuilder.control({type: 'number', defaultVal: 1}),
+}));`;
 
   constructor(private ui2QpBuilder: Ui2QpBuilder, private title: Title) {
 

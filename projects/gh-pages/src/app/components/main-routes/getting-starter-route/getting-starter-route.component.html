@@ -1,16 +1,22 @@
 <mat-sidenav-container class="flex-grow-1">
-  <mat-sidenav class="max-width-300px border-right-none width-100pct min-width-0" mode="side" [opened]="sidebarOpened"></mat-sidenav>
+  <mat-sidenav class="max-width-300px border-right-none width-100pct min-width-0" mode="side"
+               [opened]="sidebarOpened"></mat-sidenav>
   <mat-sidenav-content class="background-color-white">
     <h1 class="page-header">{{this.titleService.getTitle().split(' | ')[1] || ''}}</h1>
     <div class="page-content">
 
+      <h2>Welcome to ng-ui2qp!</h2>
+
+      <p>This guide introduces you to the essentials of ng-ui2qp by walking you through the installation,
+        configuration and, a simple use case.</p>
+
       <h2>Pre-requisites</h2>
 
       <section class="">
-        <p>Before using the library are some requisites that should be fill here they are:</p>
+        <p>Before using the library be sure the next requisites are filled out:</p>
         <ul>
           <li>
-            Angular Router Service must be available. This is only required if you use the Ui2QpRouter.
+            Angular Router Service must be available. This is only required if you use the Ui2QpRouter(Default router adapter provided by us).
           </li>
           <li>
             ReactiveFormsModule must be imported and accessible.
@@ -21,7 +27,9 @@
       <h2>Installation</h2>
 
       <section class="">
+
         <h3>Installing the library</h3>
+
         <p>The library supports Angular Schematics so just run the following command:</p>
         <code-box [code]="codesExamples.installation.schematics"></code-box>
         <p>or just use npm:</p>
@@ -29,42 +37,47 @@
       </section>
 
       <section class="">
-        <h3>Import the Ui2QpModule</h3>
+        <h3>Import Ui2QpModule</h3>
+
         <p>Import the module in the AppModule of the app</p>
         <code-box [code]="codesExamples.importModule"></code-box>
-        <p>The above code imports the NgUi2Qp module with default settings, which are:</p>
+        <p>The above code imports the NgUi2Qp module with default settings:</p>
         <code-box [code]="codesExamples.defaultSettings"></code-box>
-        <p>Checkout the <a [routerLink]="['../docs']">docs</a> to know more about them and what they mean</p>
+        <p>Checkout the <a [routerLink]="['../docs/configurations']">docs</a> to know more about them and what they mean.</p>
       </section>
 
-      <h2>How to use.</h2>
+      <h2>How to use</h2>
 
       <section class="">
-        <h3>Inject the Ui2QpBuilder service</h3>
+        <h3>Inject the Ui2QpBuilder service in the component</h3>
+
         <code-box [code]="codesExamples.injectBuilder"></code-box>
       </section>
 
       <section class="">
-        <h3>Create a Ui2QpGroup and its controls, like you'll do when creating a ReactiveForm</h3>
+        <h3>Create a Ui2QpGroup and its controls, like it's done when using ReactiveForms</h3>
+
         <code-box [code]="codesExamples.createGroup"></code-box>
       </section>
 
       <section class="">
-        <h3>Instantiate a Ui2QpRoot object and link the created model with it</h3>
+        <h3>Instantiate a Ui2QpRoot object and link it to the created model</h3>
+
         <code-box [code]="codesExamples.createRoot.withModel"></code-box>
-        <p> It's also possible to do the previous step and this one at once, here is how:</p>
+        <p> It's possible to do both previous steps in one, here is how:</p>
         <code-box [code]="codesExamples.createRoot.allInOnce"></code-box>
-        <p class="light-primary-background-color padding-15px"><b>WARNING</b>: The Ui2QpRoot will holds a subscription to the values changes observable of the model if the "autoUpdating"
-          settings was enabled, and this means that you most execute the "destroy" method in the Ui2QpRoot within the "onDestroy"
-          of the component where was created, this is needed in order to avoid memory leaks.</p>
+        <p class="warning-box"><b>ATTENTION</b>: The Ui2QpRoot will hold a subscription
+          to the "valueChanges" observable of the model if the "autoUpdating"
+          setting was enabled, which means the "destroy" method in the Ui2QpRoot must be executed within the
+          "onDestroy" lifecycle-hook of the component where was created, doing it prevents memory leaks.</p>
       </section>
 
       <section class="">
-        <h2>Bind the model with the template, like it's done with ReactiveForms</h2>
+        <h3>Bind the model with the template.</h3>
         <code-box [code]="codesExamples.bindModelWithTemplate"></code-box>
       </section>
 
-      <h2>Full Example.</h2>
+      <h2>Full Example</h2>
 
       <section class="">
         <p>This is how your code should look like after following all the previous steps</p>
@@ -82,10 +95,8 @@
       </section>
 
       <section class="">
-        <h3>Live example.</h3>
-        <p>This is how your code will behave when running.</p>
-        <p>Notice how the URL changes while you enter values in the
-          following inputs</p>
+        <h3>Running example</h3>
+        <p>This is the previous example running.</p>
         <div class="live-example display-flex flex-direction-column align-items-flex-start">
           <ng-container [formGroup]="root.model">
             <mat-form-field>
@@ -98,6 +109,7 @@
             </mat-form-field>
           </ng-container>
         </div>
+        <p class="notice-box"><b>Note</b> how the URL changes while you enter values in the following inputs.</p>
       </section>
     </div>
 

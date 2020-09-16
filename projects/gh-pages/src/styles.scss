@@ -81,3 +81,17 @@ nav.nav-menu a:hover:not(.active) {
 mat-toolbar button.active {
   color: mat-color($app-accent);
 }
+
+.warning-box {
+  border: 2px dashed mat-color($app-warn);
+  padding: 15px;
+
+  b {
+    color: mat-color($app-warn);
+  }
+}
+
+.notice-box {
+  border: 2px dashed mat-color($app-primary, A400);
+  padding: 15px;
+}
