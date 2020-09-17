@@ -58,7 +58,7 @@
   <p>When creating a model is normal to have different types of data, and in the cases where it's not "string" the type
     hast to be specified. Take a look in the previous example at the "houseNumber" property within the "address" group,
     it's a number, then we set the property "type" to "number" within the configurations passed into the Ui2QpBuilder,
-    it will assign a <a routerLink="../serializers-deserializers">serializer and a deserializer</a> of type "number" to
+    it will assign a <a routerLink="../serializers-deserializers">serializer and a de-serializer</a> of type "number" to
     the Ui2QpControl, guaranteeing that the model and the Qps receive the right type of value.</p>
   <a routerLink="../serializers-deserializers" fragment="built-in">Here you can find all built-in types</a>
 
@@ -89,9 +89,10 @@
 <h2>Binding the model to the template</h2>
 
 <section>
-  <p>In this step, we'll bind the model created in the previous step to the template like is done when creating a
-    reactive form in Angular. If you want to know more about it, check Angular's <a
-      href="https://angular.io/guide/reactive-forms#grouping-form-controls">doc</a> for a better understanding.
+  <p>In this step, we'll bind the created model to the template. Binding the model to the template is done in the same
+    way like is done in Angular when working with the ReactiveForms approach. If you want to know more about it, check
+    Angular's doc for a better understanding. Check Angular's <a
+      href="https://angular.io/guide/reactive-forms#grouping-form-controls">doc</a> for a better understanding of how is done.
 </section>
 
 <h2>Full Example</h2>
@@ -109,7 +110,7 @@
     </mat-tab>
   </mat-tab-group>
 
-  <p>Here is the code running from the example above. See how the URL changes and Qps are added.</p>
+  <p>Here is the running-core for the example above. See how the URL changes and Qps are added.</p>
   <div class="live-example display-flex flex-direction-column align-items-flex-start">
     <ng-container [formGroup]="root.model">
       <mat-form-field>

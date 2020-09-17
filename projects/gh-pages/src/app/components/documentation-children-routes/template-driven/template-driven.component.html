@@ -12,25 +12,28 @@
   </ol>
 </section>
 
-<h2>Importing Ui2QpModule and configurations</h2>
+<h2>Import Ui2QpModule and configure it</h2>
 
 <section>
   <h3>Importing Ui2QpModule</h3>
   <p>This can be done in two places:</p>
   <ul>
-    <li><p><b>AppModule</b>: If imported in the AppModule all the library features will be available across the whole
-      App which will be the normal use case.</p></li>
     <li>
-      <p><b>Module import</b>: The Ui2QpModule could also be imported in feature modules and will make the ng-ui2qp
-        features available only within the module that imports it.</p>
-      <i>It's important to remark that none of the injectables provided by the
-        lib will be automatically provided in the root injector.</i>
+      <p><b>AppModule</b>: If imported in the AppModule all the library features will be available across the whole
+        App.</p>
+    </li>
+    <li>
+      <p><b>Module import</b>: The Ui2QpModule could also be imported in feature modules making ng-ui2qp's
+        features available only within that module.</p>
     </li>
   </ul>
+  <p class="notice-box"><b>IMPORTANT</b>: We want to point out that when importing Ui2QpModule some services
+    are provided by default, making them automatically available to use, but none of them are provided in the root
+    injector by default, they will be available at the injection tree level the model was provided.</p>
 
   <h3>Configurations</h3>
-  <p>When importing Ui2QpModule some default configurations are going to be used (<a
-    [routerLink]="['../configurations']" [fragment]="'default-configurations'">now more about the configurations</a>)
+  <p>When importing Ui2QpModule some default configurations are going to be used (check <a
+    [routerLink]="['../configurations']" [fragment]="'default-configurations'">here</a> to know more)
     but those can be changed and the way to do it is with the "withConfig" method in the
     Ui2QpModule when importing it, here is an example:</p>
   <code-box [code]="withConfigCode"></code-box>
@@ -41,24 +44,24 @@
 <section>
   <h3>Requirements</h3>
 
-  <p>Before applying the Ui2qpControlDirective on a Ui component or any kind of HTML element is important to point out
-    that is required the host element implements the <a href="https://angular.io/api/forms/ControlValueAccessor">ControlValueAccessor</a>
-    because is the way the directive uses to interact with the host element state. If the host element doesn't have a
-    suitable ControlValueAccessor implementation that we have created we have created a helper
-    directive(Ui2qpValueAccessorDirective) that can be used on the host element and it offers a way to
-    include an ad-hoc control value accessor by wiring it up in the template directly, see in the next sections hot to
-    use it.</p>
+  <p>Before using the Ui2qpControlDirective, is important to know that the host element must implement a suitable <a
+    href="https://angular.io/api/forms/ControlValueAccessor">ControlValueAccessor</a>
+    because it's the way the directive uses to interact with the host element state(value). If the host element doesn't
+    have a ControlValueAccessor implementation, the Ui2qpValueAccessorDirective can be used to provide an ad-hoc control
+    value accessor by wiring it up in the template directly. The ControlValueAccessor is a helper directive created to
+    help in these specific cases. We have taken this idea from <a
+      href="https://www.ngqp.io/api-docs/directives/ControlValueAccessorDirective.html#">ngqp</a>. See in the next
+    sections how to use it.</p>
 
   <h3>Configurations</h3>
   <p>The directive provide a set of configurations that can be passed in as inputs, check this
     <a routerLink="../configurations" fragment="control-directive">link</a> to know more about it.</p>
 
   <h3>Usage</h3>
-  <p>All the next examples are using the global configurations provided when importing the Ui2QpModule</p>
-  <p>When the host elements has a suitable ControlValueAccessor implementation.</p>
+  <p>The following example is valid when the host element has a suitable ControlValueAccessor implementation.</p>
   <mat-tab-group class="code-example" mat-align-tabs="start">
     <mat-tab label="HTML">
-      <code-box [code]="controlDirectiveWithCVAExampleCode"></code-box>
+      <code-box [code]="controlDirectiveWithCVAExampleCode" [languages]="['html']"></code-box>
     </mat-tab>
     <mat-tab label="TS">
       <code-box [code]="'nothing to see here :)'"></code-box>
@@ -68,8 +71,8 @@
     </mat-tab>
   </mat-tab-group>
 
-  <p>If the host element does not implements ControlValueAccessor this is an example how the
-    Ui2qpValueAccessorDirective can be used as an ad-hoc to the host component to solve this issue.</p>
+  <p>The next is an example when the host element does not have a correct ControlValueAccessor implementation and how
+    the Ui2qpValueAccessorDirective can be used as an ad-hoc to solve this issue.</p>
   <mat-tab-group class="code-example" mat-align-tabs="start">
     <mat-tab label="HTML">
       <code-box [code]="controlDirectiveWithoutCVAExampleCode"></code-box>
@@ -94,15 +97,19 @@
       <code-box [code]="'nothing to see here :)'"></code-box>
     </mat-tab>
   </mat-tab-group>
-  <p>Note how we are assigning a Ui2QpControl instance to the select which makes angular provide the
+  <p>Note how we are assigning a Ui2QpControl instance to the select which makes angular
+    provide the
     ControlValueAccessor we needed. This also will work if instead of assigning a FormControl we assign a Ui2QpControl
     instance. If desired the above approach can be
     used here too.</p>
 
+  <p class="notice-box"><b>Attention</b>: All the above examples are using the global configurations provided when
+    importing the Ui2QpModule.</p>
+
   <h3>Important considerations</h3>
 
-  <p>Please be sure that all the Qps names defined in a template while using the approach described here are unique,
-    if not some weird thins could happen :). In future version we plan to validate this and show errors if happens,
+  <p class="warning-box"><b>Important!!</b> Please be sure that all the Qps names defined in the template when using
+    this approach are unique, if not some weird thins could happen :). In future version we plan to validate this,
     but for now be careful.</p>
 </section>
 
@@ -135,7 +142,7 @@
       </mat-radio-group>
     </div>
 
-    <p>Using Ui2qpValueAccessorDirective on a native input.</p>
+    <p>Example of using Ui2qpValueAccessorDirective on a native input.</p>
     <mat-form-field>
       <mat-label>Favorite animal</mat-label>
       <input matInput type="text" [ui2qpControl]="{qpName:'animal'}"
@@ -143,7 +150,7 @@
              #ctrl (input)="accessor.notifyChange($event.target.value)">
     </mat-form-field>
 
-    <p>Biding a FormControl instance to a native input as way of providing it with a ControlValueAccessor
+    <p>This example binds a FormControl instance to a native input as a way of providing it with a ControlValueAccessor
       implementation.</p>
     <mat-form-field>
       <mat-label>Days</mat-label>

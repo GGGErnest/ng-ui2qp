@@ -33,7 +33,7 @@
   <code-box [code]="loginLevelCode" [languages]="[]"></code-box>
 
   <h4>cryptoSecretKey</h4>
-  <p>Secret key used in the "encrypted" serializer and deserializers. If not provided a default value will be
+  <p>Secret key used in the "encrypted" serializer and de-serializers. If not provided a default value will be
     used.</p>
 
   <h3 id="default-configurations">Default values</h3>
@@ -82,7 +82,7 @@
     <a href="https://angular.io/api/forms/FormGroup">documentation</a> to know more about them.</p>
 
   <h3>type</h3>
-  <p>This property is used to assign the right serializer and deserializer to the control and if not provided then a
+  <p>This property is used to assign the right serializer and de-serializer to the control and if not provided then a
     default value of "string" will be used. Please checkout the <a
       routerLink="../serializers-deserializers">serializer and a
       deserializer</a>documentation to know more about how they affect the Ui2QpControl's value when set it or get it.
@@ -110,7 +110,7 @@
       <code-box [code]="controlDirectiveConfCode.config" [languages]="['typescript']"></code-box>
       <p>here is the default value for some of them if not provided:</p>
       <code-box [code]="controlDirectiveConfCode.defaultVal" [languages]="['typescript']"></code-box>
-      <p class="notice-box"><b>Please note</b> that the "qpName" setting is required</p>
+      <p class="notice-box"><b>Attention</b> The "qpName" setting is required</p>
     </li>
     <li><b>ui2qp</b>: Same set of global settings already explained above in this page. If not provided the global
       settings defined when importing the Ui2QpModule will be used by default.

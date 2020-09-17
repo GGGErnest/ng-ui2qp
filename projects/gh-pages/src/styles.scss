@@ -88,10 +88,15 @@ mat-toolbar button.active {
 
   b {
     color: mat-color($app-warn);
+    text-transform: capitalize;
   }
 }
 
 .notice-box {
   border: 2px dashed mat-color($app-primary, A400);
   padding: 15px;
+
+  b {
+    text-transform: uppercase;
+  }
 }
