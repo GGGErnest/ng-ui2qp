@@ -125,46 +125,6 @@
         }
       }
     },
-    "lzy-load": {
-      "projectType": "library",
-      "root": "projects/lzy-load",
-      "sourceRoot": "projects/lzy-load/src",
-      "prefix": "lzy",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/lzy-load/tsconfig.lib.json",
-            "project": "projects/lzy-load/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/lzy-load/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/lzy-load/src/test.ts",
-            "tsConfig": "projects/lzy-load/tsconfig.spec.json",
-            "karmaConfig": "projects/lzy-load/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/lzy-load/tsconfig.lib.json",
-              "projects/lzy-load/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "ng-ui2qp": {
       "projectType": "library",
       "root": "projects/ng-ui2qp",
@@ -204,47 +164,7 @@
           }
         }
       }
-    },
-    "ui": {
-      "projectType": "library",
-      "root": "projects/ui",
-      "sourceRoot": "projects/ui/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/ui/tsconfig.lib.json",
-            "project": "projects/ui/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/ui/tsconfig.lib.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/ui/src/test.ts",
-            "tsConfig": "projects/ui/tsconfig.spec.json",
-            "karmaConfig": "projects/ui/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/ui/tsconfig.lib.json",
-              "projects/ui/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
+    }
   },
   "defaultProject": "ng-projects"
 }
