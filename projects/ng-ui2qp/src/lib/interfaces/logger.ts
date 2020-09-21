@@ -1,4 +1,4 @@
-import {InjectionToken} from '@angular/core';
+import { InjectionToken } from '@angular/core';
 
 export interface IUi2QpLogger {
 
@@ -48,4 +48,3 @@ export const UI2QP_LOGGER_TOKEN_ID = 'NGUI2QP_LOGGER_ADAPTER';
  * RouterAdapter injection token
  */
 export const UI2QP_LOGGER_INJ_TOK = new InjectionToken(UI2QP_LOGGER_TOKEN_ID);
-

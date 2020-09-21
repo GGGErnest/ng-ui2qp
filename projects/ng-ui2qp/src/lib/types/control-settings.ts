@@ -1,4 +1,4 @@
-import {AbstractControlOptions, AsyncValidatorFn, ValidatorFn} from '@angular/forms';
+import { AbstractControlOptions, AsyncValidatorFn, ValidatorFn } from '@angular/forms';
 
 /**
  * Base type for the Control and the Group settings
@@ -37,7 +37,7 @@ export interface Ui2QpGroupSettings extends Ui2QpAbstractControlSettings {
 /**
  * Default value for Ui2QpControlSettings
  */
-export const DefaultUi2QpControlSettings: Ui2QpControlSettings = {
+export const DEFAULT_UI2QP_CONTROL_SETTINGS: Ui2QpControlSettings = {
   qpName: null,
   defaultVal: null,
   type: 'string',
@@ -49,7 +49,7 @@ export const DefaultUi2QpControlSettings: Ui2QpControlSettings = {
 /**
  * Default values for Ui2QpGroupSettings
  */
-export const DefaultUi2QpGroupSettings: Ui2QpGroupSettings = {
+export const DEFAULT_UI2QP_GROUP_SETTINGS: Ui2QpGroupSettings = {
   qpName: undefined,
   asyncValidators: undefined,
   validatorOrOpts: undefined,

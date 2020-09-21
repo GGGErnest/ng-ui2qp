@@ -1,9 +1,9 @@
-import {Inject, Injectable} from '@angular/core';
-import {BUILD_IN_SERIALIZERS} from '../serializers/serializers';
-import {SerializeFunc, Serializer} from '../types/serializer';
-import {NgUI2QpSettings, UI2QP_SETTINGS_INJ_TOK} from '../types/settings';
+import { Inject, Injectable } from '@angular/core';
+import { BUILD_IN_SERIALIZERS } from '../serializers/serializers';
+import { SerializeFunc, Serializer } from '../types/serializer';
+import { NgUI2QpSettings, UI2QP_SETTINGS_INJ_TOK } from '../types/settings';
 import * as CryptoJS from 'crypto-js';
-import {isEmpty} from '../helpers/empty-helper';
+import { isEmpty } from '../helpers/empty-helper';
 
 @Injectable()
 export class Ui2QpSerializersService {

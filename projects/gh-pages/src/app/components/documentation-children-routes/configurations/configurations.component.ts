@@ -1,5 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {Title} from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-configurations',
@@ -32,7 +32,6 @@ export class ConfigurationsComponent implements OnInit {
   enabled: true, // Enable or disable the auto-updating
   debounce: 500 // Debounce time in milliseconds. Used to reduce the frequency the QPs get updated after changes in the model.
 }`;
-
 
   loginLevelCode = `Trace, Debug, Info, Warn, Error, Off`;
 

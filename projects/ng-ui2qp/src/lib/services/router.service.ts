@@ -1,10 +1,10 @@
-import {Inject, Injectable} from '@angular/core';
-import {IUi2QpRouter} from '../interfaces/router';
-import {ParamMap, Params, QueryParamsHandling, Router} from '@angular/router';
-import {Observable} from 'rxjs';
-import {isEmpty} from '../helpers/empty-helper';
-import {setValueInPath, traverse} from '../helpers/object-helpers';
-import {IUi2QpLogger, UI2QP_LOGGER_INJ_TOK} from '../interfaces/logger';
+import { Inject, Injectable } from '@angular/core';
+import { IUi2QpRouter } from '../interfaces/router';
+import { ParamMap, Params, QueryParamsHandling, Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { isEmpty } from '../helpers/empty-helper';
+import { setValueInPath, traverse } from '../helpers/object-helpers';
+import { IUi2QpLogger, UI2QP_LOGGER_INJ_TOK } from '../interfaces/logger';
 
 @Injectable()
 export class Ui2QpRouter implements IUi2QpRouter {
@@ -36,8 +36,9 @@ export class Ui2QpRouter implements IUi2QpRouter {
     this.logger.debug('Ui2QpRouter.getQueryParamMap');
     this.logger.debug('returnedValue: ', (this.router.routerState.root.snapshot.queryParamMap as any).params);
 
-    // The queryParamMap object returned by the activated router snapshot has an extra property
-    // that encapsulates the actual queryParam object
+    /* The queryParamMap object returned by the activated router snapshot has an extra property
+      that encapsulates the actual queryParam object
+     */
     return (this.router.routerState.root.snapshot.queryParamMap as any).params;
   }
 

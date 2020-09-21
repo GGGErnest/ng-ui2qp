@@ -1,8 +1,8 @@
-import {AbstractControlOptions, AsyncValidatorFn, FormControl, ValidatorFn} from '@angular/forms';
-import {SerializeFunc} from '../types/serializer';
-import {DeserializeFunc} from '../types/deserializer';
-import {IUi2QpLogger} from '../interfaces/logger';
-import {UpdateValueOptions} from '../types/update-value-options';
+import { AbstractControlOptions, AsyncValidatorFn, FormControl, ValidatorFn } from '@angular/forms';
+import { SerializeFunc } from '../types/serializer';
+import { DeserializeFunc } from '../types/deserializer';
+import { IUi2QpLogger } from '../interfaces/logger';
+import { UpdateValueOptions } from '../types/update-value-options';
 
 export class Ui2QpControl extends FormControl {
   /**
@@ -38,8 +38,8 @@ export class Ui2QpControl extends FormControl {
     super(state, validatorOrOpts, asyncValidator);
 
     this.logger.debug('Ui2QpControl.constructor');
-    this.logger.debug('Params passed into the function: ', this.type, this.defaultVal, this.serializer, this.deserializer, state,
-      validatorOrOpts, asyncValidator);
+    const variablesToDebug = [this.type, this.defaultVal, this.serializer, this.deserializer, state, validatorOrOpts, asyncValidator];
+    this.logger.debug('Params passed into the function: ', ...variablesToDebug);
   }
 
   /**
@@ -81,7 +81,8 @@ export class Ui2QpControl extends FormControl {
     return returnValue;
   }
 
-  /** Updates Control's value after been deserialized
+  /**
+   * Updates Control's value after been deserialized
    * @param value The new value for the control.
    * @param options Configuration options that determine how the control propagates changes
    * and emits events when the value changes.

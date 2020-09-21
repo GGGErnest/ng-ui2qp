@@ -1,6 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Ui2QpBuilder, Ui2QpRoot} from 'ng-ui2qp';
-import {Title} from '@angular/platform-browser';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Ui2QpBuilder, Ui2QpRoot } from 'ng-ui2qp';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-model-driven',
@@ -139,7 +139,6 @@ this.ui2QpBuilder.group({
       })
     );
   }
-
 
   ngOnInit(): void {
   }

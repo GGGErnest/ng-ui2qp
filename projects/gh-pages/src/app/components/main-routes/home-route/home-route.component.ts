@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Ui2QpBuilder, Ui2QpRoot} from 'ng-ui2qp';
-import {Router} from '@angular/router';
-import {Title} from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { Ui2QpBuilder, Ui2QpRoot } from 'ng-ui2qp';
+import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home-route',

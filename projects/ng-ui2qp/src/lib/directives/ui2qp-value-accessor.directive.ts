@@ -23,12 +23,12 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => Ui2qpValueAccessorDirective),
+      useExisting: forwardRef(() => Ui2QpValueAccessorDirective),
       multi: true
     }
   ],
 })
-export class Ui2qpValueAccessorDirective implements ControlValueAccessor {
+export class Ui2QpValueAccessorDirective implements ControlValueAccessor {
 
   /**
    * Fired when a value should be written (model -> view).

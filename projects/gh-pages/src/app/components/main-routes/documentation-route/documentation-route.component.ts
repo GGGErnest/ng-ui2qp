@@ -1,8 +1,8 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {BreakpointObserver} from '@angular/cdk/layout';
-import {ActivatedRoute, Router} from '@angular/router';
-import {Title} from '@angular/platform-browser';
-import {MatSidenav} from '@angular/material/sidenav';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-documentation-route',

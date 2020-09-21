@@ -1,8 +1,8 @@
-import {Inject, Injectable} from '@angular/core';
-import {Deserializer} from '../types/deserializer';
-import {NgUI2QpSettings, UI2QP_SETTINGS_INJ_TOK} from '../types/settings';
+import { Inject, Injectable } from '@angular/core';
+import { Deserializer } from '../types/deserializer';
+import { NgUI2QpSettings, UI2QP_SETTINGS_INJ_TOK } from '../types/settings';
 import * as CryptoJS from 'crypto-js';
-import {BUILT_IN_DESERIALIZERS} from '../serializers/deserializers';
+import { BUILT_IN_DESERIALIZERS } from '../serializers/deserializers';
 
 @Injectable()
 export class Ui2QpDeserializersService {

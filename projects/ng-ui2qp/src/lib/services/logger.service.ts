@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
-import {LOG_LVL_NAMES, LogLevel} from '../types/logger';
-import {IUi2QpLogger} from '../interfaces/logger';
-import {isEmpty} from '../helpers/empty-helper';
+import { Injectable } from '@angular/core';
+
+import { LOG_LVL_NAMES, LogLevel } from '../types/logger';
+import { IUi2QpLogger } from '../interfaces/logger';
+import { isEmpty } from '../helpers/empty-helper';
 
 export const loggerFactory = (loggerLevel: LogLevel) => {
   return () => new Ui2QpLogger(loggerLevel);
@@ -29,9 +30,9 @@ export class Ui2QpLogger implements IUi2QpLogger {
   static getCallerDetails(): { lineNumber: string, fileName: string } {
     const err = new Error('');
     try {
-      // this should produce the line which NGX Logger was called
+      // This should produce the line which NGX Logger was called
       const callerLine = err.stack.split('\n')[5].split('/');
-      // returns the file:lineNumber
+      // Returns the file:lineNumber
       const fileLineNumber = callerLine[callerLine.length - 1].replace(/[)]/g, '').split(':');
 
       return {

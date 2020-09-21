@@ -1,13 +1,11 @@
-import {Deserializer} from '../types/deserializer';
+import { Deserializer } from '../types/deserializer';
 
 /**
  * String deserializer. It deserializes the value retrieved from the QueryParams to a string
  */
 const stringDeserializer: Deserializer = {
   type: 'string',
-  deserializerFunc: (value: any) => {
-    return value;
-  },
+  deserializerFunc: (value: any) => value
 };
 
 /**
@@ -16,7 +14,6 @@ const stringDeserializer: Deserializer = {
 const numberDeserializer: Deserializer = {
   type: 'number',
   deserializerFunc: (value: any, defaultVal: any) => {
-    // tslint:disable-next-line:radix
     const returnValue = parseInt(value);
     if (typeof returnValue !== 'number') {
       console.error(`The current value ${value} couldn't be deserialized, instead we used the default value`);
@@ -47,13 +44,11 @@ const arrayNumberDeserializer: Deserializer = {
   deserializerFunc: (value: Array<any>[] | any, defaultVal: any) => {
     let returnValue;
     if (Array.isArray(value)) {
-      // tslint:disable-next-line:radix
-      returnValue = value.map((item) => parseInt(item));
+      returnValue = value.map((item) => parseInt(item, 10));
       if (Array.isArray(returnValue)) {
         returnValue = defaultVal;
       }
     } else {
-      // tslint:disable-next-line:radix
       returnValue = new Array(parseInt(value));
     }
     return returnValue;

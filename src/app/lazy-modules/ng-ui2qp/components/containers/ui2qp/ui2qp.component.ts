@@ -1,6 +1,15 @@
-import {Component, OnDestroy} from '@angular/core';
-import {Deserializer, Serializer, Ui2QpBuilder, Ui2QpDeserializersService, Ui2QpGroup, Ui2QpRoot, Ui2QpSerializersService} from 'ng-ui2qp';
-import {FormControl, FormGroup} from '@angular/forms';
+/* tslint:disable:align */
+import { Component, OnDestroy } from '@angular/core';
+import {
+  Deserializer,
+  Serializer,
+  Ui2QpBuilder,
+  Ui2QpDeserializersService,
+  Ui2QpGroup,
+  Ui2QpRoot,
+  Ui2QpSerializersService
+} from 'ng-ui2qp';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-form-qp',
@@ -27,7 +36,7 @@ export class Ui2QpComponent implements OnDestroy {
               private deserializersService: Ui2QpDeserializersService) {
 
     const dateTimePickerType = 'datetime-picker';
-    // defining a custom serializer for the datetime-picker
+    // Defining a custom serializer for the datetime-picker
     const datetimePickerSerializer: Serializer = {
       type: dateTimePickerType,
       serializerFunc: (value: Date) => {
@@ -37,7 +46,7 @@ export class Ui2QpComponent implements OnDestroy {
 
     this.serializersService.register(datetimePickerSerializer);
 
-    // defining a custom deserializer for the datetime-picker
+    // Defining a custom deserializer for the datetime-picker
     const datetimePickerDeserializer: Deserializer = {
       type: dateTimePickerType,
       deserializerFunc: (value: string) => {
@@ -59,7 +68,8 @@ export class Ui2QpComponent implements OnDestroy {
                 country: this.ui2QpBuilder.control(),
                 number: this.ui2QpBuilder.control({type: 'number', qpName: 'haNum'})
               },
-              {qpName: 'ad1'}),
+              {qpName: 'ad1'}
+              ),
             address2: this.ui2QpBuilder.group({
                 address: this.ui2QpBuilder.control(),
                 state: this.ui2QpBuilder.control(),
@@ -75,8 +85,6 @@ export class Ui2QpComponent implements OnDestroy {
   toggleAddress3() {
 
     if (!this.showAddress3) {
-
-
       const addressGroup = this.ui2QpBuilder.group({
         address: this.ui2QpBuilder.control(),
         state: this.ui2QpBuilder.control(),

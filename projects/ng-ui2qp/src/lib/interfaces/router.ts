@@ -1,6 +1,6 @@
-import {Observable} from 'rxjs';
-import {Navigation, ParamMap, Params, QueryParamsHandling} from '@angular/router';
-import {InjectionToken} from '@angular/core';
+import { Observable } from 'rxjs';
+import { Navigation, ParamMap, Params, QueryParamsHandling } from '@angular/router';
+import { InjectionToken } from '@angular/core';
 
 /**
  * Router Adapter Interface

@@ -1,43 +1,48 @@
-import {Directive, Inject, Input, OnDestroy, OnInit, Optional, Self} from '@angular/core';
-import {DefaultNgUi2QpSettings, NgUI2QpSettings, UI2QP_SETTINGS_INJ_TOK} from '../types/settings';
-import {IUi2QpRouter, UI2QP_ROUTER_INJ_TOK} from '../interfaces/router';
-import {IUi2QpLogger, UI2QP_LOGGER_INJ_TOK} from '../interfaces/logger';
-import {Subject, Subscription} from 'rxjs';
-import {debounceTime} from 'rxjs/operators';
-import {ControlDirectiveSettings, DefaultControlDirectiveSettings} from '../types/control-directive-settings';
-import {mergeObjects} from '../helpers/object-helpers';
-import {isEmpty} from '../helpers/empty-helper';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl} from '@angular/forms';
-import {selectValueAccessor} from '../helpers/control-value-accessor-helper';
-import {Ui2QpSerializersService} from '../services/serializers.service';
-import {Ui2QpDeserializersService} from '../services/deserializers.service';
-import {DeserializeFunc} from '../types/deserializer';
-import {SerializeFunc} from '../types/serializer';
+import { Directive, Inject, Input, OnDestroy, OnInit, Optional, Self } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NgControl } from '@angular/forms';
+
+import { IUi2QpRouter, UI2QP_ROUTER_INJ_TOK } from '../interfaces/router';
+import { IUi2QpLogger, UI2QP_LOGGER_INJ_TOK } from '../interfaces/logger';
+import { isEmpty } from '../helpers/empty-helper';
+import { mergeObjects } from '../helpers/object-helpers';
+import { selectValueAccessor } from '../helpers/control-value-accessor-helper';
+import { Ui2QpSerializersService } from '../services/serializers.service';
+import { Ui2QpDeserializersService } from '../services/deserializers.service';
+import { SerializeFunc } from '../types/serializer';
+import { DeserializeFunc } from '../types/deserializer';
+import { ControlDirectiveSettings, DEFAULT_CONTROL_DIRECTIVE_SETTINGS } from '../types/control-directive-settings';
+import { DEFAULT_NGUI2QP_SETTINGS, NgUI2QpSettings, UI2QP_SETTINGS_INJ_TOK } from '../types/settings';
 
 @Directive({
-  selector: '[ui2qpControl]',
-  exportAs: 'ui2qpControl'
+  selector: '[ui2QpControl]',
+  exportAs: 'ui2QpControl'
 })
 export class Ui2QpControlDirective implements OnInit, OnDestroy {
 
   /**
    * Control settings
    */
-  @Input('ui2qpControl') settings!: ControlDirectiveSettings;
+  @Input('ui2QpControl') settings!: ControlDirectiveSettings;
+
   /**
    * NgUI2QpSettings that will define how to interact with the Qps. It's the same that the ones provided globally. If not passed to the
    * directive the defined globally will be used instead.
    */
   @Input() ui2qp: NgUI2QpSettings;
+
   /**
    * Control value accessor used to communicate the view with the model and viceversa
    * @private
    */
   private valueAccessor: ControlValueAccessor;
+
   /**
    * Keeps track of the component value while it changes.
    * @private
    */
+    // tslint:disable-next-line:variable-name
   private _value: any;
   /**
    * Observable that emits every time the value changes in the view. Is used for debouncing the value changes so the QPs are not
@@ -45,16 +50,19 @@ export class Ui2QpControlDirective implements OnInit, OnDestroy {
    * @private
    */
   private valueChanges$ = new Subject<void>();
+
   /**
    * Is used for unsubscribe from all the subscriptions on the OnDestroy.
    * @private
    */
   private subscriptions = new Subscription();
+
   /**
    * Deserialize function applied to the value obtained from the Qps and its outputs is the value used to set in the view.
    * @private
    */
   private deserializerFunc: DeserializeFunc;
+
   /**
    * Serialize function applied to the value obtained from the view an it outputs is the value to set to the Qps.
    * @private
@@ -82,8 +90,8 @@ export class Ui2QpControlDirective implements OnInit, OnDestroy {
               private deserializerService: Ui2QpDeserializersService) {
 
     this.logger.debug('Ui2QpControlDirective.constructor');
-    // tslint:disable-next-line:max-line-length
-    this.logger.debug('Params passed into the function', ui2qpSettings, router, ngControl, valueAccessors, serializersService, deserializerService);
+    const valuesToDebug = [ui2qpSettings, router, ngControl, valueAccessors, serializersService, deserializerService];
+    this.logger.debug('Params passed into the function', ...valuesToDebug);
   }
 
   ngOnInit() {
@@ -110,8 +118,9 @@ export class Ui2QpControlDirective implements OnInit, OnDestroy {
     this.logger.debug('Deserializer function', this.deserializerFunc);
 
     if (!(this.serializerFunc && this.deserializerFunc)) {
-      // tslint:disable-next-line:max-line-length
-      this.logger.error(`We couldn't find any registered deserializer for the control type "${this.settings.type}". Please register one for this type`);
+      this.logger.error(`We couldn't find any registered deserializer for the control type "${this.settings.type}".
+        Please register one for this type`
+      );
     }
 
     this.updateModelFromQp();
@@ -140,17 +149,13 @@ export class Ui2QpControlDirective implements OnInit, OnDestroy {
       throw Error('No query param name was provided within the settings. Please provide a query param name.');
     }
 
-    this.settings = mergeObjects(this.settings, DefaultControlDirectiveSettings);
-    this.ui2qp = this.ui2qp !== undefined ? mergeObjects(this.ui2qp, DefaultNgUi2QpSettings) : this.ui2qpSettings;
+    this.settings = mergeObjects(this.settings, DEFAULT_CONTROL_DIRECTIVE_SETTINGS);
+    this.ui2qp = this.ui2qp !== undefined ? mergeObjects(this.ui2qp, DEFAULT_NGUI2QP_SETTINGS) : this.ui2qpSettings;
 
     this.logger.debug('Settings to used after merged with the default ones', this.settings);
     this.logger.debug('Ui2Qp settings to used after merged with the default ones', this.ui2qp);
   }
 
-  /**
-   * Selects the right ValueAccessor to use for communicating with the view from the array of ValueAccessors injected to the directive.
-   * @private
-   */
   private selectValueAccessor() {
 
     this.logger.info('Ui2QpGroup.settingsSetup');
@@ -181,8 +186,9 @@ export class Ui2QpControlDirective implements OnInit, OnDestroy {
         this.onValueChange(value);
       });
 
-      // tslint:disable-next-line:max-line-length
-      this.logger.debug('Registering a value change function within the selected ControlValueAccessor since no ngControl was found in the host element');
+      const message = `Registering a value change function within the selected ControlValueAccessor
+      since no ngControl was found in the host element`;
+      this.logger.debug(message);
     }
   }
 
@@ -195,14 +201,9 @@ export class Ui2QpControlDirective implements OnInit, OnDestroy {
     this.valueAccessor.writeValue(value);
   }
 
-  /**
-   * Returns the value.
-   * @private
-   */
   private get value(): any {
     return this._value;
   }
-
 
   /**
    * Called everytime the value changes in the view.
@@ -232,7 +233,8 @@ export class Ui2QpControlDirective implements OnInit, OnDestroy {
     queryParams[this.settings.qpName] = !isEmpty(this.value) ? this.serializerFunc(this.value) : null;
 
     this.logger.debug('QueryParams to set', queryParams);
-    this.router.updateQps(queryParams, this.ui2qp.replaceState, 'merge').catch((error: any) => this.logger.error(error));
+    this.router.updateQps(queryParams, this.ui2qp.replaceState, 'merge')
+      .catch((error: any) => this.logger.error(error));
   }
 
   /**
@@ -248,8 +250,8 @@ export class Ui2QpControlDirective implements OnInit, OnDestroy {
 
     if (valueFromQp === undefined || valueFromQp === null) {
 
-      // tslint:disable-next-line:max-line-length
-      this.logger.trace('the value retrieved from the QPs is null or undefined so the default value used instead.', this.settings.defaultValue);
+      const message = 'The value retrieved from the QPs is null or undefined so the default value used instead.';
+      this.logger.trace(message, this.settings.defaultValue);
 
       this.value = this.settings.defaultValue;
 
@@ -257,7 +259,6 @@ export class Ui2QpControlDirective implements OnInit, OnDestroy {
       this.value = this.deserializerFunc(valueFromQp, this.settings.defaultValue);
 
       this.logger.trace('Value to update the model after deserialized', this.value);
-
     }
 
     this.logger.debug('Value to update the model', this.value);
