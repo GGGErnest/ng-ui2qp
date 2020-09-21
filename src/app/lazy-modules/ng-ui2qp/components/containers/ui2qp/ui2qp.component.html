@@ -1,14 +1,14 @@
 <h1>Query Params</h1>
 
-<!--<input [ui2qpControl]="{qpName:'test'}"
+<!--<input [ui2QpControl]="{qpName:'test'}"
        ui2QpValueAccessor #accessor="controlValueAccessor" (controlValueChange)="ctrl.value = $event"
        #ctrl (input)="accessor.notifyChange($event.target.value)"
        type="text">-->
 
-<input type="checkbox" [ui2qpControl]="{qpName:'check', type:'boolean'}"
+<input type="checkbox" [ui2QpControl]="{qpName:'check', type:'boolean'}"
        ui2QpValueAccessor #accessor2="controlValueAccessor" (controlValueChange)="ctrl2.value = $event"
        #ctrl2 (input)="accessor2.notifyChange($event.target.value)">
-<select name="select" [ui2qpControl]="{qpName:'select', type:'asdasd'}" multiple [formControl]="controlTest">
+<select name="select" [ui2QpControl]="{qpName:'select', type:'asdasd'}" multiple [formControl]="controlTest">
   <option value="">Empty</option>
   <option value="1">1</option>
   <option value="2">2</option>
@@ -17,7 +17,7 @@
 
 <!--<input [owlDateTimeTrigger]="dt2"
        [owlDateTime]="dt2"
-       [ui2qpControl]="{qpName:'birthday',type: 'datetime-picker'}"
+       [ui2QpControl]="{qpName:'birthday',type: 'datetime-picker'}"
        type="text">
 <owl-date-time [pickerType]="'timer'" #dt2>
 </owl-date-time>-->
@@ -27,7 +27,7 @@
   <input matInput
          [owlDateTimeTrigger]="dt2"
          [owlDateTime]="dt2"
-         [ui2qpControl]="{qpName:'birthday', type:'datetime-picker'}"
+         [ui2QpControl]="{qpName:'birthday', type:'datetime-picker'}"
          name="birthday" type="text">
   <owl-date-time [pickerType]="'timer'" #dt2></owl-date-time>
 </mat-form-field>-->

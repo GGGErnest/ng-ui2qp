@@ -2,7 +2,7 @@ export interface StackblitzSettings {
   projectId: string;
   opts?: {
     file?: string; // Show a specific file on page load
-    embed?: true // Open in new window or in current window
+    embed?: true; // Open in new window or in current window
     hideExplorer?: boolean; // Hide the debugging console
     hideNavigation?: boolean; // Set the height of the debugging console
     ctl?: boolean; // Set the height of the debugging console

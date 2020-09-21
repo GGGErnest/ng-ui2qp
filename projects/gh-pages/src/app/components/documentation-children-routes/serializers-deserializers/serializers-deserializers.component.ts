@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {Title} from '@angular/platform-browser';
-import {Deserializer, Serializer, Ui2QpDeserializersService, Ui2QpSerializersService} from 'ng-ui2qp';
-import {FormControl} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { Deserializer, Serializer, Ui2QpDeserializersService, Ui2QpSerializersService } from 'ng-ui2qp';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-serializers-deserializers',
@@ -60,7 +60,7 @@ this.serializerService.register({
   codeExample = {
     html: `<mat-form-field appearance="fill">
     <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="picker" [formControl]="datePickerControl" [ui2qpControl]="{type:'datetime-picker', qpName:'date'}">
+    <input matInput [matDatepicker]="picker" [formControl]="datePickerControl" [ui2QpControl]="{type:'datetime-picker', qpName:'date'}">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>`,
@@ -112,7 +112,7 @@ export class FullExampleComponent implements OnDestroy{
   exampleCodeInit() {
 
     const dateTimePickerType = 'datetime-picker';
-    // defining a custom serializer for the datetime-picker
+    // Defining a custom serializer for the datetime-picker
     const datetimePickerSerializer: Serializer = {
       type: dateTimePickerType,
       serializerFunc: (value: Date) => {
@@ -122,7 +122,7 @@ export class FullExampleComponent implements OnDestroy{
 
     this.serializersService.register(datetimePickerSerializer);
 
-    // defining a custom deserializer for the datetime-picker
+    // Defining a custom deserializer for the datetime-picker
     const datetimePickerDeserializer: Deserializer = {
       type: dateTimePickerType,
       deserializerFunc: (value: string) => {

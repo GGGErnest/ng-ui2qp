@@ -10,7 +10,7 @@ export interface ControlDirectiveSettings {
 /**
  * Default values for ControlDirective's settings
  */
-export const DefaultControlDirectiveSettings: Partial<ControlDirectiveSettings> = {
+export const DEFAULT_CONTROL_DIRECTIVE_SETTINGS: Partial<ControlDirectiveSettings> = {
   defaultValue: null,
   type: 'string'
 };

@@ -1,5 +1,5 @@
-import {AfterViewInit, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {StackblitzSettings} from '../../../models/stackblitz';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { StackblitzSettings } from '../../../models/stackblitz';
 import sdk from '@stackblitz/sdk';
 
 @Component({
@@ -17,7 +17,7 @@ export class EmbeddedStackblitzComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     sdk.embedProjectId(this.outlet.nativeElement, this.configurations.projectId, this.configurations.opts).then(vm => {
-      console.log('Everything went well');
+      console.log('Everything went well', vm);
     }).catch(error => {
       console.log(error);
     });

@@ -1,10 +1,11 @@
-import {Ui2QpGroup} from './group';
-import {IUi2QpRouter} from '../interfaces/router';
-import {DefaultNgUi2QpSettings, NgUI2QpSettings} from '../types/settings';
+import { Subscription } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 import merge from 'lodash/merge';
-import {Subscription} from 'rxjs';
-import {debounceTime} from 'rxjs/operators';
-import {IUi2QpLogger} from '../interfaces/logger';
+
+import { Ui2QpGroup } from './group';
+import { IUi2QpRouter } from '../interfaces/router';
+import { IUi2QpLogger } from '../interfaces/logger';
+import { DEFAULT_NGUI2QP_SETTINGS, NgUI2QpSettings } from '../types/settings';
 
 export class Ui2QpRoot {
 
@@ -17,7 +18,7 @@ export class Ui2QpRoot {
   /**
    * Settings of the Ui2QpRoot. Once defined can't be changed
    */
-  readonly settings = DefaultNgUi2QpSettings;
+  readonly settings = DEFAULT_NGUI2QP_SETTINGS;
 
   /**
    * Subscriptions that should be cleared when this Object is destroyed
@@ -56,12 +57,12 @@ export class Ui2QpRoot {
 
     this.logger.debug('Current model used: ', this.model);
 
-    // updating the configurations if were provided
+    // Updating the configurations if were provided
     if (settings) {
 
       this.logger.trace('Merging the settings provided with the default ones');
 
-      // replacing the default ones by the provided
+      // Replacing the default ones by the provided
       this.settings = merge(this.settings, settings);
     }
 
@@ -140,7 +141,7 @@ export class Ui2QpRoot {
 
             this.logger.trace('Updating the Qp');
 
-            // update the query params when the value of the form changes
+            // Update the query params when the value of the form changes
             this.updateQp();
           } else {
             this.wasModelSynchronizedWithQps = false;

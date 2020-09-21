@@ -47,7 +47,7 @@
   <p>Before using the Ui2qpControlDirective, is important to know that the host element must implement a suitable <a
     href="https://angular.io/api/forms/ControlValueAccessor">ControlValueAccessor</a>
     because it's the way the directive uses to interact with the host element state(value). If the host element doesn't
-    have a ControlValueAccessor implementation, the Ui2qpValueAccessorDirective can be used to provide an ad-hoc control
+    have a ControlValueAccessor implementation, the Ui2QpValueAccessorDirective can be used to provide an ad-hoc control
     value accessor by wiring it up in the template directly. The ControlValueAccessor is a helper directive created to
     help in these specific cases. We have taken this idea from <a
       href="https://www.ngqp.io/api-docs/directives/ControlValueAccessorDirective.html#">ngqp</a>. See in the next
@@ -72,7 +72,7 @@
   </mat-tab-group>
 
   <p>The next is an example when the host element does not have a correct ControlValueAccessor implementation and how
-    the Ui2qpValueAccessorDirective can be used as an ad-hoc to solve this issue.</p>
+    the Ui2QpValueAccessorDirective can be used as an ad-hoc to solve this issue.</p>
   <mat-tab-group class="code-example" mat-align-tabs="start">
     <mat-tab label="HTML">
       <code-box [code]="controlDirectiveWithoutCVAExampleCode"></code-box>
@@ -134,7 +134,7 @@
 
     <div class="margin-bottom-25px">
       <p>Custom component example using Material Design radio buttons</p>
-      <mat-radio-group color="primary" aria-label="Select an option" [ui2qpControl]="{qpName:'options'}">
+      <mat-radio-group color="primary" aria-label="Select an option" [ui2QpControl]="{qpName:'options'}">
         <mat-radio-button class="margin-right-10px" value="Option1">Option 1</mat-radio-button>
         <mat-radio-button class="margin-right-10px" value="Option2">Option 2</mat-radio-button>
         <mat-radio-button class="margin-right-10px" value="Option3">Option 3</mat-radio-button>
@@ -142,10 +142,10 @@
       </mat-radio-group>
     </div>
 
-    <p>Example of using Ui2qpValueAccessorDirective on a native input.</p>
+    <p>Example of using Ui2QpValueAccessorDirective on a native input.</p>
     <mat-form-field>
       <mat-label>Favorite animal</mat-label>
-      <input matInput type="text" [ui2qpControl]="{qpName:'animal'}"
+      <input matInput type="text" [ui2QpControl]="{qpName:'animal'}"
              ui2QpValueAccessor #accessor="controlValueAccessor" (controlValueChange)="ctrl.value = $event"
              #ctrl (input)="accessor.notifyChange($event.target.value)">
     </mat-form-field>
@@ -154,7 +154,7 @@
       implementation.</p>
     <mat-form-field>
       <mat-label>Days</mat-label>
-      <input matInput type="number" [ui2qpControl]="{type:'number', qpName:'days'}" multiple [formControl]="options"/>
+      <input matInput type="number" [ui2QpControl]="{type:'number', qpName:'days'}" multiple [formControl]="options"/>
     </mat-form-field>
   </div>
 </section>

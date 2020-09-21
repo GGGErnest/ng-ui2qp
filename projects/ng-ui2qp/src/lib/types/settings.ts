@@ -1,6 +1,6 @@
-import {LogLevel} from './logger';
-import {InjectionToken} from '@angular/core';
-import {mergeObjects} from '../helpers/object-helpers';
+import { LogLevel } from './logger';
+import { InjectionToken } from '@angular/core';
+import { mergeObjects } from '../helpers/object-helpers';
 
 /**
  * Defines Ui2QpRoot settings
@@ -41,7 +41,7 @@ export interface AutoUpdating {
 /**
  * Default Settings for the Ui2QpRoot
  */
-export const DefaultNgUi2QpSettings = {
+export const DEFAULT_NGUI2QP_SETTINGS = {
   autoUpdating: {enabled: true, debounce: 500},
   replaceState: true,
   logLevel: LogLevel.Off,
@@ -54,7 +54,7 @@ export const DefaultNgUi2QpSettings = {
  * @param settings Settings to be replaced in the default ones
  */
 export function factorySettings(settings: NgUI2QpSettings) {
-  return () => mergeObjects(settings, DefaultNgUi2QpSettings);
+  return () => mergeObjects(settings, DEFAULT_NGUI2QP_SETTINGS);
 }
 
 export const UI2QP_SETTINGS_TOKEN_ID = 'NGUI2QP_SETTINGS';

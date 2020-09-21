@@ -1,6 +1,7 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
+  // tslint:disable-next-line:component-selector
   selector: 'code-box',
   templateUrl: './code-box.component.html',
   styleUrls: ['./code-box.component.scss']

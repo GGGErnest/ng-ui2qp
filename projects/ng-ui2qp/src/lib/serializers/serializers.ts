@@ -1,4 +1,4 @@
-import {Serializer} from '../types/serializer';
+import { Serializer } from '../types/serializer';
 
 /**
  * Built in serializer that is used for serializing the values retrieved from the Ui2QpFormGroup to the query params in the URL

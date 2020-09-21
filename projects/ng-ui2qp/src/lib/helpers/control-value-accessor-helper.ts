@@ -67,4 +67,3 @@ export function selectValueAccessor(valueAccessors: ControlValueAccessor[]): Con
   throw Error('No suitable ControlValueAccessor was found. Please provide one.');
 
 }
-
