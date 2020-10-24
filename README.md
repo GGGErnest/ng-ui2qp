@@ -1,8 +1,6 @@
-# Angular Workspace
+# ng-ui2qp
 
 ![Build Projects](https://github.com/GGGErnest/ng-projects/workflows/Build%20Projects/badge.svg?branch=master)
-
-# ng-ui2qp
 
 Angular library that synchronizes UI component's state with the Browser's query params, improving the user experience allowing the creation of shareable links.
 
