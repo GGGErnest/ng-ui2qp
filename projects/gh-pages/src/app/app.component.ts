@@ -2,6 +2,7 @@ import {AfterViewInit, Component, ElementRef, OnDestroy, Renderer2, TemplateRef,
 import {TopBarLeftTemplateDirective} from './directives/top-bar-left-template.directive';
 import {fromEvent, Subscription} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -9,14 +10,14 @@ import {debounceTime} from 'rxjs/operators';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit, OnDestroy {
-  title = 'gh-pages';
   isToTopBtnVisible = false;
   @ViewChild('container', {static: true}) container: ElementRef<HTMLDivElement>;
   subscriptions = new Subscription();
 
   @ViewChild(TopBarLeftTemplateDirective, {read: TemplateRef, static: false}) rightLogoTemplate: TemplateRef<TopBarLeftTemplateDirective>;
 
-  constructor(private renderer2: Renderer2) {
+  constructor(private renderer2: Renderer2, private title: Title) {
+    this.title.setTitle('ng-ui2qp');
   }
 
   ngAfterViewInit() {
