@@ -166,5 +166,8 @@
       }
     }
   },
-  "defaultProject": "ng-projects"
+  "defaultProject": "ng-projects",
+  "cli": {
+    "analytics": false
+  }
 }
